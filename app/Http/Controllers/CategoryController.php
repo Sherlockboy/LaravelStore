@@ -10,6 +10,7 @@ class CategoryController extends Controller
     public function index($categoryId)
     {
         $category = Category::findOrFail($categoryId);
+        $products = $category->products;
         return view('category.index', compact('category'));
     }
 }

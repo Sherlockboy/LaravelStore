@@ -1,4 +1,14 @@
-
-
 <x-header header-type="1"/>
-    <h1>{{ __("This is category page for category with name {$category->name} and id {$category->id}") }}</h1>
+<div class="grid grid-cols-12 gap-4">
+        @foreach($category->products as $product)
+            <div class="col-span-3">
+                <div>
+                    <p style="font-weight: bold">{{ $product->name }}</p>
+                </div>
+                <div>
+                    {{ $product->price }}
+                </div>
+            </div>
+        @endforeach
+
+</div>
