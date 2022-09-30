@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function index($categoryId)
     {
-        $category = Category::find($categoryId);
+        $category = Category::findOrFail($categoryId);
         return view('category.index', compact('category'));
     }
 }
