@@ -7,7 +7,6 @@ use Illuminate\View\Component;
 
 class Header extends Component
 {
-    public $headerType;
     public $categories;
 
     /**
@@ -15,9 +14,8 @@ class Header extends Component
      *
      * @return void
      */
-    public function __construct($headerType)
+    public function __construct()
     {
-        $this->headerType = $headerType;
         $this->categories = Category::all();
     }
 

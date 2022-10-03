@@ -8,10 +8,8 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index($categoryId)
+    public function index(Category $category)
     {
-        $category = Category::findOrFail($categoryId);
-        $products = Product::all();
-        return view('category.index', compact('category', 'products'));
+        return view('category.index', compact('category'));
     }
 }

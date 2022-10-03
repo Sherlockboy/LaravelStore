@@ -1,3 +1,5 @@
 <?php
-Route::get('/category/{categoryId}', [App\Http\Controllers\CategoryController::class, 'index'])
-    ->name('category.index');
+
+use App\Http\Controllers\CategoryController;
+
+Route::get('category/{category}', [CategoryController::class, 'index'])->name('category.index');
