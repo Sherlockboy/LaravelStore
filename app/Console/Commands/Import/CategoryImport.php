@@ -7,6 +7,8 @@ use Illuminate\Console\Command;
 
 class CategoryImport extends Import
 {
+    const ENTITY_NAME = 'Category';
+
     /**
      * The name and signature of the console command.
      *
@@ -19,9 +21,7 @@ class CategoryImport extends Import
      *
      * @var string
      */
-    protected $description = 'Command description';
-
-
+    protected $description = 'Import categories from csv file';
 
     /**
      * @param array $data
@@ -41,17 +41,6 @@ class CategoryImport extends Import
             }
         }
 
-
-        if($errors) {
-            $this->output->text(__('There were errors during import:'));
-            foreach ($errors as $error) {
-                $this->output->error($error);
-            }
-
-            return Command::FAILURE;
-        } else {
-            $this->output->text(__('Import finished'));
-            return Command::SUCCESS;
-        }
+        return $this->processErrorsIfExist($errors, self::ENTITY_NAME);
     }
 }

@@ -27,7 +27,6 @@ abstract class Import extends Command
         }
 
         return $data;
-
     }
 
     /**
@@ -41,12 +40,36 @@ abstract class Import extends Command
         try {
             $data = $this->readCSV();
         } catch (FileDoesNotExistException $exception) {
-            $this->output->text($exception->getMessage());
+            $this->output->error($exception->getMessage());
             return Command::FAILURE;
         }
 
         return $this->import($data);
     }
 
-    abstract public function import(array $data);
+    /**
+     * @param array $errors
+     * @param string $entityName
+     * @return int
+     */
+    public function processErrorsIfExist(array $errors, string $entityName): int
+    {
+        if($errors) {
+            $this->output->text(__("There were errors during $entityName import:"));
+            foreach ($errors as $error) {
+                $this->output->error($error);
+            }
+
+            return Command::FAILURE;
+        } else {
+            $this->output->text(__("$entityName import finished successfully"));
+            return Command::SUCCESS;
+        }
+    }
+
+    /**
+     * @param array $data
+     * @return int
+     */
+    abstract public function import(array $data): int;
 }
