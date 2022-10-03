@@ -10,5 +10,4 @@
                 </div>
             </div>
         @endforeach
-
 </div>

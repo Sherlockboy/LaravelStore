@@ -7,8 +7,15 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function do()
+    public function index()
     {
-        $this->validate();
+        return view('admin.index');
     }
+
+    public function login()
+    {
+        $data = request()->all();
+        return view('admin.index');
+    }
+
 }

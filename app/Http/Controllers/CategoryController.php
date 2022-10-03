@@ -11,6 +11,6 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($categoryId);
         $products = $category->products;
-        return view('category.index', compact('category'));
+        return view('category.index', compact('category', 'products'));
     }
 }
