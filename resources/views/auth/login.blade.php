@@ -1,11 +1,5 @@
-<x-guest-layout>
+<x-guest-layout xmlns:x-slot="http://www.w3.org/1999/xlink">
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
