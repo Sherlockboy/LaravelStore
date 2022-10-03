@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Import;
 
 use App\Models\Category;
 use Illuminate\Console\Command;
 
-class CategoryImport extends Command
+class CategoryImport extends Import
 {
     /**
      * The name and signature of the console command.
@@ -21,28 +21,16 @@ class CategoryImport extends Command
      */
     protected $description = 'Command description';
 
+
+
     /**
-     * Execute the console command.
-     *
+     * @param array $data
      * @return int
      */
-    public function handle()
+    public function import(array $data): int
     {
-        $filename = $this->option('filename') ?? $this->ask('Enter filaname');
-
-        $filePath = storage_path('app/public/import/' . $filename);
-
-        if (file_exists($filePath)) {
-            $data = [];
-            $file = fopen($filePath, 'r');
-            while (($line = fgetcsv($file)) !== false) {
-                $data[] = $line;
-            }
-        }
-
-        $errors = [];
-
         $headers = array_shift($data);
+        $errors = [];
         foreach ($data as $row) {
             try {
                 Category::create(
@@ -53,15 +41,17 @@ class CategoryImport extends Command
             }
         }
 
+
         if($errors) {
             $this->output->text(__('There were errors during import:'));
             foreach ($errors as $error) {
                 $this->output->error($error);
             }
+
+            return Command::FAILURE;
         } else {
             $this->output->text(__('Import finished'));
+            return Command::SUCCESS;
         }
-
-        return Command::SUCCESS;
     }
 }
