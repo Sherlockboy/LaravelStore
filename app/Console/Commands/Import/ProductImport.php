@@ -53,17 +53,8 @@ class ProductImport extends Import
     private function resolveCategoryIds(string $categories): array
     {
         $categoryNames = explode('|', $categories);
-
         $categories = Category::whereIn('name', $categoryNames)->get();
-        $categories->only('id');
 
-        collect($categories->toArray())->only('id'); //TODO refactor this part
-
-        $categoryIds = [];
-        foreach ($categories as $category) {
-            $categoryIds[] = $category->id;
-        }
-
-        return $categoryIds;
+        return array_keys($categories->groupBy('id')->all());
     }
 }
