@@ -10,10 +10,6 @@ class CartController extends Controller
 {
     public function add(Product $product)
     {
-        $cartItem = auth()->user()->cart->cartItems->get(0);
-        $product = $cartItem->product;
-
-
         /** @var CartItem $cartItem */
         $cartItem = CartItem::create([
             'product_id' => $product->id,
