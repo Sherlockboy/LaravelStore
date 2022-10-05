@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\UploadedFile;
 
@@ -14,7 +15,8 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('product.create');
+        $categories = Category::all();
+        return view('product.create', compact('categories'));
     }
 
     public function store()
@@ -24,20 +26,18 @@ class ProductController extends Controller
               'name' => ['required', 'string', 'unique:products'],
               'price' => ['required', 'numeric'],
               'description' => ['required', 'string'],
-              'image' => ['required', 'image']
+              'image' => ['required', 'image'],
+              'category' => ['required']
           ]);
 
         /** @var UploadedFile $image */
         $image = request('image');
         $imagePath = $image->store('product_images', 'public');
-
         $data['image'] = $imagePath;
 
-        Product::create($data);
+        $product = Product::create($data);
+        $product->categories()->toggle($data['category']);
 
-
-        dd($data);
-
-
+        return redirect("product/$product->id");
     }
 }

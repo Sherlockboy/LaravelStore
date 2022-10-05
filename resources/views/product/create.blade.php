@@ -32,13 +32,17 @@
 
             <!-- Add category -->
 
-{{--            <div>--}}
-{{--                <x-input-label for="category" :value="__('Categories')" />--}}
+            <div>
+                <label for="category">{{ __('Categories') }}</label>
 
-{{--                <x-text-input id="category" class="block mt-1 w-full" type="select" name="category" :value="old('category')" required autofocus />--}}
+                <select id="category" class="block mt-1 w-full" name="category[]" required multiple="multiple" size="5">
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
 
-{{--                <x-input-error :messages="$errors->get('category')" class="mt-2" />--}}
-{{--            </div>--}}
+                <x-input-error :messages="$errors->get('category')" class="mt-2" />
+            </div>
 
             <div>
                 <x-input-label for="image" :value="__('Image')" />
@@ -47,7 +51,6 @@
 
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
-
 
             <div class="flex items-center justify-center mt-4">
                 <x-primary-button class="ml-4">
