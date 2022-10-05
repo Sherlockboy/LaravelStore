@@ -44,9 +44,36 @@ class ProductController extends Controller
         }
 
         $product->update($data);
-        $product->categories()->toggle($data['category']); //TODO It doesn't work as required!
+        $this->resolveEditedCategories($product,
+            array_map(function ($e) { return (int) $e; }, $data['category'])
+        );
 
         return redirect("product/$product->id");
+    }
+
+    /**
+     * TODO: move to another class
+     * @param Product $product
+     * @param array $selectedCategories
+     * @return void
+     */
+    private function resolveEditedCategories(Product $product, array $selectedCategories): void
+    {
+        $allCategoryIds = array_keys(Category::all()->groupBy('id')->all());
+        $productCategories = array_keys($product->categories->groupBy('id')->all());
+
+        $unselectedCategories = array_diff($allCategoryIds, $selectedCategories);
+
+        $categoriesToAttach = array_diff($selectedCategories, $productCategories);
+        $categoriesToDetach = array_intersect($unselectedCategories, $productCategories);
+
+        if ($categoriesToAttach) {
+            $product->categories()->attach($categoriesToAttach);
+        }
+
+        if ($categoriesToDetach) {
+            $product->categories()->detach($categoriesToDetach);
+        }
     }
 
 

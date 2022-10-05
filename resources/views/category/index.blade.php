@@ -8,7 +8,7 @@
 
 <div class="grid grid-cols-12 gap-4">
     @foreach($category->products as $product)
-        <div class="col-span-3 ml-6">
+        <div class="col-span-3 ml-4 mr-4">
             <div>
                 <a href="/product/{{ $product->id }}">
                     <img src="/storage/{{ $product->image }}" alt="{{ $product->name }}">
