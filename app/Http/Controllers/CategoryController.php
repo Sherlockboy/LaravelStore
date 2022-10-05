@@ -12,4 +12,21 @@ class CategoryController extends Controller
     {
         return view('category.index', compact('category'));
     }
+
+    public function create()
+    {
+        return view('category.create');
+    }
+
+    public function store()
+    {
+        $data = request()->validate(
+            [
+                'name' => ['required', 'unique:categories']
+            ]);
+
+        $category = Category::create($data);
+
+        return redirect("/category/$category->id");
+    }
 }
