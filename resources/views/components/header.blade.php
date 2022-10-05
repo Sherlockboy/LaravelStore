@@ -4,9 +4,10 @@
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-
-                        <a href="{{ url('/logout') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Logout</a>
+                        <div class="text-sm text-gray-700 dark:text-gray-500">
+                            <a href="{{ url('/dashboard') }}" class="ml-4">Dashboard</a>
+                            <a href="{{ url('/logout') }}" class="ml-4">Logout</a>
+                        </div>
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log
                             in</a>
@@ -26,9 +27,12 @@
                 <li>
                     <a href="/">{{ __('Home') }}</a>
                 </li>
+                @admin
+                    <x-admin-navigation/>
+                @endadmin
                 @foreach($categories as $category)
                     <li>
-                        <div class="dropdown-menu">
+                        <div>
                             <a href="/category/{{ $category->id }}">{{ $category->name }}</a>
                         </div>
                     </li>
