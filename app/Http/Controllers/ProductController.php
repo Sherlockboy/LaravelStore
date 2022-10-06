@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
@@ -74,7 +73,6 @@ class ProductController extends Controller
             $product->categories()->detach($categoriesToDetach);
         }
     }
-
 
     public function store()
     {
