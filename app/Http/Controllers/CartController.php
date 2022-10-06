@@ -32,7 +32,8 @@ class CartController extends Controller
 
     public function destroy(CartItem $cartItem)
     {
+        $productName = $cartItem->product->name;
         $cartItem->delete();
-        return redirect(route('cart.index'));
+        return response()->json(['name' => $productName]);
     }
 }

@@ -26,40 +26,48 @@
 {{--    @endforeach--}}
 {{--</table>--}}
 @if($user->cart->cartItems->count())
-    <div class="grid grid-rows gap-4 ml-6 mr-6 mb-6 ms-6 bg-blue-100">
-        <div class="grid grid-cols-12 gap-4 ml-6 mr-6 ">
-            <div class="col-span-3 ">
+    <div class="grid grid-rows gap-4 ml-6 mr-6 mb-6 ms-6 bg-blue-200">
+        <div class="grid grid-cols-10 gap-4 ml-6 mr-6 ">
+            <div class="col-span-2 flex justify-center">
                 <p class="text-xl">{{ __('Product image') }}</p>
             </div>
-            <div class="col-span-3">
+            <div class="col-span-2 flex justify-center">
                 <p class="text-xl">{{ __('Product name') }}</p>
             </div>
-            <div class="col-span-3">
+            <div class="col-span-2 flex justify-center">
                 <p class="text-xl">{{ __('Price') }}</p>
+            </div>
+            <div class="col-span-2 flex justify-center">
+                <p class="text-xl">{{ __('Quantity') }}</p>
             </div>
         </div>
         @foreach($user->cart->cartItems as $cartItem)
-            <div class="grid grid-cols-12 gap-4  ml-6 mr-6">
-                <div class="col-span-3">
+            <div class="grid grid-cols-10 gap-4  ml-6 mr-6">
+                <div class="col-span-2 flex justify-center">
                     <a href="/product/{{ $cartItem->product->id }}">
                         <img src="/storage/{{ $cartItem->product->image }}" alt="{{ $cartItem->product->name }}">
                     </a>
                 </div>
-                <div class="col-span-3">
+                <div class="col-span-2 flex justify-center">
                     <a href="/product/{{ $cartItem->product->id }}"><p
                                 class="text-xl">{{ $cartItem->product->name }}</p>
                     </a>
                 </div>
-                <div class="col-span-3">
+                <div class="col-span-2 flex justify-center">
                     <a href="/product/{{ $cartItem->product->id }}">
                         {{ $cartItem->product->price }}
                     </a>
                 </div>
-                <div>
-                    <a href="{{ route('cart.destroy', $cartItem->id) }}">{{__('Remove product')}}</a> <!-- TODO make blade-js component -->
-                    @method('DELETE')
+                <div class="col-span-2 flex justify-center">
+
+                </div>
+                <div class="col-span-2 flex justify-center">
+                    <x-cart.remove-from-cart>
+                        <x-slot name="cartItemId">{{ $cartItem->id }}</x-slot>
+                    </x-cart.remove-from-cart>
                 </div>
             </div>
+            <hr class="border-gray-100"/>
         @endforeach
         <div class="grid grid-cols-12 gap-4 ml-6 mr-6">
             <div class="col-span-4 col-start-8">

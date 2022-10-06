@@ -24,11 +24,11 @@
             {{$product->price}}
         </div>
         <div>
-            <x-add-to-cart-button>
+            <x-cart.add-to-cart-button>
                 <x-slot name="productId">
                     {{ $product->id }}
                 </x-slot>
-            </x-add-to-cart-button>
+            </x-cart.add-to-cart-button>
         </div>
     </div>
     <div class="col-span-2"></div>
