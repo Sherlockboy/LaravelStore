@@ -59,7 +59,7 @@
                     </a>
                 </div>
                 <div class="col-span-2 flex justify-center">
-
+                    {{ $cartItem->product->qty }}
                 </div>
                 <div class="col-span-2 flex justify-center">
                     <x-cart.remove-from-cart>

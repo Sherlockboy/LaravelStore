@@ -13,6 +13,7 @@ class CartController extends Controller
         CartItem::create([
             'product_id' => $product->id,
             'cart_id' => auth()->user()->cart->id,
+            'qty' => 1
         ]);
 
         return response()->json(['name' => $product->name]);

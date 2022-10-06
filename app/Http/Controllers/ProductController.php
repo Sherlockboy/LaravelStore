@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\UploadedFile;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -38,9 +39,7 @@ class ProductController extends Controller
             ]);
 
         if (request('image')) {
-            $image = request('image');
-            $imagePath = $image->store('product_images', 'public');
-            $data['image'] = $imagePath;
+            $data['image']  = $this->resizeImageAndGetPath();
         }
 
         $product->update($data);
@@ -88,14 +87,22 @@ class ProductController extends Controller
               'category' => ['required']
           ]);
 
-        /** @var UploadedFile $image */
-        $image = request('image');
-        $imagePath = $image->store('product_images', 'public');
-        $data['image'] = $imagePath;
+        $data['image'] = $this->resizeImageAndGetPath();
 
         $product = Product::create($data);
         $product->categories()->toggle($data['category']);
 
         return redirect("product/$product->id");
+    }
+
+    public function resizeImageAndGetPath()
+    {
+        $oldImage = request('image');
+        $imagePath = $oldImage->store('product_images', 'public');
+
+        $newImage = Image::make(public_path('storage/' . $imagePath))->fit(1200, 1200);
+        $newImage->save();
+
+        return $imagePath;
     }
 }
