@@ -5,8 +5,9 @@
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
                         <div class="text-sm text-gray-700 dark:text-gray-500">
-                            <a href="{{ url('/dashboard') }}" class="ml-4">Dashboard</a>
-                            <a href="{{ url('/logout') }}" class="ml-4">Logout</a>
+                            <a href="{{ route('cart.index') }}" class="ml-4">{{ __('Cart') }}</a>
+                            <a href="{{ url('/dashboard') }}" class="ml-4">{{ __('Dashboard') }}</a>
+                            <a href="{{ url('/logout') }}" class="ml-4">{{ __('Logout') }}</a>
                         </div>
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log

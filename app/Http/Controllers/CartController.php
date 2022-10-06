@@ -10,15 +10,17 @@ class CartController extends Controller
 {
     public function add(Product $product)
     {
-        /** @var CartItem $cartItem */
-        $cartItem = CartItem::create([
+        CartItem::create([
             'product_id' => $product->id,
             'cart_id' => auth()->user()->cart->id,
-
         ]);
 
+        return response()->json(['name' => $product->name]);
+    }
 
-
-        return response()->json('Success');
+    public function index()
+    {
+        $user = auth()->user();
+        return view('cart.index', compact('user'));
     }
 }

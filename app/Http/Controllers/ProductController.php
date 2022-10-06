@@ -52,7 +52,7 @@ class ProductController extends Controller
     }
 
     /**
-     * TODO: move to another class
+     * TODO: refactor
      * @param Product $product
      * @param array $selectedCategories
      * @return void
