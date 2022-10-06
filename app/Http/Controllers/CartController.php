@@ -39,7 +39,7 @@ class CartController extends Controller
         }
 
 
-        return view('cart.index', compact('user', 'finalPrice'));
+        return view('checkout.cart.index', compact('user', 'finalPrice'));
     }
 
     public function destroy(CartItem $cartItem)
