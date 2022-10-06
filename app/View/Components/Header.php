@@ -8,6 +8,7 @@ use Illuminate\View\Component;
 class Header extends Component
 {
     public $categories;
+    public $user;
 
     /**
      * Create a new component instance.
@@ -17,6 +18,7 @@ class Header extends Component
     public function __construct()
     {
         $this->categories = Category::all();
+        $this->user = auth()->user();
     }
 
     /**

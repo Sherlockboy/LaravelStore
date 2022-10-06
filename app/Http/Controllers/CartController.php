@@ -21,6 +21,18 @@ class CartController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('cart.index', compact('user'));
+        $finalPrice = 0;
+        foreach ($user->cart->cartItems->all() as $cartItem) {
+            $finalPrice += $cartItem->product->price;
+        }
+
+
+        return view('cart.index', compact('user', 'finalPrice'));
+    }
+
+    public function destroy(CartItem $cartItem)
+    {
+        $cartItem->delete();
+        return redirect(route('cart.index'));
     }
 }
