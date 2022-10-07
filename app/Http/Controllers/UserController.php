@@ -17,6 +17,7 @@ class UserController extends Controller
     public function update()
     {
         //TODO Process error messages
+        // Refactor using Request validate php artisan make:request
         $user = auth()->user();
         $data = request()->validate([
             'username' => ['required', 'string', 'max:255'],

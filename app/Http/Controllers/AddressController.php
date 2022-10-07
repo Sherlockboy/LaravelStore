@@ -10,11 +10,11 @@ class AddressController extends Controller
     public function update()
     {
         $data = request()->validate([
-            'country' => ['required'],
-            'city' => ['required'],
-            'street' => ['required'],
+            'country' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'street' => ['required', 'string'],
             'zip' => ['required'],
-            'phone' => ['required'],
+            'phone' => ['required', 'regex:~\+(\d)+~'],
         ]);
 
         $user = auth()->user();
