@@ -21,11 +21,9 @@ Route::get('/info', function () {
     phpinfo();
 });
 
-Route::get('/account', function () {
-    return view('customer.account');
-})->middleware(['auth', 'verified'])->name('customer.account');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/category.php';
 require __DIR__ . '/product.php';
 require __DIR__ . '/checkout.php';
+require __DIR__ . '/user.php';

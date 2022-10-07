@@ -13,7 +13,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public const USER_CUSTOMER_TYPE = 'customer';
+    public const USER_CUSTOMER_TYPE = 'user';
 
     public const USER_ADMIN_TYPE = 'admin';
 
@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
         'type'
