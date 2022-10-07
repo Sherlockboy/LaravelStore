@@ -1,4 +1,4 @@
-<x-header/>
+<x-header title="{{ __('Checkout') }}"/>
 <hr class="mt-4 mb-4"/>
 
 <div class="flex justify-center mb-4">

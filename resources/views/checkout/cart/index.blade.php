@@ -1,11 +1,4 @@
-<x-header/>
-<hr class="mt-4 mb-4"/>
-
-<div class="flex justify-center mb-4">
-    <h1 class="text-5xl">{{ __('Shopping cart') }}</h1>
-</div>
-<hr class=""/>
-
+<x-header title="{{ __('Shopping Cart') }}" />
 @if($user->cart->cartItems->count())
     <div class="grid grid-cols-12">
         <div class="col-span-8 col-start-2">

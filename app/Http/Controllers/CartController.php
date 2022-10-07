@@ -34,12 +34,15 @@ class CartController extends Controller
     {
         $user = auth()->user();
         $finalPrice = 0;
-        foreach ($user->cart->cartItems->all() as $cartItem) {
-            $finalPrice += $cartItem->product->price * $cartItem->qty;
+        if ($user) {
+            foreach ($user->cart->cartItems->all() as $cartItem) {
+                $finalPrice += $cartItem->product->price * $cartItem->qty;
+            }
+
+            return view('checkout.cart.index', compact('user', 'finalPrice'));
         }
 
-
-        return view('checkout.cart.index', compact('user', 'finalPrice'));
+        return redirect(route('login'));
     }
 
     public function destroy(CartItem $cartItem)

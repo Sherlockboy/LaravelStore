@@ -1,2 +1,1 @@
-
-<x-header header-type="1"/>
+<x-header title="{{ __('Home') }}" />

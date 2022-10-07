@@ -1,11 +1,4 @@
-<x-header/>
-<hr class="mt-4 mb-4"/>
-
-<div class="flex justify-center mb-4">
-    <h1 class="text-5xl">{{ $product->name }}</h1>
-</div>
-<hr class="mt-4 mb-4"/>
-
+<x-header title="{{ $product->name }}"/>
 <div class="grid grid-cols-12 gap-4">
     <div class="col-span-2"></div> <!-- TODO remove this ridiculous stuff -->
     <div class="col-span-4">
@@ -24,11 +17,13 @@
             {{$product->price}}
         </div>
         <div>
-            <x-cart.add-to-cart-button>
-                <x-slot name="productId">
-                    {{ $product->id }}
-                </x-slot>
-            </x-cart.add-to-cart-button>
+            @auth()
+                <x-cart.add-to-cart-button>
+                    <x-slot name="productId">
+                        {{ $product->id }}
+                    </x-slot>
+                </x-cart.add-to-cart-button>
+            @endauth
         </div>
     </div>
     <div class="col-span-2"></div>

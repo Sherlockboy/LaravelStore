@@ -9,16 +9,18 @@ class Header extends Component
 {
     public $categories;
     public $user;
+    public $title;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($title)
     {
         $this->categories = Category::all();
         $this->user = auth()->user();
+        $this->title = $title;
     }
 
     /**
