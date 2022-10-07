@@ -57,7 +57,7 @@
             </ul>
         </div>
     </header>
-    <div class="flex justify-center my-4 bg-blue-200  sm:rounded-lg">
+    <div class="flex justify-center my-4 bg-blue-200 sm:rounded-lg">
         <h1 class="text-5xl my-4">{{ __($title ?? config('app.name', 'Laravel')) }}</h1>
     </div>
 </div>
