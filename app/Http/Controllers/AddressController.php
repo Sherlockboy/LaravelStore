@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Rules\PhoneNumber;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -14,7 +15,7 @@ class AddressController extends Controller
             'city' => ['required', 'string'],
             'street' => ['required', 'string'],
             'zip' => ['required'],
-            'phone' => ['required', 'regex:~\+(\d)+~'],
+            'phone' => ['required', new PhoneNumber()],
         ]);
 
         $user = auth()->user();
