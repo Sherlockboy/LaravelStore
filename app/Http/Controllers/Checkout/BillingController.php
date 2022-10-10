@@ -8,6 +8,14 @@ class BillingController extends Controller
 {
     public function index()
     {
-        return view('checkout.billing');
+        $user = auth()->user();
+        $finalPrice = 0;
+        if ($user) {
+            foreach ($user->cart->cartItems->all() as $cartItem) {
+                $finalPrice += $cartItem->product->price * $cartItem->qty;
+            }
+        }
+
+        return view('checkout.billing', compact('user', 'finalPrice'));
     }
 }

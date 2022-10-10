@@ -2,7 +2,7 @@
 @if($user->cart->cartItems->count())
     <div class="grid grid-cols-12">
         <div class="col-span-8 col-start-2">
-            <div class="grid grid-rows gap-4 bg-blue-200">
+            <div class="grid grid-rows gap-4 bg-blue-200 sm:rounded-lg">
                 <!-- Cart table header -->
                 <div class="grid grid-cols-12 gap-4 mx-4 my-4 ">
                     <div class="col-span-2 flex justify-center">
@@ -23,7 +23,7 @@
                 </div>
                 <!-- Products -->
                 @foreach($user->cart->cartItems as $cartItem)
-                    <div class="grid grid-cols-12 gap-4 ml-6 mr-6 max-h-50">
+                    <div class="grid grid-cols-12 gap-4 mx-6 max-h-50">
                         <div class="col-span-2 flex justify-center ">
                             <a href="/product/{{ $cartItem->product->id }}">
                                 <img class="max-h-40" src="/storage/{{ $cartItem->product->image }}"
@@ -63,7 +63,7 @@
         </div>
         <!-- Summary -->
         <div class="col-span-2">
-            <div class="grid grid-rows gap-4 ml-6 mr-6 mb-6 bg-blue-200">
+            <div class="grid grid-rows gap-4 ml-6 mr-6 mb-6 bg-blue-200 sm:rounded-lg">
                 <div class="flex justify-center mt-10">
                     <p class="text-xl text-gray-500">{{ __('Summary') }}</p>
                 </div>

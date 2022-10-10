@@ -11,6 +11,5 @@
                     window.location.href = '/cart';
                 })
         }
-
     }
 </script>

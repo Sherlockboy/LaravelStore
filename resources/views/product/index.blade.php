@@ -1,7 +1,6 @@
 <x-header title="{{ $product->name }}"/>
 <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-2"></div> <!-- TODO remove this ridiculous stuff -->
-    <div class="col-span-4">
+    <div class="col-span-4 col-start-3">
         <img src="/storage/{{$product->image }}" alt="{{ $product->name }}">
         @admin
         <div class="mt-4">
