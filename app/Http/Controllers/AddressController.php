@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Rules\PhoneNumber;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -17,7 +18,18 @@ class AddressController extends Controller
     public function store()
     {
         $data = $this->prepareAddressData();
+
+        $this->resolveOnlyOneDefaultAddress($data);
+
         $data['user_id'] = auth()->user()->id;
+
+        if ($data['is_default']) {
+            foreach (auth()->user()->addresses as $address) {
+                if ($address->is_default) {
+                    $address->update(['is_default' => 0]);
+                }
+            }
+        }
 
         Address::create($data);
 
@@ -27,6 +39,11 @@ class AddressController extends Controller
     public function update(Address $address)
     {
         $data = $this->prepareAddressData();
+
+        if (!($address->is_default && $data['is_default'])) {
+            $this->resolveOnlyOneDefaultAddress($data);
+        }
+
         $address->update($data);
 
         return redirect(url()->previous());
@@ -39,8 +56,18 @@ class AddressController extends Controller
         return response()->json(['title' => $addressTitle]);
     }
 
+    private function resolveOnlyOneDefaultAddress($data): void
+    {
+        if ($data['is_default']) {
+            foreach (auth()->user()->addresses as $address) {
+                if ($address->is_default) {
+                    $address->update(['is_default' => 0]);
+                }
+            }
+        }
+    }
 
-    protected function prepareAddressData(): array
+    private function prepareAddressData(): array
     {
         $data = request()->validate([
             'title' => ['required', 'string'],
