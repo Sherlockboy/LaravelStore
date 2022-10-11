@@ -13,4 +13,21 @@ class CategoryController extends Controller
         $categories = Category::all();
         return view('admin.category', compact('categories'));
     }
+
+    public function create()
+    {
+        return view('category.create');
+    }
+
+    public function store()
+    {
+        $data = request()->validate(
+            [
+                'name' => ['required', 'unique:categories']
+            ]);
+
+        $category = Category::create($data);
+
+        return redirect("/category/$category->id");
+    }
 }

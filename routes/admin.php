@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
-use App\Http\Controllers\Admin\OrderController as AdminOrderController;
-use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
 
 Route::middleware('admin')->group(function () {
     //Category
@@ -31,13 +29,13 @@ Route::middleware('admin')->group(function () {
     //AdminController
     Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
 
-    Route::get('admin/category', [AdminCategoryController::class, 'index'])
+    Route::get('admin/category', [CategoryController::class, 'index'])
         ->name('admin.category.index');
-
-    Route::get('admin/product', [AdminProductController::class, 'index'])
+    Route::get('admin/product', [ProductController::class, 'index'])
         ->name('admin.product.index');
-
-    Route::get('admin/order', [AdminOrderController::class, 'index'])
+    Route::get('admin/order', [OrderController::class, 'index'])
         ->name('admin.order.index');
-    Route::patch('admin/order/{order}', [AdminOrderController::class, 'edit'])->name('admin.order.edit');
+
+    Route::patch('admin/order/{order}', [OrderController::class, 'update'])
+        ->name('admin.order.update');
 });

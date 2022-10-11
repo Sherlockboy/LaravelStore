@@ -14,7 +14,7 @@ class OrderController extends Controller
         return view('admin.orders', compact('orders'));
     }
 
-    public function edit(Order $order)
+    public function update(Order $order)
     {
         $status = request('order-status');
 
