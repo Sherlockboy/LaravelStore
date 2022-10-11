@@ -1,5 +1,5 @@
 <x-main-form>
-    <p class="text-center">{{ __($title ?? '') }}</p>
+    <p class="text-center">{{ __($formTitle ?? '') }}</p>
     <form method="POST" action="{{ $action }}" enctype="multipart/form-data">
         @csrf
         <div class="m-1">

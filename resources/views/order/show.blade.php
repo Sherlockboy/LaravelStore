@@ -9,7 +9,7 @@
     <div class="col-span-8 bg-blue-200 sm:rounded-lg">
         <div class="text-xl text-center">{{ __('Ordered items') }}</div>
         <div class="grid grid-rows">
-            <div class="grid grid-cols-8 border border-gray-100">
+            <div class="grid grid-cols-4 border border-gray-100">
                 <div class="m-1 text-center text-xl">{{ __('Product') }}</div>
                 <div class="m-1 text-center text-xl">{{ __('Price') }}</div>
                 <div class="m-1 text-center text-xl">{{ __('Qty') }}</div>
@@ -17,10 +17,14 @@
             </div>
 
             @foreach($order->orderItems as $item)
-                <div class="grid grid-cols-8 border border-gray-100">
+                <div class="grid grid-cols-4 border border-gray-100">
                     <div class="m-1 text-center">
-                        <img src="/storage/{{$item->product->image}}">
-                        {{$item->product->name}}
+                        <a href="{{ route('product.index', $item->product->id) }}">
+                            <img src="/storage/{{$item->product->image}}">
+                        </a>
+                        <a href="{{ route('product.index', $item->product->id) }}">
+                            {{$item->product->name}}
+                        </a>
                     </div>
                     <div class="m-1 text-center">{{$item->product->price}}</div>
                     <div class="m-1 text-center">{{$item->qty}}</div>

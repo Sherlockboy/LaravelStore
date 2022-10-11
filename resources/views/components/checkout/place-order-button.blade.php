@@ -5,13 +5,19 @@
 <script>
     function placeOrder() {
         let select = document.getElementById('delivery-address');
-        let addressId = select.options[select.selectedIndex].value;
-        axios.post('/order/create', {
-            'addressId': addressId
-        })
-            .then(response => {
-                alert('Order was created!');
-                window.location.href = '{{ route('checkout.success') }}' + '?orderId=' + response.data.orderId
+        let addressOption = select.options[select.selectedIndex];
+
+        if (addressOption) {
+            let addressId = addressOption.value
+            axios.post('/order/create', {
+                'addressId': addressId
             })
+                .then(response => {
+                    alert('Order was created!');
+                    window.location.href = '{{ route('checkout.success') }}' + '?orderId=' + response.data.orderId
+                })
+        } else {
+            alert('Please, select delivery address');
+        }
     }
 </script>

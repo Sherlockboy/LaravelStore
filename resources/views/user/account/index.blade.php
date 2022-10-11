@@ -94,6 +94,7 @@
                     <x-user.address-form
                             action="{{ route('address.update', $user->getDefaultAddress()->id) }}"
                             addressId="{{ $user->getDefaultAddress()->id }}"
+                            form-title="{{ __('Default address') }}"
                             title="{{$user->getDefaultAddress()->title}}"
                             country="{{$user->getDefaultAddress()->country}}"
                             city="{{$user->getDefaultAddress()->city}}"

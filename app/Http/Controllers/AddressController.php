@@ -12,7 +12,7 @@ class AddressController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('user.account-address', compact('user'));
+        return view('user.account.address', compact('user'));
     }
 
     public function store()
