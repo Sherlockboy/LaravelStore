@@ -1,6 +1,6 @@
 <div class="grid grid-rows-4 justify-center">
     <div>
-        <a href="{{ route('user.account') }}"
+        <a href="{{ route('user.account.index') }}"
            class="{{ $current == 'account' ? 'font-bold' : '' }}">{{ __('My Account') }}</a>
     </div>
     <div>

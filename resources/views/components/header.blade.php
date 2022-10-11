@@ -23,7 +23,10 @@
                         @auth
                             <div class="text-sm text-gray-700 dark:text-gray-500">
                                 <a href="{{ route('cart.index') }}" class="ml-4">{{'Cart'}}</a>
-                                <a href="{{ url('/account') }}" class="ml-4">{{ __('Account') }}</a>
+                                <a href="{{ route('user.account.index') }}" class="ml-4">{{ __('Account') }}</a>
+                                @admin
+                                <a href="{{ route('admin.index') }}" class="ml-4">{{ __('Admin') }}</a>
+                                @endadmin
                                 <a href="{{ url('/logout') }}" class="ml-4">{{ __('Logout') }}</a>
                             </div>
                         @else
@@ -44,9 +47,6 @@
                 <li>
                     <a href="/">{{ __('Home') }}</a>
                 </li>
-                @admin
-                <x-admin-navigation/>
-                @endadmin
                 @foreach($categories as $category)
                     <li>
                         <div>

@@ -64,6 +64,6 @@ class UserController extends Controller
             $user->update($dataToUpdate);
         }
 
-        return redirect(route('user.account'));
+        return redirect(route('user.account.index'));
     }
 }
