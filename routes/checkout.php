@@ -11,5 +11,6 @@ Route::delete('/cart/{cartItem}', [CartController::class, 'destroy'])->name('car
 Route::delete('/cart', [CartController::class, 'destroyAll'])->name('cart.destroy.all');
 
 Route::get('/checkout/index', [CheckoutController::class, 'index'])->name('checkout.shipping');
+Route::get('checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 
 Route::post('order/create', [OrderController::class, 'create'])->name('order.create');

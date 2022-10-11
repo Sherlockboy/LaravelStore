@@ -43,6 +43,7 @@ class CartController extends Controller
 
     public function destroy(CartItem $cartItem)
     {
+        $this->authorize('delete', $cartItem);
         $productName = $cartItem->product->name;
         $cartItem->delete();
         return response()->json(['name' => $productName]);
@@ -51,9 +52,9 @@ class CartController extends Controller
     public function destroyAll()
     {
         $cart = auth()->user()->cart;
-        foreach ($cart->cartItems as $cartItem) {
-            $cartItem->delete();
-        }
+        $this->authorize('delete', $cart);
+
+        $cart->clearCart();
 
         return response()->json('Success');
     }

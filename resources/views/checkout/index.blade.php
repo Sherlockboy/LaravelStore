@@ -9,7 +9,8 @@
                         <x-main-form>
                             <form method="POST" action="#" enctype="multipart/form-data">
                                 <label for="delivery-address">{{ __('Select delivery address') }}</label>
-                                <select name="delivery-address" id="delivery-address" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <select name="delivery-address" id="delivery-address"
+                                        class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     @foreach($user->addresses as $address)
                                         <option value="{{$address->id}}"
                                                 id="address-id" {{ $address->is_default ? 'selected' : '' }}>

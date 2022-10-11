@@ -1,7 +1,7 @@
 <x-header title="{{ __('Addresses') }}"/>
 <div class="grid grid-cols-12 gap-4">
     <div class="col-span-2 col-start-2 bg-blue-200 sm:rounded-lg">
-        <x-user.account-nav/>
+        <x-user.account-nav current="addresses"/>
     </div>
     <div class="col-span-8 bg-gray-100">
         <div class="grid grid-cols-4 gap-4">

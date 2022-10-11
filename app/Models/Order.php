@@ -9,9 +9,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
+    const STATUS_PENDING = 'pending';
+    const STATUS_PROCESSING = 'processing';
+    const STATUS_COMPLETED = 'completed';
+    const STATUS_CANCELED = 'canceled';
+
     protected $fillable = [
         'user_id',
         'address_id',
+        'status',
         'country',
         'city',
         'street',

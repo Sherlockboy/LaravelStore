@@ -30,4 +30,11 @@ class Cart extends Model
 
         return $finalPrice;
     }
+
+    public function clearCart()
+    {
+        foreach ($this->cartItems as $cartItem) {
+            $cartItem->delete();
+        }
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 
 Route::middleware('auth')->group(function () {
@@ -17,4 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/address/{address}', [AddressController::class, 'delete'])->name('address.delete');
 
     Route::get('/address', [AddressController::class, 'index'])->name('user.address.index');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
+    Route::get('/order/{order}', [OrderController::class, 'show'])->name('order.show');
 });

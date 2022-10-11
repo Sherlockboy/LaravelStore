@@ -9,10 +9,9 @@
         axios.post('/order/create', {
             'addressId': addressId
         })
-
             .then(response => {
                 alert('Order was created!');
-                window.location.href = '/cart';
+                window.location.href = '{{ route('checkout.success') }}' + '?orderId=' + response.data.orderId
             })
     }
 </script>
