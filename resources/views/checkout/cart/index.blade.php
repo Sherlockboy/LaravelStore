@@ -47,16 +47,16 @@
                             {{ number_format($cartItem->qty * $cartItem->product->price, 2)}}
                         </div>
                         <div class="col-span-2 flex justify-center">
-                            <x-cart.remove-from-cart>
+                            <x-checkout.remove-from-cart>
                                 <x-slot name="cartItemId">{{ $cartItem->id }}</x-slot>
-                            </x-cart.remove-from-cart>
+                            </x-checkout.remove-from-cart>
                         </div>
                     </div>
                     <hr class="border-gray-100"/>
                 @endforeach
                 <div class="grid grid-cols-12 gap-4  mx-6 mb-6 max-h-50">
                     <div class="col-span-2 flex justify-center col-start-11">
-                        <x-cart.clear-cart/>
+                        <x-checkout.clear-cart/>
                     </div>
                 </div>
             </div>

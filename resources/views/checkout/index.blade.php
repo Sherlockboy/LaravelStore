@@ -8,11 +8,11 @@
                     <div class="col-span-6 my-6 ml-6">
                         <x-main-form>
                             <form method="POST" action="#" enctype="multipart/form-data">
-                                <label for="saved-address">{{ __('Select delivery address') }}</label>
-                                <select name="saved-address" id="saved-address" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <label for="delivery-address">{{ __('Select delivery address') }}</label>
+                                <select name="delivery-address" id="delivery-address" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     @foreach($user->addresses as $address)
                                         <option value="{{$address->id}}"
-                                                id="address-{{$address->id}}" {{ $address->is_default ? 'selected' : '' }}>
+                                                id="address-id" {{ $address->is_default ? 'selected' : '' }}>
                                             {{ __($address->title) }}
                                         </option>
                                     @endforeach
@@ -60,9 +60,7 @@
                     <p class="text-xl">{{ __('Final price: ') .  number_format($finalPrice, 2) }}</p>
                 </div>
                 <div class="flex justify-center mb-2">
-                    <button class="inline-flex px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 mt-2">
-                        <a href="{{ route('checkout.billing') }}">{{ __('Place order') }}</a>
-                    </button>
+                    <x-checkout.place-order-button/>
                 </div>
             </div>
         </div>

@@ -17,11 +17,11 @@
         </div>
         <div>
             @auth()
-                <x-cart.add-to-cart-button>
+                <x-checkout.add-to-cart-button>
                     <x-slot name="productId">
                         {{ $product->id }}
                     </x-slot>
-                </x-cart.add-to-cart-button>
+                </x-checkout.add-to-cart-button>
             @endauth
         </div>
     </div>

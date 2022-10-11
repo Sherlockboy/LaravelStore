@@ -20,4 +20,14 @@ class Cart extends Model
     {
         return $this->hasMany(CartItem::class);
     }
+
+    public function getFinalPrice(): int
+    {
+        $finalPrice = 0;
+        foreach ($this->cartItems->all() as $cartItem) {
+            $finalPrice += $cartItem->product->price * $cartItem->qty;
+        }
+
+        return $finalPrice;
+    }
 }
