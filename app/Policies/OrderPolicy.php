@@ -30,7 +30,7 @@ class OrderPolicy
      */
     public function view(User $user, Order $order)
     {
-        return $user->id == $order->user->id;
+        return $user->id == $order->user->id || $user->type == USER::USER_ADMIN_TYPE;
     }
 
     /**

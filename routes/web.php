@@ -17,13 +17,10 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/info', function () {
-    phpinfo();
-});
-
-
 require __DIR__ . '/auth.php';
 require __DIR__ . '/category.php';
 require __DIR__ . '/product.php';
+require __DIR__ . '/cart.php';
+require __DIR__ . '/order.php';
 require __DIR__ . '/checkout.php';
 require __DIR__ . '/user.php';
