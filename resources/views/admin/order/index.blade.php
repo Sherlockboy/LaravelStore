@@ -18,7 +18,7 @@
                 <div class="m-1 text-center text-xl">{{ __('Phone') }}</div>
             </div>
             @foreach($orders as $order)
-                <a href="{{ route('order.show', $order->id) }}">
+                <a href="{{ route('admin.order.show', $order->id) }}">
                     <div class="grid grid-cols-10 border border-gray-100">
                         <div class="m-1 text-center">{{ $order->id }}</div>
                         <div class="m-1 text-center">{{ $order->user->id }}</div>

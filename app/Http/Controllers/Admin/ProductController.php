@@ -12,20 +12,22 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('admin.product', compact('products'));
+        return view('admin.product.index', compact('products'));
     }
 
     public function create()
     {
         $categories = Category::all();
-        return view('product.create', compact('categories'));
+        return view('admin.product.create', compact('categories'));
     }
 
     public function edit(Product $product)
     {
         $categories = Category::all();
         $productCategoryIds = array_keys($product->categories->groupBy('id')->all());
-        return view('product.edit', compact('product', 'categories', 'productCategoryIds'));
+        return view('admin.product.edit',
+            compact('product', 'categories', 'productCategoryIds')
+        );
     }
 
     public function update(Product $product)
@@ -51,6 +53,14 @@ class ProductController extends Controller
         );
 
         return redirect("product/$product->id");
+    }
+
+    public function destroy(Product $product)
+    {
+        $productName = $product->name;
+        $product->delete();
+        return response()->json(['name' => $productName]);
+
     }
 
     /**

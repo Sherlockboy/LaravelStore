@@ -15,16 +15,19 @@ Route::middleware('admin')->group(function () {
 
     //Product
     Route::get('product/create', [ProductController::class, 'create'])
-        ->name('product.create');
+        ->name('admin.product.create');
 
     Route::post('product/store', [ProductController::class, 'store'])
-        ->name('product.store');
+        ->name('admin.product.store');
 
     Route::get('product/edit/{product}', [ProductController::class, 'edit'])
-        ->name('product.edit');
+        ->name('admin.product.edit');
 
     Route::post('product/update/{product}', [ProductController::class, 'update'])
-        ->name('product.update');
+        ->name('admin.product.update');
+
+    Route::delete('product/delete/{product}', [ProductController::class, 'destroy'])
+        ->name('admin.product.delete');
 
     //AdminController
     Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
@@ -38,4 +41,6 @@ Route::middleware('admin')->group(function () {
 
     Route::patch('admin/order/{order}', [OrderController::class, 'update'])
         ->name('admin.order.update');
+    Route::get('admin/order/{order}', [OrderController::class, 'show'])
+        ->name('admin.order.show');
 });
