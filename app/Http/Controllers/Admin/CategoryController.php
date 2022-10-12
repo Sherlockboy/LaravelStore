@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(10);
         return view('admin.category.index', compact('categories'));
     }
 
@@ -21,12 +21,11 @@ class CategoryController extends Controller
 
     public function store()
     {
-        $data = request()->validate(
-            [
-                'name' => ['required', 'unique:categories']
-            ]);
+        $data = request()->validate([
+            'name' => ['required', 'unique:categories']
+        ]);
 
-        $category = Category::create($data);
+        Category::create($data);
 
         return redirect(route('admin.category.index'));
     }

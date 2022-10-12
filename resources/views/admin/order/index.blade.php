@@ -18,8 +18,9 @@
                 <div class="m-1 text-center text-xl">{{ __('Phone') }}</div>
             </div>
             @foreach($orders as $order)
-                <a href="{{ route('admin.order.show', $order->id) }}">
-                    <div class="grid grid-cols-10 border border-gray-100">
+                <a href="{{ route('order.show', $order->id) }}">
+                    <div class="grid grid-cols-10 border border-gray-100
+                     {{ $loop->index % 2 != 0 ? 'bg-gray-200' : 'bg-gray-300'}}">
                         <div class="m-1 text-center">{{ $order->id }}</div>
                         <div class="m-1 text-center">{{ $order->user->id }}</div>
                         <div class="m-1 text-center">{{ $order->user->username }}</div>
@@ -35,4 +36,7 @@
             @endforeach
         </div>
     </div>
+</div>
+<div class="flex justify-center m-4">
+    {{ $orders->links()}}
 </div>

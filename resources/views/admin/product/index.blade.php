@@ -1,8 +1,10 @@
 <x-header title="{{__('Admin Panel: Products')}}"/>
-<div class="justify-center flex mb-4 text-xl bg-blue-100 sm:rounded-lg">
-    <x-primary-button class="my-4">
-        <a href="{{ route('admin.product.create') }}">{{ __('Add new Product') }}</a>
-    </x-primary-button>
+<div class="grid grid-cols-12">
+    <div class="col-span-2 col-start-6 justify-center flex mb-4 text-xl bg-blue-200 sm:rounded-lg">
+        <x-primary-button class="my-4">
+            <a href="{{ route('admin.product.create') }}">{{ __('Add new Product') }}</a>
+        </x-primary-button>
+    </div>
 </div>
 <div class="grid grid-cols-12 gap-4">
     <div class="col-span-2 col-start-2 bg-blue-200 sm:rounded-lg">
@@ -18,7 +20,8 @@
                 <div class="m-1 text-center text-xl">{{ __('Actions') }}</div>
             </div>
             @foreach($products as $product)
-                <div class="grid grid-cols-5 border border-gray-100">
+                <div class="grid grid-cols-5 border border-gray-100
+                {{ $loop->index % 2 != 0 ? 'bg-gray-200' : 'bg-gray-300'}}">
                     <div class="m-1 text-center">{{ $product->id }}</div>
                     <div class="m-1 text-center">
                         <img src="/storage/{{ $product->image }}">
@@ -45,4 +48,8 @@
             @endforeach
         </div>
     </div>
+
+</div>
+<div class="flex justify-center m-4">
+    {{ $products->links()}}
 </div>

@@ -10,13 +10,13 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::paginate(10);
         return view('admin.order.index', compact('orders'));
     }
 
     public function show(Order $order)
     {
-        return view('admin.order.show', compact('order'));
+        return view('order.show', compact('order'));
     }
 
     public function update(Order $order)

@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(10);
         return view('admin.product.index', compact('products'));
     }
 
@@ -52,7 +52,7 @@ class ProductController extends Controller
             }, $data['category'])
         );
 
-        return redirect("product/$product->id");
+        return redirect(route('admin.product.index'));
     }
 
     public function destroy(Product $product)
@@ -60,7 +60,25 @@ class ProductController extends Controller
         $productName = $product->name;
         $product->delete();
         return response()->json(['name' => $productName]);
+    }
 
+    public function store()
+    {
+        $data = request()->validate(
+            [
+                'name' => ['required', 'string', 'unique:products'],
+                'price' => ['required', 'numeric'],
+                'description' => ['required', 'string'],
+                'image' => ['required', 'image'],
+                'category' => ['required']
+            ]);
+
+        $data['image'] = $this->resizeImageAndGetPath();
+
+        $product = Product::create($data);
+        $product->categories()->toggle($data['category']);
+
+        return redirect(route('admin.product.index'));
     }
 
     /**
@@ -86,25 +104,6 @@ class ProductController extends Controller
         if ($categoriesToDetach) {
             $product->categories()->detach($categoriesToDetach);
         }
-    }
-
-    public function store()
-    {
-        $data = request()->validate(
-            [
-                'name' => ['required', 'string', 'unique:products'],
-                'price' => ['required', 'numeric'],
-                'description' => ['required', 'string'],
-                'image' => ['required', 'image'],
-                'category' => ['required']
-            ]);
-
-        $data['image'] = $this->resizeImageAndGetPath();
-
-        $product = Product::create($data);
-        $product->categories()->toggle($data['category']);
-
-        return redirect(route('admin.product.index'));
     }
 
     public function resizeImageAndGetPath()
