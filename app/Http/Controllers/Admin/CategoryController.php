@@ -11,12 +11,12 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('admin.category', compact('categories'));
+        return view('admin.category.index', compact('categories'));
     }
 
     public function create()
     {
-        return view('category.create');
+        return view('admin.category.create');
     }
 
     public function store()
@@ -28,6 +28,14 @@ class CategoryController extends Controller
 
         $category = Category::create($data);
 
-        return redirect("/category/$category->id");
+        return redirect(route('admin.category.index'));
+    }
+
+    public function destroy(Category $category)
+    {
+        $categoryName = $category->name;
+        $category->delete();
+
+        return response()->json(['name' => $categoryName]);
     }
 }

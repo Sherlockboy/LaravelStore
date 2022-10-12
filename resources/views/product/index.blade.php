@@ -2,11 +2,6 @@
 <div class="grid grid-cols-12 gap-4">
     <div class="col-span-4 col-start-3">
         <img src="/storage/{{$product->image }}" alt="{{ $product->name }}">
-        @admin
-        <div class="mt-4">
-            <a href="/product/edit/{{ $product->id }}">{{ __('Edit product') }}</a>
-        </div>
-        @endadmin
     </div>
     <div class="col-span-4">
         <div>
@@ -17,11 +12,7 @@
         </div>
         <div>
             @auth()
-                <x-checkout.add-to-cart-button>
-                    <x-slot name="productId">
-                        {{ $product->id }}
-                    </x-slot>
-                </x-checkout.add-to-cart-button>
+                <x-checkout.add-to-cart-button product-id="{{$product->id}}"/>
             @endauth
         </div>
     </div>

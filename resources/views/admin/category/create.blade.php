@@ -1,7 +1,7 @@
 <x-header title="{{ __('Create Category') }}"/>
 <x-main-form>
     <p class="text-center">{{ __('Create Category') }}</p>
-    <form method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.category.store') }}" enctype="multipart/form-data">
         @csrf
 
         <div>

@@ -104,7 +104,7 @@ class ProductController extends Controller
         $product = Product::create($data);
         $product->categories()->toggle($data['category']);
 
-        return redirect("product/$product->id");
+        return redirect(route('admin.product.index'));
     }
 
     public function resizeImageAndGetPath()

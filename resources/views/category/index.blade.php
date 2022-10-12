@@ -21,11 +21,7 @@
                 </div>
                 <div class="flex justify-center row-span-2">
                     @auth()
-                        <x-checkout.add-to-cart-button>
-                            <x-slot name="productId">
-                                {{ $product->id }}
-                            </x-slot>
-                        </x-checkout.add-to-cart-button>
+                        <x-checkout.add-to-cart-button product-id="{{$product->id}}"/>
                     @endauth
                 </div>
             </div>

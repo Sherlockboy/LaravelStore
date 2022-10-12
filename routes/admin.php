@@ -8,10 +8,14 @@ use App\Http\Controllers\AdminController;
 Route::middleware('admin')->group(function () {
     //Category
     Route::get('category/create', [CategoryController::class, 'create'])
-        ->name('category.create');
+        ->name('admin.category.create');
 
     Route::post('category/store', [CategoryController::class, 'store'])
-        ->name('category.store');
+        ->name('admin.category.store');
+
+    Route::delete('category/{category}', [CategoryController::class, 'destroy'])
+        ->name('admin.category.destroy');
+
 
     //Product
     Route::get('product/create', [ProductController::class, 'create'])
@@ -26,10 +30,10 @@ Route::middleware('admin')->group(function () {
     Route::post('product/update/{product}', [ProductController::class, 'update'])
         ->name('admin.product.update');
 
-    Route::delete('product/delete/{product}', [ProductController::class, 'destroy'])
-        ->name('admin.product.delete');
+    Route::delete('product/{product}', [ProductController::class, 'destroy'])
+        ->name('admin.product.destroy');
 
-    //AdminController
+    //Admin Navigation
     Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
 
     Route::get('admin/category', [CategoryController::class, 'index'])
@@ -39,6 +43,7 @@ Route::middleware('admin')->group(function () {
     Route::get('admin/order', [OrderController::class, 'index'])
         ->name('admin.order.index');
 
+    //Order
     Route::patch('admin/order/{order}', [OrderController::class, 'update'])
         ->name('admin.order.update');
     Route::get('admin/order/{order}', [OrderController::class, 'show'])
