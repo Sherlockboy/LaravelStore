@@ -2,18 +2,17 @@
 
 namespace App\View\Components\Grid;
 
-use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class OrderGrid extends Component
+class ProductGrid extends Component
 {
-    public $orders;
+    public $items;
 
     /**
      * Grid type, can be either 'user' or 'admin'
      * @var string
      */
-    public string $type;
+    public $type;
 
     /**
      * Number of grid columns, depends on grid type
@@ -22,22 +21,24 @@ class OrderGrid extends Component
     public int $colNum;
 
     /**
+     * Create a new component instance.
+     *
      * @return void
      */
-    public function __construct($orders, string $type)
+    public function __construct($items, $type = null)
     {
-        $this->orders = $orders;
+        $this->items = $items;
         $this->type = $type;
-        $type == 'admin' ? $this->colNum = 10 : $this->colNum = 8;
+        $type == 'cart' ? $this->colNum = 6 : $this->colNum = 5;
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View|\Closure|string
      */
-    public function render(): View
+    public function render()
     {
-        return view('components.grid.order-grid');
+        return view('components.grid.product-grid');
     }
 }

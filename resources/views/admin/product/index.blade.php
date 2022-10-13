@@ -46,7 +46,6 @@
             @endforeach
         </div>
     </div>
-
 </div>
 <div class="flex justify-center m-4">
     {{ $products->links()}}

@@ -1,63 +1,11 @@
-<x-header title="{{ __('Shopping Cart') }}" />
+<x-header title="{{ __('Shopping Cart') }}"/>
 @if($user->cart->cartItems->count())
     <div class="grid grid-cols-12">
-        <div class="col-span-8 col-start-2">
-            <div class="grid grid-rows gap-4 bg-blue-200 sm:rounded-lg">
-                <!-- Cart table header -->
-                <div class="grid grid-cols-12 gap-4 mx-4 my-4 ">
-                    <div class="col-span-2 flex justify-center">
-                        <p class="text-xl">{{ __('Product image') }}</p>
-                    </div>
-                    <div class="col-span-2 flex justify-center">
-                        <p class="text-xl">{{ __('Product name') }}</p>
-                    </div>
-                    <div class="col-span-2 flex justify-center">
-                        <p class="text-xl">{{ __('Price') }}</p>
-                    </div>
-                    <div class="col-span-2 flex justify-center">
-                        <p class="text-xl">{{ __('Quantity') }}</p>
-                    </div>
-                    <div class="col-span-2 flex justify-center">
-                        <p class="text-xl">{{ __('Subtotal') }}</p>
-                    </div>
-                </div>
-                <!-- Products -->
-                @foreach($user->cart->cartItems as $cartItem)
-                    <div class="grid grid-cols-12 gap-4 mx-6 max-h-50">
-                        <div class="col-span-2 flex justify-center ">
-                            <a href="/product/{{ $cartItem->product->id }}">
-                                <img class="max-h-40" src="/storage/{{ $cartItem->product->image }}"
-                                     alt="{{ $cartItem->product->name }}">
-                            </a>
-                        </div>
-                        <div class="col-span-2 flex justify-center">
-                            <a href="/product/{{ $cartItem->product->id }}">
-                                <p class="">{{ $cartItem->product->name }}</p>
-                            </a>
-                        </div>
-                        <div class="col-span-2 flex justify-center">
-                            <a href="/product/{{ $cartItem->product->id }}">
-                                {{ number_format($cartItem->product->price, 2) }}
-                            </a>
-                        </div>
-                        <div class="col-span-2 flex justify-center">
-                            {{ $cartItem->qty }}
-                        </div>
-                        <div class="col-span-2 flex justify-center">
-                            {{ number_format($cartItem->qty * $cartItem->product->price, 2)}}
-                        </div>
-                        <div class="col-span-2 flex justify-center">
-                            <x-checkout.remove-from-cart>
-                                <x-slot name="cartItemId">{{ $cartItem->id }}</x-slot>
-                            </x-checkout.remove-from-cart>
-                        </div>
-                    </div>
-                    <hr class="border-gray-100"/>
-                @endforeach
-                <div class="grid grid-cols-12 gap-4  mx-6 mb-6 max-h-50">
-                    <div class="col-span-2 flex justify-center col-start-11">
-                        <x-checkout.clear-cart/>
-                    </div>
+        <div class="col-span-8 col-start-2 bg-blue-200 sm:rounded-lg">
+            <x-grid.product-grid :items="$user->cart->cartItems" type="cart"/>
+            <div class="grid grid-cols-12 gap-4  mx-6 mb-6 max-h-50">
+                <div class="col-span-2 flex justify-center col-start-11">
+                    <x-checkout.clear-cart/>
                 </div>
             </div>
         </div>
