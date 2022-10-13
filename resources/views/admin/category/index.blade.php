@@ -19,7 +19,7 @@
             </div>
             @foreach($categories as $category)
                 <div class="grid grid-cols-3 border border-gray-100
-                {{ $loop->index % 2 != 0 ? 'bg-gray-200' : 'bg-gray-300'}}">
+                {{ $loop->odd ? 'bg-gray-200' : 'bg-gray-300'}}">
                     <div class="m-1 text-center">{{ $category->id }}</div>
                     <div class="m-1 text-center">{{ $category->name }}</div>
                     <div class="m-1 text-center">
