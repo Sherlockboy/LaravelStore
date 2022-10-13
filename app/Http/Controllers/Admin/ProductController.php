@@ -5,22 +5,64 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Routing\Redirector;
 use Intervention\Image\Facades\Image;
 
+/**
+ * Handles product-related actions done by admin user
+ */
 class ProductController extends Controller
 {
+    /**
+     * @return Application|Factory|View
+     */
     public function index()
     {
         $products = Product::paginate(10);
         return view('admin.product.index', compact('products'));
     }
 
+    /**
+     * @return Application|Factory|View
+     */
     public function create()
     {
         $categories = Category::all();
         return view('admin.product.create', compact('categories'));
     }
 
+    /**
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function store()
+    {
+        $data = request()->validate(
+            [
+                'name' => ['required', 'string', 'unique:products'],
+                'price' => ['required', 'numeric'],
+                'description' => ['required', 'string'],
+                'image' => ['required', 'image'],
+                'category' => ['required']
+            ]);
+
+        $data['image'] = $this->resizeImageAndGetPath();
+
+        $product = Product::create($data);
+        $product->categories()->toggle($data['category']);
+
+        return redirect(route('admin.product.index'));
+    }
+
+    /**
+     * @param Product $product
+     * @return Application|Factory|View
+     */
     public function edit(Product $product)
     {
         $categories = Category::all();
@@ -30,6 +72,10 @@ class ProductController extends Controller
         );
     }
 
+    /**
+     * @param Product $product
+     * @return Application|RedirectResponse|Redirector
+     */
     public function update(Product $product)
     {
         $data = request()->validate(
@@ -55,6 +101,10 @@ class ProductController extends Controller
         return redirect(route('admin.product.index'));
     }
 
+    /**
+     * @param Product $product
+     * @return JsonResponse
+     */
     public function destroy(Product $product)
     {
         $productName = $product->name;
@@ -62,27 +112,7 @@ class ProductController extends Controller
         return response()->json(['name' => $productName]);
     }
 
-    public function store()
-    {
-        $data = request()->validate(
-            [
-                'name' => ['required', 'string', 'unique:products'],
-                'price' => ['required', 'numeric'],
-                'description' => ['required', 'string'],
-                'image' => ['required', 'image'],
-                'category' => ['required']
-            ]);
-
-        $data['image'] = $this->resizeImageAndGetPath();
-
-        $product = Product::create($data);
-        $product->categories()->toggle($data['category']);
-
-        return redirect(route('admin.product.index'));
-    }
-
     /**
-     * TODO: refactor
      * @param Product $product
      * @param array $selectedCategories
      * @return void
@@ -106,8 +136,12 @@ class ProductController extends Controller
         }
     }
 
-    public function resizeImageAndGetPath()
+    /**
+     * @return string
+     */
+    public function resizeImageAndGetPath(): string
     {
+        /** @var UploadedFile $oldImage */
         $oldImage = request('image');
         $imagePath = $oldImage->store('product_images', 'public');
 

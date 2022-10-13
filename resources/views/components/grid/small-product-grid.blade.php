@@ -1,5 +1,6 @@
+<!-- Small product grid. Used to display products in cart or at order details page-->
 <div class="grid grid-rows gap-4">
-    <!-- Cart table header -->
+    <!-- Grid header -->
     <div class="grid grid-cols-{{$colNum}} gap-4 mx-4 my-4 ">
         <div class="col-span-1 flex justify-center">
             <p class="text-xl">{{ __('Product image') }}</p>

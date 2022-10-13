@@ -4,7 +4,7 @@ namespace App\View\Components\Grid;
 
 use Illuminate\View\Component;
 
-class ProductGrid extends Component
+class SmallProductGrid extends Component
 {
     /**
      * Can be collection of cartItems of orderItems. $item->product must return App\Model\Product instance
@@ -12,7 +12,7 @@ class ProductGrid extends Component
     public $items;
 
     /**
-     * Grid type, can be either 'user' or 'admin'
+     * Grid type, can be either 'cart' or 'order'
      * @var string
      */
     public $type;
@@ -42,6 +42,6 @@ class ProductGrid extends Component
      */
     public function render()
     {
-        return view('components.grid.product-grid');
+        return view('components.grid.small-product-grid');
     }
 }

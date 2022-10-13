@@ -10,6 +10,7 @@ class CategoryController extends Controller
 {
     public function index(Category $category)
     {
-        return view('category.index', compact('category'));
+        $products = $category->products()->paginate(12);
+        return view('category.index', compact('category', 'products'));
     }
 }
