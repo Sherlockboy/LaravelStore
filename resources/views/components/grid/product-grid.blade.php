@@ -17,6 +17,7 @@
             <p class="text-xl">{{ __('Subtotal') }}</p>
         </div>
     </div>
+    <hr class="border-gray-100"/>
     <!-- Products -->
     @foreach($items as $item)
         <div class="grid grid-cols-{{$colNum}} gap-4 mx-6 max-h-50">
