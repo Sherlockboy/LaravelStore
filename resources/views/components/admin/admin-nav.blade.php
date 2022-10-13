@@ -1,4 +1,4 @@
-<div class="col-span-2 col-start-2 bg-blue-200 sm:rounded-lg">
+<div class="col-span-1 col-start-2 bg-blue-200 sm:rounded-lg">
     <div class="grid grid-rows-4 justify-center">
         <div>
             <a href="{{ route('admin.index') }}"

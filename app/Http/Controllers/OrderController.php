@@ -48,8 +48,10 @@ class OrderController extends Controller
 
     public function index()
     {
-        $user = auth()->user();
-        return view('user.account.order.index', compact('user'));
+        $orders = Order::where('user_id', '=', auth()->user()->id)
+        ->orderBy('created_at', 'DESC')
+        ->paginate(10);
+        return view('user.account.order.index', compact('orders'));
     }
 
     public function show(Order $order)

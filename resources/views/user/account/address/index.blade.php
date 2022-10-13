@@ -1,7 +1,7 @@
 <x-header title="{{ __('Addresses') }}"/>
 <div class="grid grid-cols-12 gap-4">
     <x-user.account-nav current="addresses"/>
-    <div class="col-span-8 bg-gray-100">
+    <div class="col-span-9 bg-gray-100">
         <div class="grid grid-cols-4 gap-4">
             @foreach($user->addresses as $address)
                 <div class="m-4">

@@ -8,7 +8,7 @@
 </div>
 <div class="grid grid-cols-12 gap-4">
     <x-admin.admin-nav current="categories"/>
-    <div class="col-span-8 bg-blue-200 sm:rounded-lg">
+    <div class="col-span-9 bg-blue-200 sm:rounded-lg">
         <div class="grid grid-rows">
             <div class="grid grid-cols-3 border border-gray-100">
                 <div class="m-1 text-center text-xl">{{ __('Category Id') }}</div>

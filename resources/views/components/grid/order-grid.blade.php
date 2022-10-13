@@ -1,11 +1,11 @@
-<div class="col-span-8 bg-blue-200 sm:rounded-lg">
+<div class="col-span-9 bg-blue-200 sm:rounded-lg">
     <div class="grid grid-rows">
         <div class="grid grid-cols-{{$colNum}} border border-gray-100">
             @if($type == 'admin')
                 <div class="m-1 text-center text-xl">{{ __('Order Id') }}</div>
                 <div class="m-1 text-center text-xl">{{ __('User Id') }}</div>
             @endif
-            <div class="m-1 text-center text-xl">{{ __('Order Id') }}</div>
+            <div class="m-1 text-center text-xl">{{ __('Created At') }}</div>
             <div class="m-1 text-center text-xl">{{ __('Status') }}</div>
             <div class="m-1 text-center text-xl">{{ __('Price') }}</div>
             <div class="m-1 text-center text-xl">{{ __('Country') }}</div>
@@ -22,7 +22,8 @@
                         <div class="m-1 text-center">{{ $order->id }}</div>
                         <div class="m-1 text-center">{{ $order->user->id }}</div>
                     @endif
-                    <div class="m-1 text-center">{{ $order->id }}</div>
+
+                    <div class="m-1 text-center">{{ date('d M, Y h:m', $order->created_at->getTimestamp()) }}</div>
                     <div class="m-1 text-center">{{ $order->status }}</div>
                     <div class="m-1 text-center">{{ $order->final_price }}</div>
                     <div class="m-1 text-center">{{ $order->country }}</div>

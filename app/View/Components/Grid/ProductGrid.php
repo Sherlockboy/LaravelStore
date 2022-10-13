@@ -6,6 +6,9 @@ use Illuminate\View\Component;
 
 class ProductGrid extends Component
 {
+    /**
+     * Can be collection of cartItems of orderItems. $item->product must return App\Model\Product instance
+     */
     public $items;
 
     /**
