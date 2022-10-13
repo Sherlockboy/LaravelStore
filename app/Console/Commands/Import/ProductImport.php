@@ -15,14 +15,14 @@ class ProductImport extends Import
      *
      * @var string
      */
-    protected $signature = 'import:product  {--f|filename=}';
+    protected $signature = 'import:products  {--f|filename= : Import file name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Import products from csv file. File should be located in storage/app/public/import';
 
     /**
      * @param array $data

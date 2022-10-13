@@ -14,14 +14,14 @@ class CategoryImport extends Import
      *
      * @var string
      */
-    protected $signature = 'import:categories {--f|filename=}';
+    protected $signature = 'import:categories {--f|filename= : Import file name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Import categories from csv file';
+    protected $description = 'Import categories from csv file. File should be located in storage/app/public/import';
 
     /**
      * @param array $data
