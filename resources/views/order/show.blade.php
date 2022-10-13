@@ -3,7 +3,7 @@
     {{ 'Status: ' . $order->status}}
 </div>
 @admin
-    @include('admin.order.order-status-update-tab', compact('order'))
+    <x-admin.order-status-update-tab :order="$order"/>
 @endadmin
 <div class="grid grid-cols-12 gap-4">
     <div class="col-span-2 col-start-2 bg-blue-200 sm:rounded-lg">

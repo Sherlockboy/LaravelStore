@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Grid;
 
 use App\Models\Order;
 use Illuminate\Contracts\View\View;
@@ -37,6 +37,6 @@ class OrderGrid extends Component
             $colNum = 10;
         }
 
-        return view('components.order-grid', compact('orders', 'colNum'));
+        return view('components.grid.order-grid', compact('orders', 'colNum'));
     }
 }

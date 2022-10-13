@@ -4,15 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Rules\PhoneNumber;
-use http\Client\Curl\User;
-use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
     public function index()
     {
         $user = auth()->user();
-        return view('user.account.address', compact('user'));
+        return view('user.account.address.index', compact('user'));
     }
 
     public function store()

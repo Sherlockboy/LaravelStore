@@ -49,7 +49,7 @@ class OrderController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('user.account.orders', compact('user'));
+        return view('user.account.order.index', compact('user'));
     }
 
     public function show(Order $order)
