@@ -16,7 +16,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        return view('order.show', compact('order'));
+        return view('admin.order.show', compact('order'));
     }
 
     public function update(Order $order)

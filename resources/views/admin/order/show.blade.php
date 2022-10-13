@@ -6,6 +6,6 @@
 <x-admin.order-status-update-tab :order="$order"/>
 @endadmin
 <div class="grid grid-cols-12 gap-4">
-    <x-user.account-nav current="orders"/>
+    <x-admin.admin-nav current="orders"/>
     <x-order.order-details :order="$order"/>
 </div>

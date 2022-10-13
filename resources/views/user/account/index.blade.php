@@ -1,8 +1,6 @@
 <x-header title="{{ __('Account') }}"/>
 <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-2 col-start-2 bg-blue-200 sm:rounded-lg">
-        <x-user.account-nav current="account"/>
-    </div>
+    <x-user.account-nav current="account"/>
     <div class="col-span-8 bg-blue-200 sm:rounded-lg">
         <div class="grid grid-cols-12 gap-4">
             <!-- Account Information-->

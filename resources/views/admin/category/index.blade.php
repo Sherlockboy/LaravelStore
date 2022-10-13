@@ -7,9 +7,7 @@
     </div>
 </div>
 <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-2 col-start-2 bg-blue-200 sm:rounded-lg">
-        <x-admin.admin-nav current="categories"/>
-    </div>
+    <x-admin.admin-nav current="categories"/>
     <div class="col-span-8 bg-blue-200 sm:rounded-lg">
         <div class="grid grid-rows">
             <div class="grid grid-cols-3 border border-gray-100">

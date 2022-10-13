@@ -15,7 +15,7 @@
             <div class="m-1 text-center text-xl">{{ __('Phone') }}</div>
         </div>
         @foreach($orders as $order)
-            <a href="{{ route('order.show', $order->id) }}">
+            <a href="{{ $type == 'admin' ? route('admin.order.show', $order->id) : route('order.show', $order->id)}}">
                 <div class="grid grid-cols-{{$colNum}} border border-gray-100
                        {{ $loop->odd ? 'bg-gray-200' : 'bg-gray-300'}}">
                     @if($type == 'admin')
