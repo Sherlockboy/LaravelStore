@@ -4,8 +4,11 @@
 </div>
 <script>
     function placeOrder() {
-        let select = document.getElementById('delivery-address');
-        let addressOption = select.options[select.selectedIndex];
+        let addressSelect = document.getElementById('delivery-address');
+        let addressOption = addressSelect.options[addressSelect.selectedIndex];
+
+        let paymentSelect = document.getElementById('payment-method-id');
+        console.log(paymentSelect.selected);
 
         if (addressOption) {
             let addressId = addressOption.value

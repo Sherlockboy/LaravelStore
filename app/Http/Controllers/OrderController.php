@@ -9,6 +9,14 @@ use App\Models\OrderItem;
 
 class OrderController extends Controller
 {
+    public function index()
+    {
+        $orders = Order::where('user_id', '=', auth()->user()->id)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        return view('user.account.order.index', compact('orders'));
+    }
+
     public function create()
     {
         /** @var Cart $cart */
@@ -29,6 +37,7 @@ class OrderController extends Controller
             'final_price' => $cart->getFinalPrice(),
         ];
 
+        dd();
         $order = Order::create($orderData);
 
         foreach ($cart->cartItems as $cartItem) {
@@ -44,14 +53,6 @@ class OrderController extends Controller
         $cart->clearCart();
 
         return response()->json(['orderId' => $order->id]);
-    }
-
-    public function index()
-    {
-        $orders = Order::where('user_id', '=', auth()->user()->id)
-        ->orderBy('created_at', 'DESC')
-        ->paginate(10);
-        return view('user.account.order.index', compact('orders'));
     }
 
     public function show(Order $order)
