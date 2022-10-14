@@ -14,7 +14,7 @@
                class="{{ $current == 'addresses' ? 'font-bold' : '' }}">{{ __('My Addresses') }}</a>
         </div>
         <div>
-            <a href=""
+            <a href="{{ route('wishlist.index') }}"
                class="{{ $current == 'wishlist' ? 'font-bold' : '' }}">{{ __('My Wishlist') }}</a>
         </div>
     </div>

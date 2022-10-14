@@ -11,6 +11,10 @@ class Cart extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -24,7 +28,7 @@ class Cart extends Model
     public function getFinalPrice(): int
     {
         $finalPrice = 0;
-        foreach ($this->cartItems->all() as $cartItem) {
+        foreach ($this->items->all() as $cartItem) {
             $finalPrice += $cartItem->product->price * $cartItem->qty;
         }
 
@@ -33,7 +37,7 @@ class Cart extends Model
 
     public function clearCart()
     {
-        foreach ($this->cartItems as $cartItem) {
+        foreach ($this->items as $cartItem) {
             $cartItem->delete();
         }
     }

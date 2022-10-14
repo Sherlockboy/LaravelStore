@@ -10,6 +10,7 @@ class ProductController extends Controller
 {
     public function index(Product $product)
     {
-        return view('product.index', compact('product'));
+        $user = auth()->user();
+        return view('product.index', compact('product', 'user'));
     }
 }

@@ -6,12 +6,13 @@ use App\Models\CartItem;
 use App\Models\Product;
 use function Symfony\Component\Translation\t;
 
-
 class CartController extends Controller
 {
-    public function add(Product $product)
+    public function store()
     {
-        $cartItem = CartItem::where('product_id', $product->id)
+        $data = request()->all();
+        $productId = $data['productId'];
+        $cartItem = CartItem::where('product_id', $productId)
             ->where('cart_id', auth()->user()->cart->id)
             ->get()
             ->first();
@@ -19,15 +20,14 @@ class CartController extends Controller
         if($cartItem) {
             $cartItem->update(['qty' => $cartItem->qty + 1]);
         } else {
-            CartItem::create([
-                'product_id' => $product->id,
+            $cartItem = CartItem::create([
+                'product_id' => $productId,
                 'cart_id' => auth()->user()->cart->id,
                 'qty' => 1
             ]);
-
         }
 
-        return response()->json(['name' => $product->name]);
+        return response()->json(['cartItemId' => $cartItem->id]);
     }
 
     public function index()

@@ -11,12 +11,14 @@
         <div class="col-span-1 flex justify-center">
             <p class="text-xl">{{ __('Price') }}</p>
         </div>
-        <div class="col-span-1 flex justify-center">
-            <p class="text-xl">{{ __('Quantity') }}</p>
-        </div>
-        <div class="col-span-1 flex justify-center">
-            <p class="text-xl">{{ __('Subtotal') }}</p>
-        </div>
+        @if($type != 'wishlist')
+            <div class="col-span-1 flex justify-center">
+                <p class="text-xl">{{ __('Quantity') }}</p>
+            </div>
+            <div class="col-span-1 flex justify-center">
+                <p class="text-xl">{{ __('Subtotal') }}</p>
+            </div>
+        @endif
     </div>
     <hr class="border-gray-100"/>
     <!-- Products -->
@@ -38,17 +40,17 @@
                     {{ number_format($item->product->price, 2) }}
                 </a>
             </div>
-            <div class="col-span-1 flex justify-center">
-                {{ $item->qty }}
-            </div>
-            <div class="col-span-1 flex justify-center">
-                {{ number_format($item->qty * $item->product->price, 2)}}
-            </div>
-            @if($type == 'cart')
+            @if($type != 'wishlist')
                 <div class="col-span-1 flex justify-center">
-                    <x-checkout.remove-from-cart>
-                        <x-slot name="cartItemId">{{ $item->id }}</x-slot>
-                    </x-checkout.remove-from-cart>
+                    {{ $item->qty }}
+                </div>
+                <div class="col-span-1 flex justify-center">
+                    {{ number_format($item->qty * $item->product->price, 2)}}
+                </div>
+            @endif
+            @if($type != 'order')
+                <div class="col-span-1 flex justify-center">
+                    <x-grid.remove-product-action-button item-id="{{$item->id}}" entity-type="{{$type}}"/>
                 </div>
             @endif
         </div>

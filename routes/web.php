@@ -24,3 +24,4 @@ require __DIR__ . '/cart.php';
 require __DIR__ . '/order.php';
 require __DIR__ . '/checkout.php';
 require __DIR__ . '/user.php';
+require __DIR__ . '/wishlist.php';

@@ -10,6 +10,11 @@ class WishlistItem extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'product_id',
+        'wishlist_id',
+    ];
+
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

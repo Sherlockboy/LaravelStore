@@ -31,7 +31,7 @@
                 </div>
                 <div class="flex justify-center row-span-2">
                     @auth()
-                        <x-checkout.add-to-cart-button product-id="{{$product->id}}"/>
+                        <x-grid.add-product-action-button product-id="{{$product->id}}" entity-type="cart"/>
                     @endauth
                 </div>
             </div>

@@ -19,7 +19,7 @@ class AdminAccessCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user() && auth()->user()->type == User::USER_ADMIN_TYPE) {
+        if(auth()->user() && auth()->user()->type == User::ADMIN_TYPE) {
             return $next($request);
         } else {
             return redirect('/');

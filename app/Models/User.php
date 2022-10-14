@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -14,9 +13,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public const USER_CUSTOMER_TYPE = 'user';
+    public const USER_TYPE = 'user';
 
-    public const USER_ADMIN_TYPE = 'admin';
+    public const ADMIN_TYPE = 'admin';
 
     /**
      * The attributes that are mass assignable.
@@ -66,11 +65,32 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function wishlist(): HasOne
+    {
+        return $this->hasOne(Wishlist::class);
+    }
+
     public function getDefaultAddress(): ?Address
     {
         return Address::where('user_id', $this->id)
             ->where('is_default', 1)
             ->get()
             ->first();
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        User::created(
+            function (User $user) {
+                $user->cart()->create([
+                    'user_id' => $user->id
+                ]);
+
+                $user->wishlist()->create([
+                    'user_id' => $user->id
+                ]);
+            }
+        );
     }
 }

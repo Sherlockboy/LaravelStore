@@ -44,13 +44,12 @@ class RegisteredUserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'type' => User::USER_CUSTOMER_TYPE
+            'type' => User::USER_TYPE
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
-        $user->cart()->create();
 
         return redirect('/');
     }

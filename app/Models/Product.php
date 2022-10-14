@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -23,21 +22,8 @@ class Product extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    //TODO: Check if this methods are actually required,
-    // because there is no logic for getting items related to products
-
-    public function cartItems(): HasMany
+    public function getRelatedWishlistItem(User $user)
     {
-        return $this->hasMany(CartItem::class);
-    }
-
-    public function orderItems(): HasMany
-    {
-        return $this->hasMany(OrderItem::class);
-    }
-
-    public function wishlistItems(): HasMany
-    {
-        return $this->hasMany(WishlistItem::class);
+        return $user->wishlist->items->where('product_id', '=', $this->id)->first();
     }
 }

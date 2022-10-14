@@ -32,7 +32,21 @@ class SmallProductGrid extends Component
     {
         $this->items = $items;
         $this->type = $type;
-        $type == 'cart' ? $this->colNum = 6 : $this->colNum = 5;
+        switch ($type) {
+            case 'cart':
+            {
+                $this->colNum = 6;
+                break;
+            }
+
+            case 'order': {
+                $this->colNum = 5;
+                break;
+            }
+
+            default:
+                $this->colNum = 4;
+        }
     }
 
     /**

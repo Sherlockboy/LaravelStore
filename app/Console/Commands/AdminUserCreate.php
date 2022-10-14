@@ -48,7 +48,7 @@ class AdminUserCreate extends Command
             ]);
 
             $data['password'] = Hash::make($data['password']);
-            $data['type'] = User::USER_ADMIN_TYPE;
+            $data['type'] = User::ADMIN_TYPE;
 
             User::create($data);
         } catch (\Exception $e) {

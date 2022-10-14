@@ -11,8 +11,15 @@
             {{$product->price}}
         </div>
         <div>
+            @if($product->getRelatedWishlistItem($user))
+                <x-grid.remove-product-action-button item-id="{{$product->getRelatedWishlistItem($user)->id}}" entity-type="wishlist"/>
+            @else
+                <x-grid.add-product-action-button product-id="{{$product->id}}" entity-type="wishlist"/>
+            @endif
+        </div>
+        <div>
             @auth()
-                <x-checkout.add-to-cart-button product-id="{{$product->id}}"/>
+                <x-grid.add-product-action-button product-id="{{$product->id}}" entity-type="cart"/>
             @endauth
         </div>
     </div>

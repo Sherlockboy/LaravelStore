@@ -26,7 +26,7 @@ class AdminServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::if('admin', function () {
-            return auth()->user() && auth()->user()->type == User::USER_ADMIN_TYPE;
+            return auth()->user() && auth()->user()->type == User::ADMIN_TYPE;
         });
     }
 }
