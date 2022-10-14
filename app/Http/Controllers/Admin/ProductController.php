@@ -5,13 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Routing\Redirector;
 use Intervention\Image\Facades\Image;
 
 /**
@@ -20,27 +17,27 @@ use Intervention\Image\Facades\Image;
 class ProductController extends Controller
 {
     /**
-     * @return Application|Factory|View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $products = Product::paginate(10);
         return view('admin.product.index', compact('products'));
     }
 
     /**
-     * @return Application|Factory|View
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $categories = Category::all();
         return view('admin.product.create', compact('categories'));
     }
 
     /**
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
-    public function store()
+    public function store(): RedirectResponse
     {
         $data = request()->validate(
             [
@@ -51,7 +48,7 @@ class ProductController extends Controller
                 'category' => ['required']
             ]);
 
-        $data['image'] = $this->resizeImageAndGetPath();
+        $data['image'] = $this->resizeImageAndGetPath(request('image'));
 
         $product = Product::create($data);
         $product->categories()->toggle($data['category']);
@@ -61,9 +58,9 @@ class ProductController extends Controller
 
     /**
      * @param Product $product
-     * @return Application|Factory|View
+     * @return View
      */
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
         $categories = Category::all();
         $productCategoryIds = array_keys($product->categories->groupBy('id')->all());
@@ -74,9 +71,9 @@ class ProductController extends Controller
 
     /**
      * @param Product $product
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
-    public function update(Product $product)
+    public function update(Product $product): RedirectResponse
     {
         $data = request()->validate(
             [
@@ -88,7 +85,7 @@ class ProductController extends Controller
             ]);
 
         if (request('image')) {
-            $data['image'] = $this->resizeImageAndGetPath();
+            $data['image'] = $this->resizeImageAndGetPath(request('image'));
         }
 
         $product->update($data);
@@ -105,7 +102,7 @@ class ProductController extends Controller
      * @param Product $product
      * @return JsonResponse
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product): JsonResponse
     {
         $productName = $product->name;
         $product->delete();
@@ -113,6 +110,10 @@ class ProductController extends Controller
     }
 
     /**
+     * TODO: This method should be refactored
+     * Selected categories should be attached to product.
+     * Unselected categories should be detached.
+     *
      * @param Product $product
      * @param array $selectedCategories
      * @return void
@@ -137,12 +138,11 @@ class ProductController extends Controller
     }
 
     /**
+     * @param UploadedFile $oldImage
      * @return string
      */
-    public function resizeImageAndGetPath(): string
+    public function resizeImageAndGetPath(UploadedFile $oldImage): string
     {
-        /** @var UploadedFile $oldImage */
-        $oldImage = request('image');
         $imagePath = $oldImage->store('product_images', 'public');
 
         $newImage = Image::make(public_path('storage/' . $imagePath))->fit(1200, 1200);

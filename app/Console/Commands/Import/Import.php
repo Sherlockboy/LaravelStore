@@ -4,6 +4,7 @@ namespace App\Console\Commands\Import;
 
 use Illuminate\Console\Command;
 use Psy\Readline\Hoa\FileDoesNotExistException;
+use Symfony\Component\Console\Command\Command as CommandAlias;
 
 abstract class Import extends Command
 {
@@ -41,7 +42,7 @@ abstract class Import extends Command
             $data = $this->readCSV();
         } catch (FileDoesNotExistException $exception) {
             $this->output->error($exception->getMessage());
-            return Command::FAILURE;
+            return CommandAlias::FAILURE;
         }
 
         return $this->import($data);
@@ -60,10 +61,10 @@ abstract class Import extends Command
                 $this->output->error($error);
             }
 
-            return Command::FAILURE;
+            return CommandAlias::FAILURE;
         } else {
             $this->output->text(__("$entityName import finished successfully"));
-            return Command::SUCCESS;
+            return CommandAlias::SUCCESS;
         }
     }
 

@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use Illuminate\Contracts\View\View;
 
 class CheckoutController extends Controller
 {
-    public function index()
+    /**
+     * @return View
+     */
+    public function index(): View
     {
         $user = auth()->user();
         $cart = Cart::getCart();
@@ -15,7 +19,10 @@ class CheckoutController extends Controller
         return view('checkout.index', compact('cart', 'user', 'finalPrice'));
     }
 
-    public function success()
+    /**
+     * @return View
+     */
+    public function success(): View
     {
         $orderId = request('orderId');
         return view('checkout.success', compact('orderId'));

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class AdminController extends Controller
 {
-    public function index()
+    /**
+     *
+     * @return View
+     */
+    public function index(): View
     {
         return view('admin.index');
     }

@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 
 /**
  * Handles order-related actions done by admin user
@@ -16,9 +13,9 @@ use Illuminate\Routing\Redirector;
 class OrderController extends Controller
 {
     /**
-     * @return Application|Factory|View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $orders = Order::orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.order.index', compact('orders'));
@@ -26,18 +23,18 @@ class OrderController extends Controller
 
     /**
      * @param Order $order
-     * @return Application|Factory|View
+     * @return View
      */
-    public function show(Order $order)
+    public function show(Order $order): View
     {
         return view('admin.order.show', compact('order'));
     }
 
     /**
      * @param Order $order
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
-    public function update(Order $order)
+    public function update(Order $order): RedirectResponse
     {
         $status = request('order-status');
 

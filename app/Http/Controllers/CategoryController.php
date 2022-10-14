@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Product;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class CategoryController extends Controller
 {
-    public function index(Category $category)
+    /**
+     * @param Category $category
+     * @return View
+     */
+    public function index(Category $category): View
     {
         $products = $category->products()->paginate(12);
         return view('category.index', compact('category', 'products'));

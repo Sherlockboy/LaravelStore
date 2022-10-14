@@ -4,28 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Rules\PhoneNumber;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 
 class AddressController extends Controller
 {
     /**
-     * @return Application|Factory|View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $user = auth()->user();
         return view('user.account.address.index', compact('user'));
     }
 
     /**
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
-    public function store()
+    public function store(): RedirectResponse
     {
         $data = $this->prepareAddressData();
         $this->resolveOnlyOneDefaultAddress($data);
@@ -39,9 +36,9 @@ class AddressController extends Controller
 
     /**
      * @param Address $address
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
-    public function update(Address $address)
+    public function update(Address $address): RedirectResponse
     {
         $data = $this->prepareAddressData();
 
@@ -58,7 +55,7 @@ class AddressController extends Controller
      * @param Address $address
      * @return JsonResponse
      */
-    public function delete(Address $address)
+    public function delete(Address $address): JsonResponse
     {
         $addressTitle = $address->title;
         $address->delete();

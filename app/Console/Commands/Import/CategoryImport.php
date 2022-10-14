@@ -3,7 +3,6 @@
 namespace App\Console\Commands\Import;
 
 use App\Models\Category;
-use Illuminate\Console\Command;
 
 class CategoryImport extends Import
 {

@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\WishlistItem;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 
 class WishlistController extends Controller
 {
-    public function index()
+    /**
+     * @return View
+     */
+    public function index(): View
     {
         $wishlist = auth()->user()->wishlist;
         return view('user.account.wishlist.index', compact('wishlist'));
     }
 
-    public function store()
+    /**
+     * @return JsonResponse
+     */
+    public function store(): JsonResponse
     {
         $data = request()->all();
         $productId = $data['productId'];
@@ -26,7 +33,11 @@ class WishlistController extends Controller
         return response()->json(['wishlistItemId' => $wishlistItem->id]);
     }
 
-    public function destroy(WishlistItem $wishlistItem)
+    /**
+     * @param WishlistItem $wishlistItem
+     * @return JsonResponse
+     */
+    public function destroy(WishlistItem $wishlistItem): JsonResponse
     {
         $productName = $wishlistItem->product->name;
         $wishlistItem->delete();

@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
-use Intervention\Image\Facades\Image;
+use Illuminate\Contracts\View\View;
 
 class ProductController extends Controller
 {
-    public function index(Product $product)
+    /**
+     * @param Product $product
+     * @return View
+     */
+    public function index(Product $product): View
     {
         $user = auth()->user();
         return view('product.index', compact('product', 'user'));

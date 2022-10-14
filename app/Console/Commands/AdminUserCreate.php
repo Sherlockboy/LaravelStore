@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
+use Symfony\Component\Console\Command\Command as CommandAlias;
 
 class AdminUserCreate extends Command
 {
@@ -31,7 +32,7 @@ class AdminUserCreate extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $data = [];
 
@@ -53,9 +54,9 @@ class AdminUserCreate extends Command
             User::create($data);
         } catch (\Exception $e) {
             $this->output->error($e->getMessage());
-            return Command::FAILURE;
+            return CommandAlias::FAILURE;
         }
 
-        return Command::SUCCESS;
+        return CommandAlias::SUCCESS;
     }
 }

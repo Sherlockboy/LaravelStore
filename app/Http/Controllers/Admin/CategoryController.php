@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 
 /**
  * Handles category-related actions done by admin user
@@ -16,26 +14,26 @@ use Illuminate\Routing\Redirector;
 class CategoryController extends Controller
 {
     /**
-     * @return Application|Factory|View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $categories = Category::paginate(10);
         return view('admin.category.index', compact('categories'));
     }
 
     /**
-     * @return Application|Factory|View
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.category.create');
     }
 
     /**
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
-    public function store()
+    public function store(): RedirectResponse
     {
         $data = request()->validate([
             'name' => ['required', 'unique:categories']
@@ -46,7 +44,11 @@ class CategoryController extends Controller
         return redirect(route('admin.category.index'));
     }
 
-    public function destroy(Category $category)
+    /**
+     * @param Category $category
+     * @return JsonResponse
+     */
+    public function destroy(Category $category): JsonResponse
     {
         $categoryName = $category->name;
         $category->delete();

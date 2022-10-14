@@ -4,7 +4,6 @@ namespace App\Console\Commands\Import;
 
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Console\Command;
 
 class ProductImport extends Import
 {

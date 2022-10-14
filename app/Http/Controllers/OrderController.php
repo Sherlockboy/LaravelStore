@@ -6,12 +6,16 @@ use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\Product;
-use http\Env\Response;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 
 class OrderController extends Controller
 {
-    public function index()
+    /**
+     * @return View
+     */
+    public function index(): View
     {
         $orders = Order::where('user_id', '=', auth()->user()->id)
             ->orderBy('created_at', 'DESC')
@@ -19,7 +23,10 @@ class OrderController extends Controller
         return view('user.account.order.index', compact('orders'));
     }
 
-    public function create()
+    /**
+     * @return JsonResponse
+     */
+    public function create(): JsonResponse
     {
         $cart = Cart::getCart();
 
@@ -56,12 +63,23 @@ class OrderController extends Controller
         }
     }
 
-    public function show(Order $order)
+    /**
+     * @param Order $order
+     * @return View
+     * @throws AuthorizationException
+     */
+    public function show(Order $order): View
     {
         $this->authorize('view', $order);
         return view('order.show', compact('order'));
     }
 
+    /**
+     * Prepare data to create authorized user order
+     *
+     * @param Address $address
+     * @return array
+     */
     private function prepareOrderData(Address $address): array
     {
         return [
@@ -75,6 +93,11 @@ class OrderController extends Controller
         ];
     }
 
+    /**
+     * Prepare data to create guest order
+     *
+     * @return array
+     */
     private function prepareGuestOrderData(): array
     {
         return [

@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
-    public function index()
+    /**
+     * @return View
+     */
+    public function index(): View
     {
         $user = auth()->user();
         return view('user.account.index', compact('user'));
     }
 
-    public function update()
+    /**
+     * @return RedirectResponse
+     */
+    public function update(): RedirectResponse
     {
         //TODO Process error messages
         // Refactor using Request validate php artisan make:request

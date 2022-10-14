@@ -4,10 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\CartItem;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 
 class CartController extends Controller
 {
-    public function store()
+    /**
+     * @return View
+     */
+    public function index(): View
+    {
+        $cart = Cart::getCart();
+        $finalPrice = $cart->getFinalPrice();
+
+        return view('checkout.cart.index', compact('cart', 'finalPrice'));
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function store(): JsonResponse
     {
         $data = request()->all();
         $productId = $data['productId'];
@@ -31,16 +47,11 @@ class CartController extends Controller
         return response()->json(['cartItemId' => $cartItem->id]);
     }
 
-    public function index()
-    {
-        $cart = Cart::getCart();
-        $finalPrice = $cart->getFinalPrice();
-
-        return view('checkout.cart.index', compact('cart', 'finalPrice'));
-
-    }
-
-    public function destroy(CartItem $cartItem)
+    /**
+     * @param CartItem $cartItem
+     * @return JsonResponse
+     */
+    public function destroy(CartItem $cartItem): JsonResponse
     {
         $cart = Cart::getCart();
 
@@ -52,7 +63,12 @@ class CartController extends Controller
         return response()->json(['name' => $productName]);
     }
 
-    public function destroyAll()
+    /**
+     * Remove all products from the cart
+     *
+     * @return JsonResponse
+     */
+    public function destroyAll(): JsonResponse
     {
         $cart = Cart::getCart();
         $cart->clearCart();
