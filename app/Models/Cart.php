@@ -44,7 +44,20 @@ class Cart extends Model
         }
     }
 
-    public static function getCart(): Cart
+    public static function merge(Cart $guestCart): void
+    {
+        $userCart = auth()->user()->cart;
+        /** @var CartItem $item */
+        foreach ($guestCart->items as $item) {
+            $item->update([
+                'cart_id' => $userCart->id
+            ]);
+        }
+
+        $guestCart->delete();
+    }
+
+    public static function getCart($createNew = true): ?Cart
     {
         if (auth()->user()) {
             //Get user cart for authorized user
@@ -54,7 +67,7 @@ class Cart extends Model
             $cart = Cart::where('session_id', '=', session()->getId())->get()->first();
 
             //Create new guest cart using session id
-            if (!$cart) {
+            if (!$cart && $createNew) {
                 $cart = Cart::create([
                     'session_id' => session()->getId(),
                     'is_guest' => 1

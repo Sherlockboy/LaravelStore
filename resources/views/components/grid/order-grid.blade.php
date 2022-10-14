@@ -20,7 +20,7 @@
                        {{ $loop->odd ? 'bg-gray-200' : 'bg-gray-300'}}">
                     @if($type == 'admin')
                         <div class="m-1 text-center">{{ $order->id }}</div>
-                        <div class="m-1 text-center">{{ $order->user->id }}</div>
+                        <div class="m-1 text-center">{{ $order->user ? $order->user->id : 'Guest'}}</div>
                     @endif
 
                     <div class="m-1 text-center">{{ date('d M, Y h:m', $order->created_at->getTimestamp()) }}</div>

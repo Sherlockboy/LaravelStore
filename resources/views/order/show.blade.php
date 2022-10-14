@@ -1,6 +1,8 @@
 <x-header title="{{ 'Order # ' . $order->id }}"/>
 <div class="justify-center flex mb-4 text-xl bg-blue-100 sm:rounded-lg">
-    {{ 'Status: ' . $order->status}}
+    <div class="text-center">
+        {{ 'Status: ' . $order->status}}
+    </div>
 </div>
 <div class="grid grid-cols-12 gap-4">
     <x-user.account-nav current="orders"/>
