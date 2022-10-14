@@ -31,7 +31,7 @@ class OrderController extends Controller
 
         $order = Order::create($orderData);
 
-        foreach ($cart->cartItems as $cartItem) {
+        foreach ($cart->items as $cartItem) {
             $orderItemData = [
                 'product_id' => $cartItem->product->id,
                 'order_id' => $order->id,

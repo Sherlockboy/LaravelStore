@@ -1,5 +1,5 @@
 <x-header title="{{ __('Checkout') }}"/>
-@if($user->cart->cartItems->count())
+@if($user->cart->items->count())
     <div class="grid grid-cols-12">
         <div class="col-span-8 col-start-2 mx-6 mb-6 bg-blue-200 sm:rounded-lg">
             <p class="text-3xl text-center text-gray-500 mt-2">{{ __('Delivery address') }}</p>
@@ -39,7 +39,7 @@
                 <div class="flex justify-center mt-2">
                     <p class="text-xl text-gray-500">{{ __('Order Summary') }}</p>
                 </div>
-                @foreach($user->cart->cartItems as $cartItem)
+                @foreach($user->cart->items as $cartItem)
                     <div class="grid grid-cols-8 gap-4 mx-6">
                         <div class="col-span-4 flex justify-center">
                             <a href="/product/{{ $cartItem->product->id }}">

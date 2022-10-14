@@ -23,6 +23,9 @@ class Product extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    //TODO: Check if this methods are actually required,
+    // because there is no logic for getting items related to products
+
     public function cartItems(): HasMany
     {
         return $this->hasMany(CartItem::class);
@@ -31,5 +34,10 @@ class Product extends Model
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function wishlistItems(): HasMany
+    {
+        return $this->hasMany(WishlistItem::class);
     }
 }
