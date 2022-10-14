@@ -12,7 +12,9 @@ class Cart extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id'
+        'user_id',
+        'is_guest',
+        'session_id'
     ];
 
     public function user(): BelongsTo
@@ -39,6 +41,27 @@ class Cart extends Model
     {
         foreach ($this->items as $cartItem) {
             $cartItem->delete();
+        }
+    }
+
+    public static function getCart(): Cart
+    {
+        if (auth()->user()) {
+            //Get user cart for authorized user
+            return auth()->user()->cart;
+        } else {
+            //Get guest cart by session id
+            $cart = Cart::where('session_id', '=', session()->getId())->get()->first();
+
+            //Create new guest cart using session id
+            if (!$cart) {
+                $cart = Cart::create([
+                    'session_id' => session()->getId(),
+                    'is_guest' => 1
+                ]);
+            }
+
+            return $cart;
         }
     }
 }

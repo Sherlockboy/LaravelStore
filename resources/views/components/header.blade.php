@@ -20,24 +20,22 @@
             <div class="row">
                 @if (Route::has('login'))
                     <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                        @auth
-                            <div class="text-sm text-gray-700 dark:text-gray-500">
-                                <a href="{{ route('cart.index') }}" class="ml-4">{{'Cart'}}</a>
-                                <a href="{{ route('user.account.index') }}" class="ml-4">{{ __('Account') }}</a>
+                        <div class="text-sm text-gray-700 dark:text-gray-500">
+                            <a href="{{ route('cart.index') }}" class="ml-4 underline">{{'Cart'}}</a>
+                            @auth
+                                <a href="{{ route('user.account.index') }}" class="ml-4 underline">{{ __('Account') }}</a>
                                 @admin
-                                <a href="{{ route('admin.index') }}" class="ml-4">{{ __('Admin') }}</a>
+                                <a href="{{ route('admin.index') }}" class="ml-4 underline">{{ __('Admin') }}</a>
                                 @endadmin
-                                <a href="{{ url('/logout') }}" class="ml-4">{{ __('Logout') }}</a>
-                            </div>
-                        @else
-                            <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log
-                                in</a>
+                                <a href="{{ url('/logout') }}" class="ml-4 underline">{{ __('Logout') }}</a>
+                            @else
+                                <a href="{{ route('login') }}" class="ml-4 underline">Log in</a>
 
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}"
-                                   class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                            @endif
-                        @endauth
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="ml-4 underline">Register</a>
+                                @endif
+                            @endauth
+                        </div>
                     </div>
                 @endif
             </div>

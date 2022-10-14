@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\CartItem;
-use App\Models\Product;
-use function Symfony\Component\Translation\t;
 
 class CartController extends Controller
 {
@@ -12,17 +11,19 @@ class CartController extends Controller
     {
         $data = request()->all();
         $productId = $data['productId'];
+        $cart = Cart::getCart();
+
         $cartItem = CartItem::where('product_id', $productId)
-            ->where('cart_id', auth()->user()->cart->id)
+            ->where('cart_id', $cart->id)
             ->get()
             ->first();
 
-        if($cartItem) {
+        if ($cartItem) {
             $cartItem->update(['qty' => $cartItem->qty + 1]);
         } else {
             $cartItem = CartItem::create([
                 'product_id' => $productId,
-                'cart_id' => auth()->user()->cart->id,
+                'cart_id' => $cart->id,
                 'qty' => 1
             ]);
         }
@@ -32,28 +33,28 @@ class CartController extends Controller
 
     public function index()
     {
-        $user = auth()->user();
-        $finalPrice = $user ? $user->cart->getFinalPrice() : 0;
-        if ($user) {
-            return view('checkout.cart.index', compact('user', 'finalPrice'));
-        }
+        $cart = Cart::getCart();
+        $finalPrice = $cart->getFinalPrice();
 
-        return redirect(route('login'));
+        return view('checkout.cart.index', compact('cart', 'finalPrice'));
+
     }
 
     public function destroy(CartItem $cartItem)
     {
-        $this->authorize('delete', $cartItem);
-        $productName = $cartItem->product->name;
-        $cartItem->delete();
+        $cart = Cart::getCart();
+
+        if ($cart->id == $cartItem->cart->id) {
+            $productName = $cartItem->product->name;
+            $cartItem->delete();
+        }
+
         return response()->json(['name' => $productName]);
     }
 
     public function destroyAll()
     {
-        $cart = auth()->user()->cart;
-        $this->authorize('delete', $cart);
-
+        $cart = Cart::getCart();
         $cart->clearCart();
 
         return response()->json('Success');

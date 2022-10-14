@@ -30,9 +30,7 @@
                     </p>
                 </div>
                 <div class="flex justify-center row-span-2">
-                    @auth()
-                        <x-grid.add-product-action-button product-id="{{$product->id}}" entity-type="cart"/>
-                    @endauth
+                    <x-grid.add-product-action-button product-id="{{$product->id}}" entity-type="cart"/>
                 </div>
             </div>
         </div>
