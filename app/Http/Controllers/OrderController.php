@@ -11,23 +11,34 @@ class OrderController extends Controller
 {
     public function create()
     {
-        /** @var Cart $cart */
-        $cart = auth()->user()->cart;
+        $cart = Cart::getCart();
+        
+        if (request('addressId')) {
+            /** @var Address $address */
+            $address = Address::find(request('addressId'));
 
-        /** @var Address $address */
-        $address = Address::find(request('addressId'));
+            $orderData = [
+                'user_id' => auth()->user()->id,
+                'country' => $address->country,
+                'city' => $address->city,
+                'street' => $address->street,
+                'zip' => $address->zip,
+                'phone' => $address->phone,
+                'address_id'=> $address->id,
+            ];
+        } else {
+            $orderData = [
+                'country' => request('country'),
+                'city' => request('city'),
+                'street' => request('street'),
+                'zip' => request('zip'),
+                'phone' => request('phone'),
+                'is_guest' => 1
+            ];
+        }
 
-        $orderData = [
-            'user_id' => auth()->user()->id,
-            'address_id' => $address->id,
-            'status' => Order::STATUS_PENDING,
-            'country' => $address->country,
-            'city' => $address->city,
-            'street' => $address->street,
-            'zip' => $address->zip,
-            'phone' => $address->phone,
-            'final_price' => $cart->getFinalPrice(),
-        ];
+        $orderData['status'] = Order::STATUS_PENDING;
+        $orderData['final_price'] = $cart->getFinalPrice();
 
         $order = Order::create($orderData);
 

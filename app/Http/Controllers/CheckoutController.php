@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use Illuminate\Http\Request;
+use App\Models\Cart;
 
 class CheckoutController extends Controller
 {
     public function index()
     {
         $user = auth()->user();
-        $finalPrice = $user ? $user->cart->getFinalPrice() : 0;
+        $cart = Cart::getCart();
+        $finalPrice = $cart->getFinalPrice();
 
-        return view('checkout.index', compact('user', 'finalPrice'));
+        return view('checkout.index', compact('cart', 'user', 'finalPrice'));
     }
 
     public function success()
     {
         $orderId = request('orderId');
-        $order = Order::find($orderId);
-        $this->authorize('view', $order);
         return view('checkout.success', compact('orderId'));
     }
 }
