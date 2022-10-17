@@ -25,7 +25,9 @@ class AddressController extends Controller
     public function store(): RedirectResponse
     {
         $data = $this->prepareAddressData();
-        $this->resolveOnlyOneDefaultAddress($data);
+        if ($data['is_default']) {
+            $this->resolveOnlyOneDefaultAddress($data);
+        }
 
         $data['user_id'] = auth()->user()->id;
 
@@ -64,18 +66,14 @@ class AddressController extends Controller
 
     /**
      * As user can have only one default address, previous default address should be marked as non-default.
-     * @param $data
      * @return void
      */
-    private function resolveOnlyOneDefaultAddress($data): void
+    private function resolveOnlyOneDefaultAddress(): void
     {
-        if ($data['is_default']) {
-            $address = Address::where('user_id', '=', auth()->user()->id)
-                ->where('is_default', '=', 1)
-                ->get()
-                ->first();
+        $previousDefaultAddress = auth()->user()->getDefaultAddress();
 
-            $address->update(['is_default' => 0]);
+        if ($previousDefaultAddress) {
+            $previousDefaultAddress->update(['is_default' => 0]);
         }
     }
 

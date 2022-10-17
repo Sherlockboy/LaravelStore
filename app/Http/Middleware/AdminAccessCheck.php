@@ -11,10 +11,11 @@ use Illuminate\Http\Response;
 class AdminAccessCheck
 {
     /**
-     * Handle an incoming request.
+     * Check if current user has user_type == admin
+     * All admin routes should be executed through this middleware
      *
      * @param Request $request
-     * @param  \Closure(Request): (Response|RedirectResponse)  $next
+     * @param Closure(Request): (Response|RedirectResponse) $next
      * @return Response|RedirectResponse
      */
     public function handle(Request $request, Closure $next)

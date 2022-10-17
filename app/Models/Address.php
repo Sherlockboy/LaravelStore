@@ -20,9 +20,4 @@ class Address extends Model
         'zip',
         'phone'
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }
