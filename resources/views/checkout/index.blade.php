@@ -69,7 +69,11 @@
                     <p class="text-xl">{{ __('Final price: ') .  number_format($finalPrice, 2) }}</p>
                 </div>
                 <div class="flex justify-center mb-2">
-                    <x-checkout.place-order-button/>
+                    @auth()
+                        <x-checkout.place-order-button/>
+                    @else
+                        <x-checkout.place-order-guest-button/>
+                    @endauth
                 </div>
             </div>
         </div>
