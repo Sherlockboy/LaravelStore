@@ -2,7 +2,7 @@
 @if($cart->items->count())
     <div class="grid grid-cols-12">
         <div class="col-span-8 col-start-2 bg-blue-200 sm:rounded-lg">
-            <x-grid.small-product-grid :items="$cart->items" type="cart"/>
+            <x-grid.small-product-grid :container="$cart" type="cart"/>
             <div class="grid grid-cols-12 gap-4  mx-6 mb-6 max-h-50">
                 <div class="col-span-2 flex justify-center col-start-11">
                     <x-checkout.clear-cart/>

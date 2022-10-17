@@ -3,16 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int $id
- * @property Product $product
  * @property Order $order
  * @property int $qty
  */
-class OrderItem extends Model
+class OrderItem extends ProductRelatedItem
 {
     use HasFactory;
 
@@ -25,13 +22,7 @@ class OrderItem extends Model
         'qty'
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function product(): BelongsTo
-    {
-        return $this->belongsTo(Product::class);
-    }
+
 
     /**
      * @return BelongsTo

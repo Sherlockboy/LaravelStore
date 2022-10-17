@@ -1,6 +1,6 @@
 <div class="col-span-7 bg-blue-200 sm:rounded-lg mb-4">
     <div class="text-xl text-center">{{ __('Ordered items') }}</div>
-    <x-grid.small-product-grid :items="$order->items" type="order"/>
+    <x-grid.small-product-grid :container="$order" type="order"/>
 </div>
 <div class="col-span-2 bg-gray-200 sm:rounded-lg mb-4">
     <div class="grid grid-rows gap-4 ml-6 mr-6 mb-6">

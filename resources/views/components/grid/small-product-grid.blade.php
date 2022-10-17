@@ -1,4 +1,4 @@
-<!-- Small product grid. Used to display products in cart or at order details page-->
+<!-- Small product grid. Used to display products in cart/order details/wishlist page-->
 <div class="grid grid-rows gap-4">
     <!-- Grid header -->
     <div class="grid grid-cols-{{$colNum}} gap-4 mx-4 my-4 ">
@@ -22,8 +22,8 @@
     </div>
     <hr class="border-gray-100"/>
     <!-- Products -->
-    @php /** @var \App\Models\ProductRelatedItemInterface $item */@endphp
-    @foreach($items as $item)
+    @php /** @var \App\Models\ProductRelatedItem $item */@endphp
+    @foreach($container->items as $item)
         <div class="grid grid-cols-{{$colNum}} gap-4 mx-6 max-h-50">
             <div class="col-span-2 flex justify-center ">
                 <a href="/product/{{ $item->product->id }}">
@@ -37,9 +37,9 @@
                 </a>
             </div>
             <div class="col-span-2 flex justify-center">
-                <a href="/product/{{ $item->product->id }}">
+                <p>
                     {{ number_format($item->product->price, 2) }}
-                </a>
+                </p>
             </div>
             @if($type != 'wishlist')
                 <div class="col-span-2 flex justify-center">
@@ -49,10 +49,16 @@
                     {{ number_format($item->qty * $item->product->price, 2)}}
                 </div>
             @endif
-            @if($type != 'order')
+            @if($type == 'cart')
                 <div class="col-span-2 flex justify-center">
                     <div>
-                        <x-grid.remove-product-action-button item-id="{{$item->id}}" entity-type="{{$type}}"/>
+                        <x-buttons.remove-from-cart-button item-id="{{$item->id}}"/>
+                    </div>
+                </div>
+            @elseif($type == 'wishlist')
+                <div class="col-span-2 flex justify-center">
+                    <div>
+                        <x-buttons.remove-from-wishlist-button item-id="{{$item->id}}"/>
                     </div>
                 </div>
             @endif

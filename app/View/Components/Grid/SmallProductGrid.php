@@ -2,13 +2,13 @@
 
 namespace App\View\Components\Grid;
 
+use App\Models\ProductRelatedItemsContainer;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
 class SmallProductGrid extends Component
 {
-    public Collection $items;
+    public ProductRelatedItemsContainer $container;
 
     /**
      * Grid type, can be either 'cart', 'order' or 'wishlist'
@@ -27,9 +27,9 @@ class SmallProductGrid extends Component
      *
      * @return void
      */
-    public function __construct($items, $type = null)
+    public function __construct(ProductRelatedItemsContainer $container, $type = null)
     {
-        $this->items = $items;
+        $this->container = $container;
         $this->type = $type;
         switch ($type) {
             case 'cart':

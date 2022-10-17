@@ -13,17 +13,17 @@
         </div>
         <div>
             @auth()
-                @if($product->getRelatedWishlistItem($user))
-                    <x-grid.remove-product-action-button item-id="{{$product->getRelatedWishlistItem($user)->id}}"
-                                                         entity-type="wishlist"/>
+                @if($user->wishlist->getItemByRelatedId('product_id', $product->id))
+                    <x-buttons.remove-from-wishlist-button
+                            item-id="{{$user->wishlist->getItemByRelatedId('product_id', $product->id)->id}}"/>
                 @else
-                    <x-grid.add-product-action-button product-id="{{$product->id}}" entity-type="wishlist"/>
+                    <x-buttons.add-to-wishlist-button product-id="{{$product->id}}"/>
                 @endif
             @endauth
 
         </div>
         <div>
-            <x-grid.add-product-action-button product-id="{{$product->id}}" entity-type="cart"/>
+            <x-buttons.add-to-cart-button product-id="{{$product->id}}"/>
         </div>
     </div>
     <div class="col-span-2"></div>

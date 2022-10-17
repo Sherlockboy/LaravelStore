@@ -32,7 +32,7 @@
                     </p>
                 </div>
                 <div class="flex justify-center row-span-2">
-                    <x-grid.add-product-action-button product-id="{{$product->id}}" entity-type="cart"/>
+                    <x-buttons.add-to-cart-button product-id="{{$product->id}}"/>
                 </div>
             </div>
         </div>
