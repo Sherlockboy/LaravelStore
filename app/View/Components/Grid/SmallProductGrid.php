@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Grid;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class SmallProductGrid extends Component
@@ -15,7 +16,7 @@ class SmallProductGrid extends Component
      * Grid type, can be either 'cart' or 'order'
      * @var string
      */
-    public $type;
+    public string $type;
 
     /**
      * Number of grid columns, depends on grid type
@@ -35,26 +36,26 @@ class SmallProductGrid extends Component
         switch ($type) {
             case 'cart':
             {
-                $this->colNum = 6;
+                $this->colNum = 12;
                 break;
             }
 
             case 'order': {
-                $this->colNum = 5;
+                $this->colNum = 10;
                 break;
             }
 
             default:
-                $this->colNum = 4;
+                $this->colNum = 8;
         }
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View
      */
-    public function render()
+    public function render(): View
     {
         return view('components.grid.small-product-grid');
     }
