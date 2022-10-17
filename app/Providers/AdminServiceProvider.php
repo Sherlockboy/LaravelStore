@@ -19,6 +19,8 @@ class AdminServiceProvider extends ServiceProvider
     }
 
     /**
+     * TODO: Maybe rewrite using Admin guard and calling @auth('admin') instead of @admin
+     *
      * Bootstrap services.
      *
      * @return void

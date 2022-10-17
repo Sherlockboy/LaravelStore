@@ -19,6 +19,7 @@
     {
         let data = {
             'full_name': document.getElementById('full_name').value,
+            'email': document.getElementById('email').value,
             'country': document.getElementById('country').value,
             'city': document.getElementById('city').value,
             'street': document.getElementById('street').value,

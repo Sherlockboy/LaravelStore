@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewOrder;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Order;
@@ -9,6 +10,7 @@ use App\Models\OrderItem;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -54,8 +56,8 @@ class OrderController extends Controller
             }
 
             $cart->clearCart();
+            Mail::to($orderData['email'])->send(new NewOrder($order));
 
-            //TODO: manage responses
 
             return response()->json(['orderId' => $order->id]);
         } catch (\Exception $e) {
@@ -85,6 +87,7 @@ class OrderController extends Controller
         return [
             'user_id' => auth()->user()->id,
             'full_name' => $address->full_name,
+            'email' => auth()->user()->email,
             'country' => $address->country,
             'city' => $address->city,
             'street' => $address->street,
@@ -103,6 +106,7 @@ class OrderController extends Controller
     {
         return [
             'full_name' => request('full_name'),
+            'email' => request('email'),
             'country' => request('country'),
             'city' => request('city'),
             'street' => request('street'),

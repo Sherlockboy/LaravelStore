@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class represents class-container. Class container has collection of items.
+ * Class represents class-container. Class container has collection of product related items.
  *
  * @property Collection $items
  */

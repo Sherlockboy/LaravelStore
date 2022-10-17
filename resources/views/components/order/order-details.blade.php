@@ -16,6 +16,8 @@
                     {{ __('Order details') }}
                 </div>
                 <div>
+                    <div><strong>{{ __('Full Name: ')}}</strong>{{$order->full_name}}</div>
+                    <div><strong>{{ __('Email: ')}}</strong>{{$order->email}}</div>
                     <div><strong>{{ __('Country: ')}}</strong>{{$order->country}}</div>
                     <div><strong>{{ __('City: ')}}</strong>{{$order->city}}</div>
                     <div><strong>{{ __('Street: ')}}</strong>{{$order->street}}</div>

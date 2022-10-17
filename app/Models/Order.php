@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property int $id
  * @property User $user
+ * @property string $full_name
+ * @property string $email
  * @property Collection|OrderItem[] $items
  * @property Address $address
  * @property string $status
@@ -35,6 +37,7 @@ class Order extends ProductRelatedItemsContainer
     protected $fillable = [
         'user_id',
         'address_id',
+        'email',
         'full_name',
         'status',
         'country',
