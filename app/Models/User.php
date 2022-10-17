@@ -18,9 +18,7 @@ class User extends Authenticatable
     public const ADMIN_TYPE = 'admin';
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
+     * @inheritdoc
      */
     protected $fillable = [
         'username',
@@ -32,9 +30,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
+     * @inheritdoc
      */
     protected $hidden = [
         'password',
@@ -70,6 +66,9 @@ class User extends Authenticatable
         return $this->hasOne(Wishlist::class);
     }
 
+    /**
+     * @return Address|null
+     */
     public function getDefaultAddress(): ?Address
     {
         return Address::where('user_id', $this->id)
@@ -78,6 +77,12 @@ class User extends Authenticatable
             ->first();
     }
 
+    /**
+     * @inheritdoc
+     *
+     * Create cart instance for new user
+     * Create wishlist instance for new user
+     */
     protected static function boot()
     {
         parent::boot();

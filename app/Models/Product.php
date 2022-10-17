@@ -10,6 +10,9 @@ class Product extends Model
 {
     use HasFactory;
 
+    /**
+     * @inheritdoc
+     */
     protected $fillable = [
         'name',
         'price',
@@ -17,13 +20,11 @@ class Product extends Model
         'image'
     ];
 
+    /**
+     * @return BelongsToMany
+     */
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
-    }
-
-    public function getRelatedWishlistItem(User $user)
-    {
-        return $user->wishlist->items->where('product_id', '=', $this->id)->first();
     }
 }
