@@ -50,6 +50,7 @@ class ProductController extends Controller
 
         $data['image'] = $this->resizeImageAndGetPath(request('image'));
 
+        /** @var Product $product */
         $product = Product::create($data);
         $product->categories()->toggle($data['category']);
 

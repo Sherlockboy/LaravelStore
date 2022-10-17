@@ -3,17 +3,15 @@
 namespace App\View\Components\Grid;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
 class SmallProductGrid extends Component
 {
-    /**
-     * Can be collection of cartItems of orderItems. $item->product must return App\Model\Product instance
-     */
-    public $items;
+    public Collection $items;
 
     /**
-     * Grid type, can be either 'cart' or 'order'
+     * Grid type, can be either 'cart', 'order' or 'wishlist'
      * @var string
      */
     public string $type;

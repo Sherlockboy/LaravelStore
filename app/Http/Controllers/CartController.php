@@ -29,6 +29,7 @@ class CartController extends Controller
         $productId = $data['productId'];
         $cart = Cart::getCart();
 
+        /** @var CartItem $cartItem */
         $cartItem = CartItem::where('product_id', $productId)
             ->where('cart_id', $cart->id)
             ->get()

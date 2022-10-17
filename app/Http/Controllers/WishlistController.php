@@ -25,6 +25,7 @@ class WishlistController extends Controller
         $data = request()->all();
         $productId = $data['productId'];
         $user = auth()->user();
+        /** @var WishlistItem $wishlistItem */
         $wishlistItem = WishlistItem::create([
             'product_id' => $productId,
             'wishlist_id' => $user->wishlist->id,

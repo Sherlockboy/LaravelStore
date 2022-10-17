@@ -17,6 +17,7 @@
                 <div class="m-1 text-center text-xl">{{ __('Categories') }}</div>
                 <div class="m-1 text-center text-xl">{{ __('Actions') }}</div>
             </div>
+            @php /** @var \App\Models\Product $product */ @endphp
             @foreach($products as $product)
                 <div class="grid grid-cols-5 border border-gray-100
                 {{ $loop->odd ? 'bg-gray-200' : 'bg-gray-300'}}">
@@ -27,6 +28,7 @@
                     <div class="m-1 text-center">{{ $product->name }}</div>
                     <div class="m-1 text-center">
                         <div class="grid grid-rows">
+                            @php /** @var \App\Models\Category $category */ @endphp
                             @foreach($product->categories as $category)
                                 <div>{{ $category->name }}</div>
                             @endforeach

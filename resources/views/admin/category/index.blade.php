@@ -15,6 +15,7 @@
                 <div class="m-1 text-center text-xl">{{ __('Category Name') }}</div>
                 <div class="m-1 text-center text-xl">{{ __('Actions') }}</div>
             </div>
+            @php /** @var \App\Models\Category $category */ @endphp
             @foreach($categories as $category)
                 <div class="grid grid-cols-3 border border-gray-100
                 {{ $loop->odd ? 'bg-gray-200' : 'bg-gray-300'}}">

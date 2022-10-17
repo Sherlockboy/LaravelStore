@@ -12,6 +12,7 @@
                                     <label for="delivery-address">{{ __('Select delivery address') }}</label>
                                     <select name="delivery-address" id="delivery-address"
                                             class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                        @php /** @var App\Models\Address $address*/ @endphp
                                         @foreach($user->addresses as $address)
                                             <option value="{{$address->id}}"
                                                     id="address-id" {{ $address->is_default ? 'selected' : '' }}>
@@ -46,19 +47,20 @@
                 <div class="flex justify-center mt-2">
                     <p class="text-xl text-gray-500">{{ __('Order Summary') }}</p>
                 </div>
-                @foreach($cart->items as $cartItem)
+                @php /** @var App\Models\CartItem $item */@endphp
+                @foreach($cart->items as $item)
                     <div class="grid grid-cols-8 gap-4 mx-6">
                         <div class="col-span-4 flex justify-center">
-                            <a href="/product/{{ $cartItem->product->id }}">
-                                <img class="max-h-40" src="/storage/{{ $cartItem->product->image }}"
-                                     alt="{{ $cartItem->product->name }}">
+                            <a href="/product/{{ $item->product->id }}">
+                                <img class="max-h-40" src="/storage/{{ $item->product->image }}"
+                                     alt="{{ $item->product->name }}">
                             </a>
                         </div>
                         <div class="col-span-4 flex justify-center">
                             <div class="grid grid-rows">
-                                <div>{{ $cartItem->product->name }}</div>
-                                <div>{{ 'Qty: ' . $cartItem->qty }}</div>
-                                <div>{{ 'Price: ' . $cartItem->product->price * $cartItem->qty }}</div>
+                                <div>{{ $item->product->name }}</div>
+                                <div>{{ 'Qty: ' . $item->qty }}</div>
+                                <div>{{ 'Price: ' . $item->product->price * $item->qty }}</div>
                             </div>
                         </div>
                     </div>

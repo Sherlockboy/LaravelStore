@@ -1,3 +1,4 @@
+@php /** @var \App\Models\Order $order */ @endphp
 <x-header title="{{ 'Order # ' . $order->id }}"/>
 <div class="justify-center flex mb-4 text-xl bg-blue-100 sm:rounded-lg">
     <div class="text-center">

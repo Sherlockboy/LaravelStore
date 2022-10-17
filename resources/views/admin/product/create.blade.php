@@ -37,6 +37,7 @@
             <label for="category">{{ __('Categories') }}</label>
 
             <select id="category" class="block mt-1 w-full" name="category[]" required multiple="multiple" size="5">
+                @php /** @var \App\Models\Category $category */ @endphp
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach

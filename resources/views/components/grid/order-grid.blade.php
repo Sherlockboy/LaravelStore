@@ -14,6 +14,7 @@
             <div class="m-1 text-center text-xl">{{ __('Zip') }}</div>
             <div class="m-1 text-center text-xl">{{ __('Phone') }}</div>
         </div>
+        @php /** @var \App\Models\Order $order */ @endphp
         @foreach($orders as $order)
             <a href="{{ $type == 'admin' ? route('admin.order.show', $order->id) : route('order.show', $order->id)}}">
                 <div class="grid grid-cols-{{$colNum}} border border-gray-100

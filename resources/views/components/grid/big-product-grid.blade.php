@@ -1,5 +1,6 @@
 <!-- Big product grid. Used to display product at home or category page-->
 <div class="grid grid-cols-12 gap-4">
+    @php /** @var \App\Models\Product $product */ @endphp
     @foreach($products as $product)
         <div class="col-span-3 ml-4 mr-4">
             <div class="grid grid-rows-12">
@@ -16,6 +17,7 @@
                 <div class="flex justify-center row-span-2">
                     <p>
                         {{ __('Categories: ') }}
+                        @php /** @var \App\Models\Category $category */ @endphp
                         @foreach($product->categories as $category)
                             <a href="{{ route('category.index', $category->id) }}">
                                 {{$category->name . ($loop->last ? '' : ',')}}

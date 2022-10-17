@@ -1,3 +1,4 @@
+@php /** @var \App\Models\Product $product */ @endphp
 <x-header title="{{ __('Edit product') }}"/>
 <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
     <p class="text-xl">Edit {{ $product->name }}</p>

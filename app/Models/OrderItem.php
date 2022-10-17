@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property
+ * @property int $id
+ * @property Product $product
+ * @property Order $order
+ * @property int $qty
  */
 class OrderItem extends Model
 {

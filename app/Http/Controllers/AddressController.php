@@ -26,7 +26,7 @@ class AddressController extends Controller
     {
         $data = $this->prepareAddressData();
         if ($data['is_default']) {
-            $this->resolveOnlyOneDefaultAddress($data);
+            $this->resolveOnlyOneDefaultAddress();
         }
 
         $data['user_id'] = auth()->user()->id;
@@ -45,7 +45,7 @@ class AddressController extends Controller
         $data = $this->prepareAddressData();
 
         if ((!$address->is_default && $data['is_default'])) {
-            $this->resolveOnlyOneDefaultAddress($data);
+            $this->resolveOnlyOneDefaultAddress();
         }
 
         $address->update($data);

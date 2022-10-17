@@ -45,6 +45,7 @@
                 <li>
                     <a href="/">{{ __('Home') }}</a>
                 </li>
+                @php /** @var \App\Models\Category $category */ @endphp
                 @foreach($categories as $category)
                     <li>
                         <div>

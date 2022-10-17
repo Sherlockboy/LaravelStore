@@ -40,6 +40,7 @@ class OrderController extends Controller
         $orderData['final_price'] = $cart->getFinalPrice();
 
         try {
+            /** @var Order $order */
             $order = Order::create($orderData);
 
             foreach ($cart->items as $cartItem) {

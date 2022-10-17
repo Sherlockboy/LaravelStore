@@ -1,3 +1,4 @@
+@php /** @var \App\Models\Product $product */ @endphp
 <x-header title="{{ $product->name }}"/>
 <div class="grid grid-cols-12 gap-4">
     <div class="col-span-4 col-start-3">

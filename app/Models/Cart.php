@@ -2,11 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property int $id
+ * @property User $user
+ * @property Collection|CartItem[] $items
+ * @property string $session_id
+ * @property bool $is_guest
+ */
 class Cart extends Model
 {
     use HasFactory;
@@ -44,6 +52,7 @@ class Cart extends Model
     public function getFinalPrice(): int
     {
         $finalPrice = 0;
+        /** @var CartItem $cartItem */
         foreach ($this->items->all() as $cartItem) {
             $finalPrice += $cartItem->product->price * $cartItem->qty;
         }

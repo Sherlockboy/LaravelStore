@@ -22,6 +22,7 @@
     </div>
     <hr class="border-gray-100"/>
     <!-- Products -->
+    @php /** @var \App\Models\ProductRelatedItemInterface $item */@endphp
     @foreach($items as $item)
         <div class="grid grid-cols-{{$colNum}} gap-4 mx-6 max-h-50">
             <div class="col-span-2 flex justify-center ">
