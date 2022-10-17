@@ -31,8 +31,7 @@
                     </div>
                     <div class="col-span-5">
                         <div class="col-span-6 my-6 mr-6">
-                            <x-user.address-form form-title="{{ __('Add new address') }}"
-                                                 action="{{ route('address.store') }}"/>
+                            <x-user.address-form/>
                         </div>
                     </div>
                 </div>

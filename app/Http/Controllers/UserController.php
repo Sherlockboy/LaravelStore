@@ -36,8 +36,7 @@ class UserController extends Controller
                 'max:255',
                 Rule::unique('users')->ignore($user->id)
             ],
-            'first_name' => ['nullable', 'string', 'max:255'],
-            'last_name' => ['nullable', 'string', 'max:255'],
+            'full_name' => ['nullable', 'string', 'max:255'],
             'new_password' => ['nullable', 'confirmed', 'different:current_password', Password::default()],
             'current_password' => [
                 'nullable',
@@ -56,12 +55,8 @@ class UserController extends Controller
             //TODO: Send confirmation email
         }
 
-        if ($data['first_name'] != $user->first_name) {
-            $dataToUpdate['first_name'] = $data['first_name'];
-        }
-
-        if ($data['last_name'] != $user->last_name) {
-            $dataToUpdate['last_name'] = $data['last_name'];
+        if ($data['full_name'] != $user->full_name) {
+            $dataToUpdate['full_name'] = $data['full_name'];
         }
 
         if ($data['new_password']) {

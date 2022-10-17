@@ -55,7 +55,6 @@ class OrderController extends Controller
 
             $cart->clearCart();
 
-            //TODO send email!
             //TODO: manage responses
 
             return response()->json(['orderId' => $order->id]);
@@ -85,6 +84,7 @@ class OrderController extends Controller
     {
         return [
             'user_id' => auth()->user()->id,
+            'full_name' => $address->full_name,
             'country' => $address->country,
             'city' => $address->city,
             'street' => $address->street,
@@ -102,6 +102,7 @@ class OrderController extends Controller
     private function prepareGuestOrderData(): array
     {
         return [
+            'full_name' => request('full_name'),
             'country' => request('country'),
             'city' => request('city'),
             'street' => request('street'),

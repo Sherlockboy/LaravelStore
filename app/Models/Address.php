@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property int $id
  * @property User $user
+ * @property string $full_name
  * @property bool $is_default
  * @property string $title
  * @property string $country
@@ -26,6 +27,7 @@ class Address extends Model
      */
     protected $fillable = [
         'user_id',
+        'full_name',
         'is_default',
         'title',
         'country',

@@ -7,21 +7,12 @@
             @foreach($user->addresses as $address)
                 <div class="m-4">
                     <x-user.address-form
-                            action="{{ route('address.update', $address->id) }}"
-                            addressId="{{ $address->id }}"
-                            form-title="{{ $address->title}}"
-                            title="{{ $address->title}}"
-                            country="{{$address->country}}"
-                            city="{{$address->city}}"
-                            street="{{$address->street}}"
-                            zip="{{$address->zip}}"
-                            phone="{{$address->phone}}"
-                            isDefault="{{ $address->is_default }}"
-                    />
+                            :address="$address"
+                            action="{{ route('address.update', $address->id) }}"/>
                 </div>
             @endforeach
             <div class="m-4">
-                <x-user.address-form form-title="{{ __('New address') }}" action="{{ route('address.store') }}"/>
+                <x-user.address-form/>
             </div>
         </div>
     </div>

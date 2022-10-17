@@ -35,6 +35,7 @@ class Order extends ProductRelatedItemsContainer
     protected $fillable = [
         'user_id',
         'address_id',
+        'full_name',
         'status',
         'country',
         'city',

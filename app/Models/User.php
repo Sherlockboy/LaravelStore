@@ -15,8 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $username
  * @property string $email
  * @property string $type
- * @property string $first_name
- * @property string $last_name
+ * @property string $full_name
  * @property Cart $cart
  * @property Collection|Order[] $orders
  * @property Wishlist $wishlist
@@ -38,8 +37,7 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
-        'first_name',
-        'last_name'
+        'full_name'
     ];
 
     /**

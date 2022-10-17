@@ -3,13 +3,16 @@
 namespace App\View\Components;
 
 use App\Models\Category;
+use App\Models\User;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
 class Header extends Component
 {
-    public $categories;
-    public $user;
-    public $title;
+    public Collection $categories;
+    public User|null $user;
+    public string $title;
 
     /**
      * Create a new component instance.
@@ -26,9 +29,9 @@ class Header extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View
      */
-    public function render()
+    public function render(): View
     {
         return view('components.header');
     }

@@ -29,21 +29,12 @@
                         </div>
 
                         <div class="m-1">
-                            <x-input-label for="first_name" :value="__('First Name')"/>
+                            <x-input-label for="full_name" :value="__('Full Name')"/>
 
-                            <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name"
-                                          value="{{ $user->first_name }}" autofocus/>
+                            <x-text-input id="full_name" class="block mt-1 w-full" type="text" name="full_name"
+                                          value="{{ $user->full_name }}" autofocus/>
 
-                            <x-input-error :messages="$errors->get('first_name')" class="mt-2"/>
-                        </div>
-
-                        <div class="m-1">
-                            <x-input-label for="last_name" :value="__('Last Name')"/>
-
-                            <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"
-                                          value="{{ $user->last_name }}" autofocus/>
-
-                            <x-input-error :messages="$errors->get('last_name')" class="mt-2"/>
+                            <x-input-error :messages="$errors->get('full_name')" class="mt-2"/>
                         </div>
 
                         <div class="mx-1 mb-1 mt-10">
@@ -90,16 +81,8 @@
             <div class="col-span-6 my-6 mr-6">
                 @if($user->getDefaultAddress())
                     <x-user.address-form
-                            action="{{ route('address.update', $user->getDefaultAddress()->id) }}"
-                            addressId="{{ $user->getDefaultAddress()->id }}"
-                            form-title="{{ __('Default address') }}"
-                            title="{{$user->getDefaultAddress()->title}}"
-                            country="{{$user->getDefaultAddress()->country}}"
-                            city="{{$user->getDefaultAddress()->city}}"
-                            street="{{$user->getDefaultAddress()->street}}"
-                            zip="{{$user->getDefaultAddress()->zip}}"
-                            phone="{{$user->getDefaultAddress()->phone}}"
-                            isDefault="{{ true }}"/>
+                            :address="$user->getDefaultAddress()"
+                            action="{{route('address.update', $user->getDefaultAddress()->id)}}"/>
                 @else
                     <p class="text-xl text-center">{{ __('You don\'t have default address yet') }}</p>
                     <a href="{{ route('user.address.index') }}"><p class="text-center text-xl">

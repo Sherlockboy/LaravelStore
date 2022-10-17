@@ -85,6 +85,7 @@ class AddressController extends Controller
     {
         $data = request()->validate([
             'title' => ['required', 'string'],
+            'full_name' => ['required', 'string'],
             'country' => ['required', 'string'],
             'city' => ['required', 'string'],
             'street' => ['required', 'string'],
