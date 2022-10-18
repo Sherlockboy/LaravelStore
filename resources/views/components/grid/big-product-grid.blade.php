@@ -28,7 +28,7 @@
                 <div class="flex justify-center row-span-2">
                     <p>
                         {{ __('Price: ') }}
-                        {{ $product->price }}
+                        {{ number_format($product->price, 2) }}
                     </p>
                 </div>
                 <div class="flex justify-center row-span-2">

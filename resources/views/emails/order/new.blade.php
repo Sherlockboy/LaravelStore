@@ -1,14 +1,22 @@
 @php /** @var \App\Models\Order $order */@endphp
 @component('mail::message')
-    # Dear {{$order->full_name}}
+    # <div style="text-align: center;">Dear {{$order->full_name}}</div>
+<br>Thank you for tou purchase from {{ config('app.name') }}!
+@component('mail.markdown.order-details', ['order' => $order])
 
-Thank you for tou purchase from {{ config('app.name') }}!
+@endcomponent
 @if(!$isGuest)
-You can view your order details here:
+<br>
+<div style="text-align: center;">You can view your order details here:</div>
 @component('mail::button', ['url' => route('order.show', $order->id)])
-View Order
+    View Order
 @endcomponent
 @endif
-Thanks,<br>
+Thanks, <br>
 {{ config('app.name') }}
 @endcomponent
+<style>
+    img[alt=smallImage] {
+        width: 100px
+    }
+</style>

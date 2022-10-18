@@ -17,7 +17,7 @@
                     <x-buttons.remove-from-wishlist-button
                             item-id="{{$user->wishlist->getItemByRelatedId($product->id)->id}}"/>
                 @else
-                    <x-buttons.add-to-wishlist-button product-id="{{$product->id}}"/>
+                    <x-buttons.add-to-wishlist-button product-id="{{number_format($product->id, 2)}}"/>
                 @endif
             @endauth
 

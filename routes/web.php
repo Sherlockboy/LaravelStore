@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dev\EmailPreviewController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+Route::get('dev/preview-email/new-order/{order}', [EmailPreviewController::class, 'newOrder']);
+Route::get('dev/preview-email/new-order-guest/{order}', [EmailPreviewController::class, 'newOrderGuest']);
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
