@@ -9,7 +9,18 @@
             {{ $product->description }}
         </div>
         <div>
-            {{$product->price}}
+            <p>
+                <strong>{{ __('Categories: ') }}</strong>
+                @php /** @var \App\Models\Category $category */ @endphp
+                @foreach($product->categories as $category)
+                    <a href="{{ route('category.index', $category->id) }}">
+                        {{$category->name . ($loop->last ? '' : ',')}}
+                    </a>
+                @endforeach
+            </p>
+        </div>
+        <div>
+            <strong>{{ __('Price: ') }}</strong> {{number_format($product->price, 2)}}
         </div>
         <div>
             @auth()

@@ -1,66 +1,63 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# This is demo store created using Laravel Framework.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Pages
 
-## About Laravel
+### Homepage
+Homepage contains list of all products with product image, name, price, product categories and `Add to cart` button.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+You can navigate home page with link `Home` in header.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Category page
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Same as Homepage, but only products which are associated with that category are displayed.
 
-## Learning Laravel
+You can navigate to category page using corresponding links in header or links under product name at 
+Homepage or category page
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Product page
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Product page contains more detailed information about product - same as at Homepage/Category page +
+product description. Authorized user (see below) will also have button `Add to wishlist` or `Remove from wishlist`.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Cart
 
-## Laravel Sponsors
+Cart contains products which were added to cart. Left part contains table with information about each 
+product in cart - image, name, price, quantity, subtotal. There are also buttons `Remove from cart` to the right of each
+product which allow to remove particular product form cart and `Clear Shopping Cart` below the table, which removes all
+products from cart. 
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Right part of cart page contains cart summary - Total price and link to Checkout page(see below).
 
-### Premium Partners
+Cart page can be accessed with link `Cart` in header.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Checkout
 
-## Contributing
+Right part of checkout page contains order summary - list of all products in cart with image,
+name, quantity, price and subtotal, final price and button `Place order'.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Left part of Checkout page looks different for authorized and unauthorized user. 
 
-## Code of Conduct
+##### Guest
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Guest has form which allows to add delivery address information (`address form`) - Full name, email, Country, City, Street, Zip and phone. 
+This information will be saved not as address but as part of order itself.
 
-## Security Vulnerabilities
+##### Authorized user
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+For authorized user this part is spited in two different parts: left with `address form`
+to add new delivery address and right, simple selector which allows to select 
+delivery address.
 
-## License
+Ideally, I'd prefer to provide ability for customer to enter new address information without forcing 
+him/her to create new address entity - i.e. just like guest - but this implementation requires more advanced 
+level of JS while this project is mostly backend demo.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+## Roles and permissions
+
+There are 2 (2.5) types of users - `user` and `admin`. Let's look at their possibilities:
+
+### User
+

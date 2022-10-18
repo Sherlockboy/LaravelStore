@@ -58,7 +58,8 @@
                             <div class="grid grid-rows">
                                 <div>{{ $item->product->name }}</div>
                                 <div>{{ 'Qty: ' . $item->qty }}</div>
-                                <div>{{ 'Price: ' . $item->product->price * $item->qty }}</div>
+                                <div>{{ 'Price: ' . $item->product->price }}</div>
+                                <div>{{ 'Subtotal: ' . $item->product->price * $item->qty }}</div>
                             </div>
                         </div>
                     </div>
