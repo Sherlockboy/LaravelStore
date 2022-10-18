@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Wishlist;
 use App\Models\WishlistItem;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property User $user
  * @property Collection|WishlistItem[] $items
  */
-class Wishlist extends ProductRelatedItemsContainer
+class Wishlist extends Model
 {
     use HasFactory;
 
@@ -30,8 +31,8 @@ class Wishlist extends ProductRelatedItemsContainer
         return $this->hasMany(WishlistItem::class);
     }
 
-    public function getWishlistItemByProductId(int $productId): ?WishlistItem
+    public function getItemByRelatedId(int $relatedId): ?WishlistItem
     {
-        return $this->items->where('product_id', '=', $productId)->first();
+        return $this->items->where('product_id', '=', $relatedId)->first();
     }
 }

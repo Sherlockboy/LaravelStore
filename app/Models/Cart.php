@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $session_id
  * @property bool $is_guest
  */
-class Cart extends ProductRelatedItemsContainer
+class Cart extends Model
 {
     use HasFactory;
 
@@ -90,7 +91,7 @@ class Cart extends ProductRelatedItemsContainer
                 'cart_id' => $userCart->id
             ];
 
-            $userCartItem = $userCart->getItemByRelatedId('product_id', $guestCartItem->product->id);
+            $userCartItem = $userCart->getItemByRelatedId($guestCartItem->product->id);
 
             if ($userCartItem) {
                 // If user has same product in the cart, result qty must be equal to guest gat qty + user cart qty
@@ -134,5 +135,10 @@ class Cart extends ProductRelatedItemsContainer
 
             return $cart;
         }
+    }
+
+    public function getItemByRelatedId(int $relatedId): ?CartItem
+    {
+        return $this->items->where('product_id', '=', $relatedId)->first();
     }
 }
