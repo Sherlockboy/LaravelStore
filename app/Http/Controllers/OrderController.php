@@ -7,10 +7,12 @@ use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Rules\PhoneNumber;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
@@ -32,16 +34,16 @@ class OrderController extends Controller
     {
         $cart = Cart::getCart();
 
-        if (request('addressId') && $address = Address::find(request('addressId'))) {
-            $orderData = $this->prepareOrderData($address);
-        } else {
-            $orderData = $this->prepareGuestOrderData();
-        }
-
-        $orderData['status'] = Order::STATUS_PENDING;
-        $orderData['final_price'] = $cart->getFinalPrice();
-
         try {
+            if (request('addressId') && $address = Address::find(request('addressId'))) {
+                $orderData = $this->prepareOrderData($address);
+            } else {
+                $orderData = $this->prepareGuestOrderData();
+            }
+
+            $orderData['status'] = Order::STATUS_PENDING;
+            $orderData['final_price'] = $cart->getFinalPrice();
+
             /** @var Order $order */
             $order = Order::create($orderData);
 
@@ -58,10 +60,12 @@ class OrderController extends Controller
             $cart->clearCart();
             Mail::to($orderData['email'])->send(new NewOrder($order));
 
-
             return response()->json(['orderId' => $order->id]);
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()]);
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 422);
         }
     }
 
@@ -84,7 +88,7 @@ class OrderController extends Controller
      */
     private function prepareOrderData(Address $address): array
     {
-        return [
+        $data = [
             'user_id' => auth()->user()->id,
             'full_name' => $address->full_name,
             'email' => auth()->user()->email,
@@ -95,6 +99,8 @@ class OrderController extends Controller
             'phone' => $address->phone,
             'address_id' => $address->id,
         ];
+
+        return $this->validateOrderData($data);
     }
 
     /**
@@ -104,7 +110,7 @@ class OrderController extends Controller
      */
     private function prepareGuestOrderData(): array
     {
-        return [
+        $data = [
             'full_name' => request('full_name'),
             'email' => request('email'),
             'country' => request('country'),
@@ -114,5 +120,27 @@ class OrderController extends Controller
             'phone' => request('phone'),
             'is_guest' => 1
         ];
+
+        return $this->validateOrderData($data);
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    private function validateOrderData(array $data): array
+    {
+        return Validator::validate($data, [
+                'full_name' => ['required', 'string'],
+                'email' => ['required', 'email', 'string'],
+                'country' => ['required', 'string'],
+                'city' => ['required', 'string'],
+                'street' => ['required', 'string'],
+                'zip' => ['required', 'string'],
+                'phone' => ['required', 'string', new PhoneNumber()],
+                'user_id' => ['nullable'],
+                'address_id' => ['nullable'],
+            ]
+        );
     }
 }

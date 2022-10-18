@@ -3,10 +3,14 @@
     <div class="flex justify-center">
         <p class="text-xl">
             {{ __('Yor order id is # ')}}
-            <a href="{{ route('order.show', $orderId) }}">
+            @auth()
+                <a href="{{ route('order.show', $orderId) }}">
+                    {{$orderId}}
+                </a>
+                {{ __('You can view order details in your account') }}
+            @else
                 {{$orderId}}
-            </a>
-            {{ __('You can view order details in your account') }}
+            @endauth
         </p>
     </div>
 </div>

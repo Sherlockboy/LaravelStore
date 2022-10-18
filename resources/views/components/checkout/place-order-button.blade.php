@@ -9,13 +9,17 @@
 
         if (addressOption) {
             let data = {'addressId': addressOption.value};
-            axios.post('/order/create', data)
+            axios.post('{{ route('order.create') }}', data)
                 .then(response => {
                     alert('Order was created!');
                     window.location.href = '{{ route('checkout.success') }}' + '?orderId=' + response.data.orderId
+                }, error => {
+                    alert(error.response.data.message)
+                    document.getElementById('place-order').disabled = false;
                 })
         } else {
             alert('Please, select delivery address');
+            document.getElementById('place-order').disabled = false;
         }
     }
 </script>

@@ -6,6 +6,14 @@
             @auth()
                 <div class="grid grid-cols-11 gap-4">
                     <div class="col-span-5">
+                        <div class="col-span-6 my-6 mr-6">
+                            <x-user.address-form/>
+                        </div>
+                    </div>
+                    <div class="col-span-1 flex justify-center">
+                        <span class="text-3xl">{{ __('OR') }}</span>
+                    </div>
+                    <div class="col-span-5">
                         <div class="col-span-6 my-6 ml-6">
                             <x-main-form>
                                 <form method="POST" action="#" enctype="multipart/form-data">
@@ -20,18 +28,9 @@
                                             </option>
                                         @endforeach
                                     </select>
-
                                     @csrf
                                 </form>
                             </x-main-form>
-                        </div>
-                    </div>
-                    <div class="col-span-1 flex justify-center">
-                        <span class="text-3xl">{{ __('OR') }}</span>
-                    </div>
-                    <div class="col-span-5">
-                        <div class="col-span-6 my-6 mr-6">
-                            <x-user.address-form/>
                         </div>
                     </div>
                 </div>
