@@ -7,11 +7,11 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewOrder extends Mailable
+class OrderStatusUpdate extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public Order $order;
+    private Order $order;
 
     /**
      * Create a new message instance.
@@ -28,8 +28,8 @@ class NewOrder extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): static
     {
-        return $this->markdown('emails.order.new', ['order' => $this->order]);
+        return $this->markdown('emails.order.status-update', ['order' => $this->order]);
     }
 }

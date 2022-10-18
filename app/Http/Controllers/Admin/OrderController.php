@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderStatusUpdate;
 use App\Models\Order;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Handles order-related actions done by admin user
@@ -36,10 +38,12 @@ class OrderController extends Controller
      */
     public function update(Order $order): RedirectResponse
     {
-        $status = request('order-status');
+        $newStatus = request('order-status');
 
-        if ($order->status != $status) {
-            $order->update(['status' => $status]);
+        if ($order->status != $newStatus) {
+            $order->update(['status' => $newStatus]);
+
+            Mail::to($order->email)->send(new OrderStatusUpdate($order));
         }
 
         return redirect(url()->previous());

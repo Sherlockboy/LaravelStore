@@ -5,7 +5,7 @@
 @component('mail.markdown.order-details', ['order' => $order])
 
 @endcomponent
-@if(!$isGuest)
+@if(!$order->is_guest)
 <br>
 <div style="text-align: center;">You can view your order details here:</div>
 @component('mail::button', ['url' => route('order.show', $order->id)])

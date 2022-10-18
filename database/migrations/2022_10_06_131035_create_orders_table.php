@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->nullable();
             $table->integer('address_id')->nullable();
+            $table->boolean('is_guest')->default(false);
             $table->string('full_name');
             $table->string('email');
             $table->string('status');

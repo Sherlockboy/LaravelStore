@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property int $id
  * @property User $user
+ * @property bool $is_guest
  * @property string $full_name
  * @property string $email
  * @property Collection|OrderItem[] $items
