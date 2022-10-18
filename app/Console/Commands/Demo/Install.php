@@ -2,11 +2,19 @@
 
 namespace App\Console\Commands\Demo;
 
+use App\Models\Address;
+use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Wishlist;
+use App\Models\WishlistItem;
 use Illuminate\Console\Command;
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Http\FileHelpers;
 use Illuminate\Support\Facades\DB;
@@ -77,29 +85,72 @@ class Install extends Command
             'password' => 'test@123',
             'type' => User::ADMIN_TYPE,
             'full_name' => 'Store Admin'
-        ]
+        ],
+        [
+            'username' => 'test',
+            'email' => 'test@test.com',
+            'password' => 'test@123',
+            'type' => User::USER_TYPE,
+            'full_name' => 'Store User'
+        ],
     ];
 
     /**
-     * Execute the console command.
+     * @var array[]
+     */
+    protected array $addressData = [
+        [
+            'user_id' => 1,
+            'title' => 'Default UK Address',
+            'full_name' => 'Store Admin',
+            'country' => 'United Kingdom',
+            'city' => 'London',
+            'street' => 'Conan Doyle str, 14-08',
+            'zip' => 'CB25',
+            'phone' => '+44 111 11 11',
+            'is_default' => 1,
+        ],
+        [
+            'user_id' => 2,
+            'title' => 'Default US Address',
+            'full_name' => 'Store User',
+            'country' => 'USA',
+            'city' => 'New York',
+            'street' => 'Ray Douglas Bradbury str, 45-1',
+            'zip' => '10001',
+            'phone' => '+212 111 11 11',
+            'is_default' => 1,
+        ],
+    ];
+
+    /**
+     * Truncate most of the tables and install demo data
      *
      * @return int
+     * @throws BindingResolutionException
      */
     public function handle(): int
     {
-        $confirmation = $this->ask('This command will delete all categories, products and users.
-        Are you sure you wish to continue? [yes/no]');
+        $confirmation = $this->confirm('This command will delete all data - categories, products, users, 
+        addresses, etc. Are you sure you wish to continue?');
 
-        if (strtolower($confirmation) == 'yes') {
+        if ($confirmation) {
+            $this->truncateTables();
             $this->createCategories();
             $this->createProducts();
             $this->createUsers();
+            $this->createAddresses();
+
+            $this->output->writeln('Demo data successfully installed');
             return CommandAlias::SUCCESS;
         }
 
         return CommandAlias::FAILURE;
     }
 
+    /**
+     * @return void
+     */
     private function createCategories(): void
     {
         Category::query()->truncate();
@@ -108,7 +159,11 @@ class Install extends Command
         }
     }
 
-    private function createProducts()
+    /**
+     * @return void
+     * @throws BindingResolutionException
+     */
+    private function createProducts(): void
     {
         Product::query()->truncate();
         DB::table('category_product')->truncate();
@@ -126,17 +181,49 @@ class Install extends Command
 
             $productDatum['image'] = $imagePath;
 
+            /** @var Product $product */
             $product = Product::create($productDatum);
-            $product->categories()->toggle($productDatum['category']);
+            $product->categories()->attach($productDatum['category']);
         }
     }
 
-    private function createUsers()
+    /**
+     * @return void
+     */
+    private function createUsers(): void
     {
         User::query()->truncate();
         foreach ($this->userData as $userDatum) {
             $userDatum['password'] = Hash::make($userDatum['password']);
             User::create($userDatum);
         }
+    }
+
+    /**
+     * @return void
+     */
+    private function createAddresses(): void
+    {
+        Address::query()->truncate();
+        foreach ($this->addressData as $addressDatum) {
+            Address::create($addressDatum);
+        }
+    }
+
+    /**
+     * Delete carts, orders and wishlists
+     *
+     * @return void
+     */
+    private function truncateTables(): void
+    {
+        Cart::query()->truncate();
+        CartItem::query()->truncate();
+
+        Order::query()->truncate();
+        OrderItem::query()->truncate();
+
+        Wishlist::query()->truncate();
+        WishlistItem::query()->truncate();
     }
 }
