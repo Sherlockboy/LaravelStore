@@ -146,7 +146,7 @@ class ProductController extends Controller
     {
         $imagePath = $oldImage->store('product_images', 'public');
 
-        $newImage = Image::make(public_path('storage/' . $imagePath))->fit(1200, 1200);
+        $newImage = Image::make(public_path('storage/' . $imagePath))->fit(1000, 1000);
         $newImage->save();
 
         return $imagePath;
