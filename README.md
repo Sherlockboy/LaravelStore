@@ -80,7 +80,7 @@ Right part contains table with list of all orders made by `user` sorted from new
 basic information about order - date, status, price and delivery address details. Each line is clickable and leads to
 order details page.
 
-##### Order details page
+##### Account - Order details
 
 This page contains order details:
  - Left part contains table with list of ordered products.
@@ -98,3 +98,48 @@ If `user` added some products to his/her wishlist, this products will be display
 allows to remove product from wishlist.
 
 If there are no products in wishlist, corresponding message will be displayed.
+
+##  Pages available for authorized user with type = `admin`
+`Admin` has access to all pages which are accessible by `user` + access to admin pages:
+
+### Admin panel - Admin panel
+The very left part of page has Admin navigation bar with links to another user Admin pages (`admin navigation`).
+`admin navigation` is presented at all admin pages.
+
+Main part of page is currently empty
+
+### Admin panel - Categories
+
+Right bellow the header there is a button `Add new category` which leads to `category create` page.
+
+This page also contains list of all categories with their id and name. Action column contains links `Edit` and `Delete`
+which lead to `category edit` page or allow to delete category respectively.
+
+Right now category doesn't have any attributes except for name. So only name is required to create new category and
+only category name can be edited.
+
+I thought about implementing category tree structure - when categories can have parent and child categories.
+This is not something difficult from the backend point of view, but creating a user-friendly category navigation
+is a nontrivial frontend task for me. Again, this project is mostly a backend demo.
+
+### Admin panel - Products
+
+Right bellow the header there is a button `Add new product` which leads to `product create` page.
+
+This page contains list of all products with basic information  - id, image, name and categories. Action column contains
+links `Edit` and `Delete` which lead to `product edit` page or allow to delete product respectively.
+
+Product can be assigned to multiple categories at once.
+
+### Admin panel - Orders
+
+This page is similar to same page in user account (see *Account - My Orders*), but it contains list of ALL orders.
+It also has additional information - order id, user id (replaced with 'Guest' if order was placed by `guest`) and
+full name. Each line is clickable and leads to admin order details page.
+
+##### Admin - Order details
+
+Page looks same as account order details page (see *Account - order details*), but it also has form which allows to 
+change order status (below order status). When order status is changed, corresponding email will be sent. 
+
+Available statuses are: `pending`, `processing`, `completed` and `canceled`.

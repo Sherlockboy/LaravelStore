@@ -24,6 +24,9 @@
                     <div class="m-1 text-center">
                         <div class="grid grid-rows">
                             <div>
+                                <a href="{{ route('admin.category.edit', $category->id) }}">{{__('Edit')}}</a>
+                            </div>
+                            <div>
                                 <x-admin.delete-action
                                         entity-id="{{$category->id}}"
                                         entity-name="category"/>

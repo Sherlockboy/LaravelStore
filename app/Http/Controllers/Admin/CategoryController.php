@@ -35,11 +35,31 @@ class CategoryController extends Controller
      */
     public function store(): RedirectResponse
     {
-        $data = request()->validate([
-            'name' => ['required', 'unique:categories']
-        ]);
+        $data = $this->validateCategory();
 
         Category::create($data);
+
+        return redirect(route('admin.category.index'));
+    }
+
+    /**
+     * @param Category $category
+     * @return View
+     */
+    public function edit(Category $category): View
+    {
+        return view('admin.category.edit', compact('category'));
+    }
+
+    /**
+     * @param Category $category
+     * @return RedirectResponse
+     */
+    public function update(Category $category): RedirectResponse
+    {
+        $data = $this->validateCategory();
+
+        $category->update($data);
 
         return redirect(route('admin.category.index'));
     }
@@ -54,5 +74,15 @@ class CategoryController extends Controller
         $category->delete();
 
         return response()->json(['name' => $categoryName]);
+    }
+
+    /**
+     * @return array
+     */
+    private function validateCategory(): array
+    {
+        return request()->validate([
+            'name' => ['required', 'unique:categories']
+        ]);
     }
 }

@@ -4,6 +4,7 @@
             @if($type == 'admin')
                 <div class="m-1 text-center text-xl">{{ __('Order Id') }}</div>
                 <div class="m-1 text-center text-xl">{{ __('User Id') }}</div>
+                <div class="m-1 text-center text-xl">{{ __('Full name') }}</div>
             @endif
             <div class="m-1 text-center text-xl">{{ __('Created At') }}</div>
             <div class="m-1 text-center text-xl">{{ __('Status') }}</div>
@@ -22,6 +23,7 @@
                     @if($type == 'admin')
                         <div class="m-1 text-center">{{ $order->id }}</div>
                         <div class="m-1 text-center">{{ $order->user ? $order->user->id : 'Guest'}}</div>
+                        <div class="m-1 text-center">{{ $order->full_name}}</div>
                     @endif
 
                     <div class="m-1 text-center">{{ date('d M, Y h:m', $order->created_at->getTimestamp()) }}</div>

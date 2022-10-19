@@ -37,6 +37,5 @@
             <x-buttons.add-to-cart-button product-id="{{$product->id}}"/>
         </div>
     </div>
-    <div class="col-span-2"></div>
 </div>
 

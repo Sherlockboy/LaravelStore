@@ -28,7 +28,7 @@ class OrderGrid extends Component
     {
         $this->orders = $orders;
         $this->type = $type;
-        $type == 'admin' ? $this->colNum = 10 : $this->colNum = 8;
+        $type == 'admin' ? $this->colNum = 11 : $this->colNum = 8;
     }
 
     /**

@@ -13,6 +13,12 @@ Route::middleware('admin')->group(function () {
     Route::post('category/store', [CategoryController::class, 'store'])
         ->name('admin.category.store');
 
+    Route::get('category/edit/{category}', [CategoryController::class, 'edit'])
+        ->name('admin.category.edit');
+
+    Route::post('category/update/{category}', [CategoryController::class, 'update'])
+        ->name('admin.category.update');
+
     Route::delete('category/{category}', [CategoryController::class, 'destroy'])
         ->name('admin.category.destroy');
 
