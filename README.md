@@ -143,3 +143,32 @@ Page looks same as account order details page (see *Account - order details*), b
 change order status (below order status). When order status is changed, corresponding email will be sent. 
 
 Available statuses are: `pending`, `processing`, `completed` and `canceled`.
+
+## CLI commands
+
+### admin:create
+
+Creates user with type = `admin`. This is the only way to create admin user right now (without direct onteraction with 
+database). Creation requires username, email, password and password confirmation.
+
+### demo:install
+
+Deploys sample data:
+ - Two categories
+ - Three products
+ - Two users - one admin and one user
+ - One address for each user
+
+## Warning! ## 
+This command will delete ALL previously created entities - users, categories, products, carts, orders, wishlists.
+Do not execute it unless you don't need such data.
+
+##### Demo admin user:
+
+ - email: admin@test.com
+ - password: test@123
+
+##### Demo user:
+
+ - email: test@test.com
+ - password: test@123
