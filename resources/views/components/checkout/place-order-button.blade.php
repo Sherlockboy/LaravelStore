@@ -6,10 +6,10 @@
     function placeOrder() {
         document.getElementById('place-order-button').disabled = true;
         let select = document.getElementById('delivery-address');
-        let addressOption = select.options[select.selectedIndex];
+        let addressOption = JSON.parse(select.options[select.selectedIndex].value).id;
 
         if (addressOption) {
-            let data = {'addressId': addressOption.value};
+            let data = {'addressId': addressOption};
             axios.post('{{ route('order.create') }}', data)
                 .then(response => {
                     alert('Order was created!');

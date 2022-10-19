@@ -47,7 +47,8 @@ This information will be saved not as `address` entity but as part of `order` en
 
 For authorized user this part is split into two different parts: 
  - Left part contains `address form` which allows to add new delivery address.
- - Right part contains simple selector which allows to select delivery address.
+ - Right part contains simple selector which allows to select delivery address. When address is selected, address
+details will be displayed under selector.
 
 Ideally, I'd prefer to provide ability for customer to enter new address information without forcing 
 customer to create new address entity, so there will be options - either select existent address or 
@@ -89,10 +90,7 @@ This page contains order details:
 
 ### My Account - My addresses
 This page contains all user addresses. Addresses are displayed in `address form` which allows to edit address right
-here. It also contains empty `address form` which allows to add new Address. 
-
-User can have only one default address, so if you mark one address as default and save it, previous default address will
-be set as not-default.
+here. It also contains empty `address form` which allows to add new Address.
 
 ### My Account - My Wishlist
 If `user` added some products to his/her wishlist, this products will be displayed here, together with buttons
@@ -152,20 +150,20 @@ Available statuses are: `pending`, `processing`, `completed` and `canceled`.
 
 ### admin:create
 
-Creates user with type = `admin`. This is the only way to create admin user right now (without direct onteraction with 
+Creates user with type = `admin`. This is the only way to create admin user right now (without direct interaction with 
 database). Creation requires username, email, password and password confirmation.
 
 ### demo:install
+
+## <span style="color: red"> Warning! </span> ## 
+This command will delete ALL previously created entities - users, categories, products, carts, orders, wishlists.
+Do not execute it unless you don't need such data.
 
 Deploys sample data:
  - Two categories
  - Three products
  - Two users - one admin and one user
  - One address for each user
-
-## Warning! ## 
-This command will delete ALL previously created entities - users, categories, products, carts, orders, wishlists.
-Do not execute it unless you don't need such data.
 
 ##### Demo admin user:
 
@@ -197,3 +195,10 @@ appended if user cart and guest cart contain same product). Guest cart is delete
 - When user removes product from cart, whole cart item will be deleted. So, that means that right now there is
 no way to decrease amount of product in cart which is obviously bad for UI/UX.
 
+## Notes about addresses
+
+ - User can have only one default address, so if you mark one address as default and save it, previous default address 
+will be set as not-default.
+ - Delivery information is saved in order, even if it was placed by authorized user. So, delivery information will
+be preserved even if address will be deleted.
+ - In order to validate phone number format, custom validation rule was created - `\App\Rules\PhoneNumber`.

@@ -18,11 +18,13 @@
                             <x-main-form>
                                 <form method="POST" action="#" enctype="multipart/form-data">
                                     <label for="delivery-address">{{ __('Select delivery address') }}</label>
-                                    <select name="delivery-address" id="delivery-address"
+                                    <select name="delivery-address"
+                                            id="delivery-address"
+                                            onchange="displayAddressData(this.value)"
                                             class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                         @php /** @var App\Models\Address $address*/ @endphp
                                         @foreach($user->addresses as $address)
-                                            <option value="{{$address->id}}"
+                                            <option value="{{$address}}"
                                                     id="address-id" {{ $address->is_default ? 'selected' : '' }}>
                                                 {{ __($address->title) }}
                                             </option>
@@ -30,6 +32,22 @@
                                     </select>
                                     @csrf
                                 </form>
+                            </x-main-form>
+                            <x-main-form>
+                                <strong>{{__('Full name: ')}}</strong>
+                                <p id="selected-address-full_name" class="inline">{{$user->full_name}}</p><br>
+                                <strong>{{__('Email: ')}}</strong>
+                                <p id="selected-address-email" class="inline">{{$user->email}}</p><br>
+                                <strong>{{__('Country: ')}}</strong>
+                                <p id="selected-address-country" class="inline">{{$user->getDefaultAddress()->country}}</p><br>
+                                <strong>{{__('City: ')}}</strong>
+                                <p id="selected-address-city" class="inline">{{$user->getDefaultAddress()->city}}</p><br>
+                                <strong>{{__('Street: ')}}</strong>
+                                <p id="selected-address-street" class="inline">{{$user->getDefaultAddress()->street}}</p><br>
+                                <strong>{{__('Zip/Postal Code: ')}}</strong>
+                                <p id="selected-address-zip" class="inline">{{$user->getDefaultAddress()->zip}}</p><br>
+                                <strong>{{__('Phone: ')}}</strong>
+                                <p id="selected-address-phone" class="inline">{{$user->getDefaultAddress()->phone}}</p><br>
                             </x-main-form>
                         </div>
                     </div>
@@ -79,3 +97,14 @@
         </div>
     </div>
 @endif
+<script>
+    function displayAddressData(value) {
+        let address = JSON.parse(value)
+        document.getElementById('selected-address-full_name').innerHTML = address.full_name;
+        document.getElementById('selected-address-country').innerHTML = address.country;
+        document.getElementById('selected-address-city').innerHTML = address.city;
+        document.getElementById('selected-address-street').innerHTML = address.street;
+        document.getElementById('selected-address-zip').innerHTML = address.zip;
+        document.getElementById('selected-address-phone').innerHTML = address.phone;
+    }
+</script>

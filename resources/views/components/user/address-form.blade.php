@@ -13,7 +13,7 @@
         <div class="m-1">
             <x-input-label for="full_name" :value="__('Full name')"/>
             <x-text-input id="full_name" class="block mt-1 w-full" type="text" name="full_name"
-                          value="{{ $address->full_name ?? ''}}" required autofocus/>
+                          value="{{ $address->full_name ?? (auth()->user()->full_name ?? '')}}" required autofocus/>
             <x-input-error :messages="$errors->get('full_name')" class="mt-2"/>
         </div>
 
