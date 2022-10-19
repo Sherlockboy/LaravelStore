@@ -1,5 +1,11 @@
 # This is demo store created using Laravel Framework.
 
+## Important
+
+I'm a PHP backend developer who is studying Laravel right now. All frontend (both CSS suing Tailwind and JS) is probably
+a set of stupid workarounds and quality of frontend code is very low in general. The goal of this project was to study 
+backend component of Laravel and create corresponding *backend* demo.
+
 ## Pages available for everyone (or `guest`)
 
 ### Homepage
@@ -25,7 +31,8 @@ Cart contains products which were added to cart.
 
  - Left part contains table with information about each product in cart - image, name, price, quantity, subtotal. 
 There are also buttons `Remove from cart` to the right of each product which allow to remove particular product 
-from cart and `Clear Shopping Cart` below the table, which removes all products from cart. 
+from cart and `Clear Shopping Cart` below the table, which removes all products from cart. Item quantity can be changed 
+using `+` and `-` buttons and by inserting desired amount into input.
 
  - Right part of cart page contains cart summary - Total price and link to Checkout page (see below).
 
@@ -180,7 +187,7 @@ Deploys sample data:
  - All routes related to user account are executed though Laravel OOB `auth` middleware and are
 available only to authorized users. All user routes are located in `routes/user.php` file.
  - All admin routes are executed through custom `admin` middleware (`\App\Http\Middleware\AdminAccessCheck`) 
-and are available only for user with type = `admin`. All admin routes are located in `routes.admin.php` file.
+and are available only for user with type = `admin`. All admin routes are located in `routes/admin.php` file.
  - Admin order details and user order details are actually different views. So admin can edit order status ONLY
 at `Admin - order details` page.
 
@@ -190,15 +197,19 @@ at `Admin - order details` page.
 Guest cart uses session id instead of user id. See `\App\Models\Cart::getCart` for more details.
 - Carts are merged after login - all products from guest cart are moved to user cart (item quantity is 
 appended if user cart and guest cart contain same product). Guest cart is deleted after merge. Merge is called in
-`\App\Http\Controllers\Auth\AuthenticatedSessionController::store`executed in `\App\Models\Cart::merge`.
+`\App\Http\Controllers\Auth\AuthenticatedSessionController::store` and executed in `\App\Models\Cart::merge`.
 - When user adds to cart product which is already in cart, product quantity will be increased by 1.
-- When user removes product from cart, whole cart item will be deleted. So, that means that right now there is
-no way to decrease amount of product in cart which is obviously bad for UI/UX.
+- When user removes product from cart, whole cart item will be deleted.
 
 ## Notes about addresses
 
  - User can have only one default address, so if you mark one address as default and save it, previous default address 
 will be set as not-default.
  - Delivery information is saved in order, even if it was placed by authorized user. So, delivery information will
-be preserved even if address will be deleted.
+be preserved even if address is deleted.
  - In order to validate phone number format, custom validation rule was created - `\App\Rules\PhoneNumber`.
+
+## Notes about orders
+
+- All orders are created with status = `pending`. Status can be changed later by admin.
+- 

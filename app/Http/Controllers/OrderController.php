@@ -32,6 +32,7 @@ class OrderController extends Controller
      */
     public function create(): JsonResponse
     {
+        //TODO: check throttle
         $cart = Cart::getCart();
 
         try {

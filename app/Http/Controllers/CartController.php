@@ -52,6 +52,27 @@ class CartController extends Controller
      * @param CartItem $cartItem
      * @return JsonResponse
      */
+    public function update(CartItem $cartItem): JsonResponse
+    {
+        $newQty = match (request('type')) {
+            'increase' => $cartItem->qty + 1,
+            'decrease' => $cartItem->qty - 1,
+            default => request('qty'),
+        };
+
+        if ($newQty == 0) {
+            $cartItem->delete();
+        } else {
+            $cartItem->update(['qty' => $newQty]);
+        }
+
+        return response()->json();
+    }
+
+    /**
+     * @param CartItem $cartItem
+     * @return JsonResponse
+     */
     public function destroy(CartItem $cartItem): JsonResponse
     {
         $cart = Cart::getCart();
