@@ -12,7 +12,7 @@ You can navigate home page with link `Home` in header.
 Same as Homepage, but only products which are associated with that category are displayed.
 
 You can navigate to category page using corresponding links in header or links under product name at 
-Homepage or category page
+Homepage or category page.
 
 ### Product page
 
@@ -21,12 +21,13 @@ product description. Authorized user (see below) will also have button `Add to w
 
 ### Cart
 
-Cart contains products which were added to cart. Left part contains table with information about each 
-product in cart - image, name, price, quantity, subtotal. There are also buttons `Remove from cart` to the right of each
-product which allow to remove particular product form cart and `Clear Shopping Cart` below the table, which removes all
-products from cart. 
+Cart contains products which were added to cart.
 
-Right part of cart page contains cart summary - Total price and link to Checkout page(see below).
+ - Left part contains table with information about each product in cart - image, name, price, quantity, subtotal. 
+There are also buttons `Remove from cart` to the right of each product which allow to remove particular product 
+from cart and `Clear Shopping Cart` below the table, which removes all products from cart. 
+
+ - Right part of cart page contains cart summary - Total price and link to Checkout page(see below).
 
 Cart page can be accessed with link `Cart` in header.
 
@@ -37,37 +38,63 @@ name, quantity, price and subtotal, final price and button `Place order`.
 
 Left part of Checkout page looks different for authorized and unauthorized user. 
 
-##### Guest
+##### For Guest
 
 Guest has form which allows to add delivery address information (`address form`) - Full name, email, Country, City, Street, Zip and phone. 
 This information will be saved not as address but as part of order itself.
 
-##### Authorized user
+##### For Authorized user
 
-For authorized user this part is splitted into two different parts: left with `address form`
-to add new delivery address and right, simple selector which allows to select 
-delivery address.
+For authorized user this part is split into two different parts: 
+ - Left part contains `address form` which allows to add new delivery address.
+ - Right part contains simple selector which allows to select delivery address.
 
 Ideally, I'd prefer to provide ability for customer to enter new address information without forcing 
 him/her to create new address entity - i.e. just like guest - but this implementation requires more advanced 
-level of JS while this project is mostly backend demo.
+level of JS while this project is mostly a backend demo.
 
 ### Login/Register
 
 These pages were created using OOB Laravel tools - so, nothing specific about them. The
-only thing which is worth mentioning is that websites has two different user types - `user` and `admin` - and
-only `user` can be created using registration form.
+only thing which is worth mentioning is that website has two different user types - `user` and `admin` - and
+only `user` can be created using registration form. `admin` user can be created using custom CLI command (see below).
 
 ## Pages available for authorized user with type = `user`
 
 `User` has access to all pages which are accessible by guest (except for `Login` and `Register` of course as `user` 
 is already logged in) + access to user account pages:
 
-### Account Dashboard
+### Account - My Account
 
-The very left part of page has Account navigation bar with links to another user account pages (`user navigation`).
+The very left part of page has Account navigation bar with links to another user account pages (`user navigation`). 
+`user navigation` is presented at all account pages.
 
-Main part of account dashboard is splitted into two parts - left allow to edit account information - username, email,
-full name, password, right part displays `address form` with default address and allows to edit this address
-(if user has default address).
+Main part of account dashboard is split into two parts:
+- Left parts contains form which allows to edit account information - username, email,
+full name, password
+- Right part displays `address form` with default address and allows to edit this address (if user has default address).
+If there is no default address, this part will contain message about it and link to Account Addresses tab.
 
+### Account - My orders
+Right part contains table with list of all orders made by `user` sorted from newest to oldest. Each line contains some
+basic information about order - date, status, price and delivery address details. Each line is clickable and leads to
+order details page.
+
+##### Order details page
+
+This page contains order details:
+ - Left part contains table with list of ordered products.
+ - Right part contains order summary - Full price and delivery details.
+
+### My Account - My addresses
+This page contains all user addresses. Addresses are displayed in `address form` which allows to edit address right
+here. It also contains empty `address form` which allows to add new Address. 
+
+User can have only one default address, so if you mark one address as default and save it, previous default address will
+be set as not-default.
+
+### My Account - My Wishlist
+If `user` added some products to his/her wishlist, this products will be displayed here, together with button which 
+allows to remove product from wishlist.
+
+If there are no products in wishlist, corresponding message will be displayed.

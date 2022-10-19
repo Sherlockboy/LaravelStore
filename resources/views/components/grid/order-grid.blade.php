@@ -26,7 +26,7 @@
 
                     <div class="m-1 text-center">{{ date('d M, Y h:m', $order->created_at->getTimestamp()) }}</div>
                     <div class="m-1 text-center">{{ $order->status }}</div>
-                    <div class="m-1 text-center">{{ $order->final_price }}</div>
+                    <div class="m-1 text-center">{{ number_format($order->final_price, 2) }}</div>
                     <div class="m-1 text-center">{{ $order->country }}</div>
                     <div class="m-1 text-center">{{ $order->city }}</div>
                     <div class="m-1 text-center">{{ $order->street }}</div>
