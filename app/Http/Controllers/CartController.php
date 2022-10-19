@@ -61,7 +61,7 @@ class CartController extends Controller
             $cartItem->delete();
         }
 
-        return response()->json(['name' => $productName]);
+        return response()->json(['name' => $productName ?? '']);
     }
 
     /**

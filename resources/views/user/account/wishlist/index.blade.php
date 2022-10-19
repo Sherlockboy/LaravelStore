@@ -39,9 +39,14 @@
                                     {{ number_format($item->product->price, 2) }}
                                 </p>
                             </div>
-                            <div class="col-span-2 flex justify-center">
-                                <div>
-                                    <x-buttons.remove-from-wishlist-button item-id="{{$item->id}}"/>
+                            <div class="col-span-2">
+                                <div class="grid grid-rows flex justify-center">
+                                    <div class="flex justify-center">
+                                        <x-buttons.remove-from-wishlist-button item-id="{{$item->id}}"/>
+                                    </div>
+                                    <div class="flex justify-center">
+                                        <x-buttons.add-to-cart-button product-id="{{$item->product->id}}"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>

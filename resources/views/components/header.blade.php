@@ -23,10 +23,11 @@
                         <div class="text-sm text-gray-700 dark:text-gray-500">
                             <a href="{{ route('cart.index') }}" class="ml-4 underline">{{'Cart'}}</a>
                             @auth
-                                <a href="{{ route('user.account.index') }}" class="ml-4 underline">{{ __('Account') }}</a>
-                                @admin
-                                <a href="{{ route('admin.index') }}" class="ml-4 underline">{{ __('Admin') }}</a>
-                                @endadmin
+                                <a href="{{ route('user.account.index') }}"
+                                   class="ml-4 underline">{{ __('Account') }}</a>
+                                @if(auth()->user() && auth()->user()->type == 'admin')
+                                    <a href="{{ route('admin.index') }}" class="ml-4 underline">{{ __('Admin') }}</a>
+                                @endif
                                 <a href="{{ url('/logout') }}" class="ml-4 underline">{{ __('Logout') }}</a>
                             @else
                                 <a href="{{ route('login') }}" class="ml-4 underline">Log in</a>

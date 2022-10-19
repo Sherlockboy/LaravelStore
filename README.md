@@ -27,7 +27,7 @@ Cart contains products which were added to cart.
 There are also buttons `Remove from cart` to the right of each product which allow to remove particular product 
 from cart and `Clear Shopping Cart` below the table, which removes all products from cart. 
 
- - Right part of cart page contains cart summary - Total price and link to Checkout page(see below).
+ - Right part of cart page contains cart summary - Total price and link to Checkout page (see below).
 
 Cart page can be accessed with link `Cart` in header.
 
@@ -40,8 +40,8 @@ Left part of Checkout page looks different for authorized and unauthorized user.
 
 ##### For Guest
 
-Guest has form which allows to add delivery address information (`address form`) - Full name, email, Country, City, Street, Zip and phone. 
-This information will be saved not as address but as part of order itself.
+Guest has form which allows to add delivery address information (`address form`) - Full name, Email, Country, City, Street, Zip and phone. 
+This information will be saved not as `address` entity but as part of `order` entity itself.
 
 ##### For Authorized user
 
@@ -50,7 +50,8 @@ For authorized user this part is split into two different parts:
  - Right part contains simple selector which allows to select delivery address.
 
 Ideally, I'd prefer to provide ability for customer to enter new address information without forcing 
-him/her to create new address entity - i.e. just like guest - but this implementation requires more advanced 
+customer to create new address entity, so there will be options - either select existent address or 
+fill address information without creating address entity. But such implementation requires more advanced 
 level of JS while this project is mostly a backend demo.
 
 ### Login/Register
@@ -94,8 +95,8 @@ User can have only one default address, so if you mark one address as default an
 be set as not-default.
 
 ### My Account - My Wishlist
-If `user` added some products to his/her wishlist, this products will be displayed here, together with button which 
-allows to remove product from wishlist.
+If `user` added some products to his/her wishlist, this products will be displayed here, together with buttons
+`Remove from wishlist` which allows to remove product from wishlist and `Add to cart` button.
 
 If there are no products in wishlist, corresponding message will be displayed.
 
@@ -106,7 +107,10 @@ If there are no products in wishlist, corresponding message will be displayed.
 The very left part of page has Admin navigation bar with links to another user Admin pages (`admin navigation`).
 `admin navigation` is presented at all admin pages.
 
-Main part of page is currently empty
+Admin panel can be accessed with link `Admin` in right part of header (this link is visible and
+available only for `admin` users).
+
+Main part of page is currently empty.
 
 ### Admin panel - Categories
 
@@ -172,3 +176,24 @@ Do not execute it unless you don't need such data.
 
  - email: test@test.com
  - password: test@123
+
+## Notes about users
+
+ - All routes related to user account are executed though Laravel OOB `auth` middleware and are
+available only to authorized users. All user routes are located in `routes/user.php` file.
+ - All admin routes are executed through custom `admin` middleware (`\App\Http\Middleware\AdminAccessCheck`) 
+and are available only for user with type = `admin`. All admin routes are located in `routes.admin.php` file.
+ - Admin order details and user order details are actually different views. So admin can edit order status ONLY
+at `Admin - order details` page.
+
+## Notes about cart/checkout
+- User cart (as well as user wishlist) entity is created after user is created (see `\App\Models\User::boot`).
+- Guest cart is created either when guest adds something to cart OR when guest opens cart page. 
+Guest cart uses session id instead of user id. See `\App\Models\Cart::getCart` for more details.
+- Carts are merged after login - all products from guest cart are moved to user cart (item quantity is 
+appended if user cart and guest cart contain same product). Guest cart is deleted after merge. Merge is called in
+`\App\Http\Controllers\Auth\AuthenticatedSessionController::store`executed in `\App\Models\Cart::merge`.
+- When user adds to cart product which is already in cart, product quantity will be increased by 1.
+- When user removes product from cart, whole cart item will be deleted. So, that means that right now there is
+no way to decrease amount of product in cart which is obviously bad for UI/UX.
+
