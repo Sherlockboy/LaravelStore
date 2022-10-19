@@ -1,0 +1,4 @@
+name,price,description,categories
+Book it two variants,10,Test description,Digital Books|Paper Books
+Digital Book,15,Test description,Digital Books
+Paper Book,20,Test description,Paper Books
