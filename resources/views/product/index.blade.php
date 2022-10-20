@@ -25,16 +25,16 @@
         <div>
             @auth()
                 @if($user->wishlist->getItemByRelatedId($product->id))
-                    <x-buttons.remove-from-wishlist-button
+                    <x-wishlist.remove-from-wishlist-button
                             item-id="{{$user->wishlist->getItemByRelatedId($product->id)->id}}"/>
                 @else
-                    <x-buttons.add-to-wishlist-button product-id="{{number_format($product->id, 2)}}"/>
+                    <x-wishlist.add-to-wishlist-button product-id="{{number_format($product->id, 2)}}"/>
                 @endif
             @endauth
 
         </div>
         <div>
-            <x-buttons.add-to-cart-button product-id="{{$product->id}}"/>
+            <x-checkout.cart.add-to-cart-button product-id="{{$product->id}}"/>
         </div>
     </div>
 </div>

@@ -32,7 +32,7 @@
                     </p>
                 </div>
                 <div class="flex justify-center row-span-2">
-                    <x-buttons.add-to-cart-button product-id="{{$product->id}}"/>
+                    <x-checkout.cart.add-to-cart-button product-id="{{$product->id}}"/>
                 </div>
             </div>
         </div>

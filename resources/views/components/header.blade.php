@@ -20,7 +20,7 @@
             <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                 <div class="text-gray-700 dark:text-gray-500 flex">
                     <a href="{{ route('cart.index') }}" class="ml-4 underline flex">{{'Cart'}}</a>
-                    <x-checkout.cart-items-count/>
+                    <x-checkout.cart.cart-items-count/>
                     @auth
                         <a href="{{ route('user.account.index') }}"
                            class="ml-4 underline">{{ __('Account') }}</a>

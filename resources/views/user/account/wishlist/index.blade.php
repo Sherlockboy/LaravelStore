@@ -42,10 +42,10 @@
                             <div class="col-span-2">
                                 <div class="grid grid-rows flex justify-center">
                                     <div class="flex justify-center">
-                                        <x-buttons.remove-from-wishlist-button item-id="{{$item->id}}"/>
+                                        <x-wishlist.remove-from-wishlist-button item-id="{{$item->id}}"/>
                                     </div>
                                     <div class="flex justify-center">
-                                        <x-buttons.add-to-cart-button product-id="{{$item->product->id}}"/>
+                                        <x-checkout.cart.add-to-cart-button product-id="{{$item->product->id}}"/>
                                     </div>
                                 </div>
                             </div>

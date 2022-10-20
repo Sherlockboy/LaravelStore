@@ -43,13 +43,13 @@
                             </p>
                         </div>
                         <!-- Item quantity -->
-                        <x-checkout.item-qty-input :item="$item"/>
+                        <x-checkout.cart.item-qty-input :item="$item"/>
                         <div class="col-span-2 flex justify-center">
                             {{ number_format($item->qty * $item->product->price, 2)}}
                         </div>
                         <div class="col-span-2 flex justify-center">
                             <div>
-                                <x-buttons.remove-from-cart-button item-id="{{$item->id}}"/>
+                                <x-checkout.cart.remove-from-cart-button item-id="{{$item->id}}"/>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
             </div>
             <div class="grid grid-cols-12 gap-4  mx-6 mb-6 max-h-50">
                 <div class="col-span-2 flex justify-center col-start-11">
-                    <x-checkout.clear-cart/>
+                    <x-checkout.cart.clear-cart/>
                 </div>
             </div>
         </div>
