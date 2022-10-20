@@ -1,7 +1,10 @@
 <x-header title="{{ __('Create Category') }}"/>
 <div class="grid grid-cols-12 gap-4">
-    <x-admin.admin-nav current="products"/>
+    <x-admin.admin-nav current="categories"/>
     <div class="col-span-9 bg-blue-200 sm:rounded-lg">
+        <div class="mt-6 mx-6">
+            <a href="{{ route('admin.category.index') }}"> {{ __('Back') }}</a>
+        </div>
         <x-main-form>
             <p class="text-center">{{ __('Create Category') }}</p>
             <form method="POST" action="{{ route('admin.category.store') }}" enctype="multipart/form-data">

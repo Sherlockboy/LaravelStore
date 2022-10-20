@@ -2,7 +2,10 @@
 @if($cart->items->count())
     <div class="grid grid-cols-12">
         <div class="col-span-8 col-start-2 mx-6 mb-6 bg-blue-200 sm:rounded-lg">
-            <p class="text-3xl text-center text-gray-500 mt-2">{{ __('Delivery address') }}</p>
+            <div class="mt-6 mx-6">
+                <a href="{{ route('cart.index') }}"> {{ __('Back to Cart') }}</a>
+            </div>
+            <p class="text-3xl text-center text-gray-500">{{ __('Delivery address') }}</p>
             @auth()
                 <div class="grid grid-cols-11 gap-4">
                     <div class="col-span-5">
@@ -11,7 +14,7 @@
                         </div>
                     </div>
                     <div class="col-span-1 flex justify-center">
-                        <span class="text-3xl">{{ __('OR') }}</span>
+                        <span class="text-3xl mt-10">{{ __('OR') }}</span>
                     </div>
                     <div class="col-span-5">
                         <div class="col-span-6 my-6 ml-6">

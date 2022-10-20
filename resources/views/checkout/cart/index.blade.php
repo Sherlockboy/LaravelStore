@@ -1,4 +1,5 @@
 <x-header title="{{ __('Shopping Cart') }}"/>
+
 @if($cart->items->count())
     <div class="grid grid-cols-12">
         <div class="col-span-8 col-start-2 bg-blue-200 sm:rounded-lg">
@@ -41,6 +42,7 @@
                                 {{ number_format($item->product->price, 2) }}
                             </p>
                         </div>
+                        <!-- Item quantity -->
                         <div class="col-span-2 flex justify-center">
                             <button data-action="increment" onclick="updateCartItemQty({{$item->id}}, 'decrease')"
                                     class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:bg-gray-400 w-full h-10 rounded-l">
@@ -106,7 +108,6 @@
 
         if (type === 'change') {
             let select = document.getElementById('item-qty-' + itemId);
-            console.log(typeof data)
             data.qty = select.value;
         }
 

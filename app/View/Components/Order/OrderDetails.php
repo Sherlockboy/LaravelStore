@@ -10,14 +10,17 @@ class OrderDetails extends Component
 {
     public Order $order;
 
+    public string $type;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order, string $type = 'user')
     {
         $this->order = $order;
+        $this->type = $type;
     }
 
     /**

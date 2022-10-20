@@ -1,5 +1,12 @@
 <div class="col-span-7 bg-blue-200 sm:rounded-lg mb-4">
-    <div class="text-xl text-center">{{ __('Ordered items') }}</div>
+    <div class="mt-6 mx-6">
+        @if($type == 'admin')
+            <a href="{{ route('admin.order.index') }}"> {{ __('Back') }}</a>
+        @else
+            <a href="{{ route('order.index') }}"> {{ __('Back') }}</a>
+        @endif
+    </div>
+    <div class="text-xl text-center mb-4">{{ __('Ordered items') }}</div>
     <div class="grid grid-rows gap-4">
         <!-- Grid header -->
         <div class="grid grid-cols-10 gap-4 mx-4 my-4 ">

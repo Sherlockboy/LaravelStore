@@ -3,6 +3,9 @@
 <div class="grid grid-cols-12 gap-4">
     <x-admin.admin-nav current="products"/>
     <div class="col-span-9 bg-blue-200 sm:rounded-lg">
+        <div class="mt-6 mx-6">
+            <a href="{{ route('admin.product.index') }}"> {{ __('Back') }}</a>
+        </div>
         <div class=" flex flex-col sm:justify-center items-center my-6 sm:pt-0">
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-4 col-start-3">

@@ -40,5 +40,5 @@
 </div>
 <div class="grid grid-cols-12 gap-4">
     <x-admin.admin-nav current="orders"/>
-    <x-order.order-details :order="$order"/>
+    <x-order.order-details :order="$order" type="admin"/>
 </div>
