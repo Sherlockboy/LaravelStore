@@ -45,7 +45,7 @@ class CartController extends Controller
             ]);
         }
 
-        return response()->json(['cartItemId' => $cartItem->id]);
+        return response()->json(['total_qty' => $cartItem->cart->getTotalItemQty()]);
     }
 
     /**
@@ -66,7 +66,12 @@ class CartController extends Controller
             $cartItem->update(['qty' => $newQty]);
         }
 
-        return response()->json();
+        return response()->json([
+            'qty' => $newQty,
+            'subtotal' => $cartItem->qty * $cartItem->product->price,
+            'final_price' => $cartItem->cart->getFinalPrice(),
+            'total_qty' => $cartItem->cart->getTotalItemQty()
+        ]);
     }
 
     /**
@@ -82,7 +87,7 @@ class CartController extends Controller
             $cartItem->delete();
         }
 
-        return response()->json(['name' => $productName ?? '']);
+        return response()->json(['total_qty' => $cartItem->cart->getTotalItemQty()]);
     }
 
     /**

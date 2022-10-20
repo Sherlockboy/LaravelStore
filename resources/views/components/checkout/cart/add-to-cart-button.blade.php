@@ -9,8 +9,7 @@
             'productId': productId
         })
             .then(response => {
-                alert('Product was added to your cart');
-                window.location.href = '{{url()->current()}}'
+                updateCartItemCountSpan(response.data.total_qty)
             })
     }
 </script>

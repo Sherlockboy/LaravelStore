@@ -23,7 +23,17 @@
             data.qty = select.value;
         }
 
-        axios.patch('/cart/' + itemId, data);
-        window.location.href = '{{url()->current()}}';
+        axios.patch('/cart/' + itemId, data)
+            .then(response => {
+                if (response.data.items_count === 0 || response.data.qty === 0) {
+                    window.location = '{{ route('cart.index')}}';
+                } else {
+                    document.getElementById('item-qty-' + itemId).value = response.data.qty
+                    document.getElementById('item-subtotal-' + itemId).innerHTML = response.data.subtotal.toFixed(2);
+                    document.getElementById('final-price').innerHTML = response.data.final_price.toFixed(2);
+
+                    updateCartItemCountSpan(response.data.total_qty)
+                }
+            })
     }
 </script>

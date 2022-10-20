@@ -61,6 +61,21 @@ class Cart extends Model
     }
 
     /**
+     * Get total amount of products in cart
+     *
+     * @return int
+     */
+    public function getTotalItemQty(): int
+    {
+        $count = 0;
+        foreach ($this->items as $item) {
+            $count += $item->qty;
+        }
+
+        return $count;
+    }
+
+    /**
      * Remove all items from cart
      *
      * @return void
@@ -137,8 +152,14 @@ class Cart extends Model
         }
     }
 
-    public function getItemByRelatedId(int $relatedId): ?CartItem
+    /**
+     * Get cart item related to product with id = $productId if it exists
+     *
+     * @param int $productId
+     * @return CartItem|null
+     */
+    public function getItemByRelatedId(int $productId): ?CartItem
     {
-        return $this->items->where('product_id', '=', $relatedId)->first();
+        return $this->items->where('product_id', '=', $productId)->first();
     }
 }

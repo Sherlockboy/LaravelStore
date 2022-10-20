@@ -6,7 +6,7 @@
             axios.delete('/cart')
                 .then(response => {
                     alert('Your shopping cart was cleared');
-                    window.location.href = '/cart';
+                    window.location.href = '{{ route('cart.index') }}';
                 })
         }
     }
