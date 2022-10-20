@@ -7,14 +7,17 @@ use App\Http\Controllers\WishlistController;
 
 Route::middleware('auth')->group(function () {
     // Account
-    Route::post('account/update', [UserController::class, 'update'])
-        ->name('user.update');
-
     Route::get('account', [UserController::class, 'index'])
         ->name('user.account.index');
 
+    Route::patch('account/update', [UserController::class, 'update'])
+        ->name('user.update');
+
     // Addresses
-    Route::post('address/update/{address}', [AddressController::class, 'update'])
+    Route::get('address', [AddressController::class, 'index'])
+        ->name('user.address.index');
+
+    Route::patch('address/update/{address}', [AddressController::class, 'update'])
         ->name('address.update');
 
     Route::post('address/store', [AddressController::class, 'store'])
@@ -22,9 +25,6 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('address/{address}', [AddressController::class, 'delete'])
         ->name('address.delete');
-
-    Route::get('address', [AddressController::class, 'index'])
-        ->name('user.address.index');
 
     // Orders
     Route::get('orders', [OrderController::class, 'index'])

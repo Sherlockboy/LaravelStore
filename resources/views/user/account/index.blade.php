@@ -9,6 +9,7 @@
                     <p class="text-center">{{ __('Account Information') }}</p>
                     <form method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
                         @csrf
+                        @method('PATCH')
 
                         <div class="m-1">
                             <x-input-label for="username" :value="__('Username')"/>

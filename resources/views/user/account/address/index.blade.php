@@ -8,7 +8,8 @@
                 <div class="m-4">
                     <x-user.address-form
                             :address="$address"
-                            action="{{ route('address.update', $address->id) }}"/>
+                            action="{{ route('address.update', $address->id) }}"
+                    />
                 </div>
             @endforeach
             <div class="m-4">

@@ -12,7 +12,7 @@ class AddressForm extends Component
     /**
      * @var mixed|string
      */
-    public string $action;
+    public ?string $action;
 
     /**
      * Create a new component instance.
@@ -21,7 +21,7 @@ class AddressForm extends Component
      */
     public function __construct($action = null, Address $address = null)
     {
-        $this->action = $action ?? route('address.store');
+        $this->action = $action;
         $this->address = $address;
     }
 

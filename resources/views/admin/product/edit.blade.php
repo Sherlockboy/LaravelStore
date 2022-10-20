@@ -17,8 +17,8 @@
                     <div class="w-full sm:max-w-md p-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
                         <form method="POST" action="{{ route('admin.product.update', $product->id) }}"
                               enctype="multipart/form-data">
+                            @method('PATCH')
                             @csrf
-
                             <div>
                                 <x-input-label for="name" :value="__('Name')"/>
 

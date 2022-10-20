@@ -2,6 +2,7 @@
     <p class="text-center">{{ __($address->title ?? 'Add new address') }}</p>
     <form method="POST" action="{{ $action ?? route('address.store')}}" enctype="multipart/form-data">
         @csrf
+            @method($action ? 'PATCH' : 'POST')
         @auth()
             <div class="m-1">
                 <x-input-label for="title" :value="__('Address Title')"/>

@@ -7,5 +7,5 @@
 </div>
 <div class="grid grid-cols-12 gap-4">
     <x-user.account-nav current="orders"/>
-    <x-order.order-details :order="$order"/>
+    <x-order.order-details :order="$order" type="user"/>
 </div>

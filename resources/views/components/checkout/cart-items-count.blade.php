@@ -1,5 +1,9 @@
 <div id="cart-items-count"></div>
 <script>
+    /*
+    TODO: This MUST be refactored. Each page load now triggers request to backend. Request should be triggered only
+    TODO: if cart item qty changes
+    */
     window.onload = function () {
         return getItemsCount();
     }

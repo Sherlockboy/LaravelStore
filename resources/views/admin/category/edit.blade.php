@@ -10,6 +10,7 @@
             <p class="text-center">{{ __('Edit Category ' . $category->name) }}</p>
             <form method="POST" action="{{ route('admin.category.update', $category->id) }}"
                   enctype="multipart/form-data">
+                @method('PATCH')
                 @csrf
                 <div>
                     <x-input-label for="name" :value="__('Name')"/>

@@ -7,12 +7,15 @@ use App\Http\Controllers\AdminController;
 
 Route::middleware('admin')->group(function () {
     //Admin Navigation
-    Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('admin', [AdminController::class, 'index'])
+        ->name('admin.index');
 
     Route::get('admin/category', [CategoryController::class, 'index'])
         ->name('admin.category.index');
+
     Route::get('admin/product', [ProductController::class, 'index'])
         ->name('admin.product.index');
+
     Route::get('admin/order', [OrderController::class, 'index'])
         ->name('admin.order.index');
 
@@ -26,7 +29,7 @@ Route::middleware('admin')->group(function () {
     Route::get('category/edit/{category}', [CategoryController::class, 'edit'])
         ->name('admin.category.edit');
 
-    Route::post('category/update/{category}', [CategoryController::class, 'update'])
+    Route::patch('category/update/{category}', [CategoryController::class, 'update'])
         ->name('admin.category.update');
 
     Route::delete('category/{category}', [CategoryController::class, 'destroy'])
@@ -42,15 +45,15 @@ Route::middleware('admin')->group(function () {
     Route::get('product/edit/{product}', [ProductController::class, 'edit'])
         ->name('admin.product.edit');
 
-    Route::post('product/update/{product}', [ProductController::class, 'update'])
+    Route::patch('product/update/{product}', [ProductController::class, 'update'])
         ->name('admin.product.update');
 
     Route::delete('product/{product}', [ProductController::class, 'destroy'])
         ->name('admin.product.destroy');
 
     //Order
-    Route::patch('admin/order/{order}', [OrderController::class, 'update'])
-        ->name('admin.order.update');
     Route::get('admin/order/{order}', [OrderController::class, 'show'])
         ->name('admin.order.show');
+    Route::patch('admin/order/{order}', [OrderController::class, 'update'])
+        ->name('admin.order.update');
 });
