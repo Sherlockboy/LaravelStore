@@ -97,4 +97,17 @@ class CartController extends Controller
 
         return response()->json('Success');
     }
+
+    public function getItemsCount(): JsonResponse
+    {
+        $count = 0;
+        $cart = Cart::getCart(false);
+        if ($cart) {
+            foreach ($cart->items as $item) {
+                $count += $item->qty;
+            }
+        }
+
+        return response()->json(['count' => $count]);
+    }
 }

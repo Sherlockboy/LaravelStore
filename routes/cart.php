@@ -16,3 +16,6 @@ Route::delete('cart', [CartController::class, 'destroyAll'])
 
 Route::post('cart/{cartItem}', [CartController::class, 'update'])
     ->name('cart.update');
+
+Route::get('cart/get-items-count', [CartController::class, 'getItemsCount'])
+    ->name('cart.get-items-count');
