@@ -25,7 +25,7 @@
 
         axios.patch('/cart/' + itemId, data)
             .then(response => {
-                if (response.data.items_count === 0 || response.data.qty === 0) {
+                if (response.data.qty === 0) {
                     window.location = '{{ route('cart.index')}}';
                 } else {
                     document.getElementById('item-qty-' + itemId).value = response.data.qty
