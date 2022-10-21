@@ -47,9 +47,9 @@ class Cart extends Model
     /**
      * Get total cart price
      * 
-     * @return int
+     * @return float
      */
-    public function getFinalPrice(): int
+    public function getFinalPrice(): float
     {
         $finalPrice = 0;
         /** @var CartItem $cartItem */
@@ -106,7 +106,7 @@ class Cart extends Model
                 'cart_id' => $userCart->id
             ];
 
-            $userCartItem = $userCart->getItemByRelatedId($guestCartItem->product->id);
+            $userCartItem = $userCart->getItemByProductId($guestCartItem->product->id);
 
             if ($userCartItem) {
                 // If user has same product in the cart, result qty must be equal to guest gat qty + user cart qty
@@ -158,7 +158,7 @@ class Cart extends Model
      * @param int $productId
      * @return CartItem|null
      */
-    public function getItemByRelatedId(int $productId): ?CartItem
+    public function getItemByProductId(int $productId): ?CartItem
     {
         return $this->items->where('product_id', '=', $productId)->first();
     }

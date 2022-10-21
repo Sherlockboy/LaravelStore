@@ -24,9 +24,9 @@
         </div>
         <div>
             @auth()
-                @if($user->wishlist->getItemByRelatedId($product->id))
+                @if($user->wishlist->getItemByProductId($product->id))
                     <x-wishlist.remove-from-wishlist-button
-                            item-id="{{$user->wishlist->getItemByRelatedId($product->id)->id}}"/>
+                            item-id="{{$user->wishlist->getItemByProductId($product->id)->id}}"/>
                 @else
                     <x-wishlist.add-to-wishlist-button product-id="{{number_format($product->id, 2)}}"/>
                 @endif

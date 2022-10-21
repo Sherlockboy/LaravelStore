@@ -83,7 +83,6 @@ class CartController extends Controller
         $cart = Cart::getCart();
 
         if ($cart->id == $cartItem->cart->id) {
-            $productName = $cartItem->product->name;
             $cartItem->delete();
         }
 

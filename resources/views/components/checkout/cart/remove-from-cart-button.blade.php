@@ -5,7 +5,6 @@
         if (confirm('Are you sure you want to remove product from your cart?')) {
             axios.delete('{{route('cart.destroy', $itemId)}}')
                 .then(response => {
-                    alert(response.data.name + ' was removed from your cart');
                     window.location.href = '{{route('cart.index')}}';
                 })
         }

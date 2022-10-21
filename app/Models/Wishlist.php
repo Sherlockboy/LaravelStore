@@ -31,8 +31,8 @@ class Wishlist extends Model
         return $this->hasMany(WishlistItem::class);
     }
 
-    public function getItemByRelatedId(int $relatedId): ?WishlistItem
+    public function getItemByProductId(int $productId): ?WishlistItem
     {
-        return $this->items->where('product_id', '=', $relatedId)->first();
+        return $this->items->where('product_id', '=', $productId)->first();
     }
 }
